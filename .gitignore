@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+/.vs/Screen_Cheat
+/Debug
+/MainProject/Debug
+/MainProject/Release
+/MainProject/x64/Release
+/Release
+/Screen_Cheat/Debug
+/Screen_Cheat/Release
+/Screen_Cheat/x64
+/x64/Debug

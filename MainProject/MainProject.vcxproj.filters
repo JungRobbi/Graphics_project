@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="소스 파일\PCH_AND_MISC">
+      <UniqueIdentifier>{4a385e19-a340-494a-9d7c-6e85d52e7772}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Framework">
+      <UniqueIdentifier>{be6e9943-79f6-4dbb-97a0-b542124659a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Game">
+      <UniqueIdentifier>{1c5bd3dd-9949-4b05-83f6-bf5767570ba6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Game\Components">
+      <UniqueIdentifier>{fa1cbab7-d37c-4d6c-b86a-80e4b08aff8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Framework\Math">
+      <UniqueIdentifier>{cba9c6b8-e563-44c8-bd8a-b66626512886}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\System">
+      <UniqueIdentifier>{f8dbda3f-5284-4399-92b3-555e05e27f87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Game\Scenes">
+      <UniqueIdentifier>{9e50589a-844c-44b0-b487-f203708303bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Game\Objects">
+      <UniqueIdentifier>{b5a128a1-99e0-4879-8f11-3dc1093cd1c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Game\Player">
+      <UniqueIdentifier>{4ea7f96e-8f46-48b5-a088-85e053b45598}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Game\GameFramework">
+      <UniqueIdentifier>{9bf6f406-c3cd-44d0-8885-e3996a02d32f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Framework.cpp">
+      <Filter>소스 파일\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>소스 파일\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>소스 파일\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>소스 파일\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>소스 파일\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Output.cpp">
+      <Filter>소스 파일\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>소스 파일\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects.cpp">
+      <Filter>소스 파일\Game\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>소스 파일\Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3.cpp">
+      <Filter>소스 파일\Framework\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform3D.cpp">
+      <Filter>소스 파일\Game\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerMovement.cpp">
+      <Filter>소스 파일\Game\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>소스 파일\Game\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="소스.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>소스 파일\PCH_AND_MISC</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsFramework.cpp">
+      <Filter>소스 파일\Game\GameFramework</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FrameWork.h">
+      <Filter>소스 파일\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>소스 파일\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>소스 파일\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>소스 파일\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>소스 파일\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Output.h">
+      <Filter>소스 파일\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>소스 파일\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects.h">
+      <Filter>소스 파일\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>소스 파일\Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>소스 파일\Framework\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform3D.h">
+      <Filter>소스 파일\Game\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMovement.h">
+      <Filter>소스 파일\Game\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>소스 파일\Game\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>소스 파일\PCH_AND_MISC</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsFramework.h">
+      <Filter>소스 파일\Game\GameFramework</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

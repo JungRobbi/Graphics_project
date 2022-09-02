@@ -10,13 +10,12 @@ class Scene
 	std::queue<GameObject*> creationQueue;
 	std::deque<GameObject*> deletionQueue;
 
-	std::list<GameObject*> gameObjects;
-
 public:
 	static Scene* scene;
 
 protected:
 	GameObject* CreateEmpty();
+	std::list<GameObject*> gameObjects;
 
 public:
 	Scene();

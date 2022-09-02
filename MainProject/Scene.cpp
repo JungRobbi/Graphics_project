@@ -40,6 +40,7 @@ void Scene::update()
 
 void Scene::render()
 {
-	for (auto object : Scene::scene->gameObjects)
+	for (auto object : Scene::scene->gameObjects) {
 		object->render();
+	}
 }

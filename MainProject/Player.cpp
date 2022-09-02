@@ -3,7 +3,11 @@
 #include "Camera.h"
 #include "PlayerMovement.h"
 
-Player::Player() 
+Player::Player() : GameObject()
+{
+}
+
+void Player::start()
 {
 	AddComponent<Transform3D>();
 	AddComponent<Camera>();

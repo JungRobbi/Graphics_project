@@ -1,9 +1,7 @@
 #define  _CRT_SECURE_NO_WARNINGS
 #define STB_IMAGE_IMPLEMENTATION
-#define WINDOWX 800
-#define WINDOWY 800
-#define pie 3.14159265358979324846 // ³­ ÆÄÀÌ
 
+#include "stdafx.h"
 #include <vector>
 #include <gl/glew.h>
 #include <gl/freeglut.h>
@@ -612,8 +610,8 @@ void Display()
 		TR = glm::mat4(1.0f);																		// ¸Ê
 		TR = glm::translate(TR, glm::vec3(0.0f, 1.7f, 0.0f));
 		TR = glm::scale(TR, glm::vec3(7.0, 3.0, 7.0));
-		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
 
+		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
 		glBindTexture(GL_TEXTURE_2D, texture[Imagenum]);
 		glDrawArrays(GL_TRIANGLES, 0, num_Triangle);
 

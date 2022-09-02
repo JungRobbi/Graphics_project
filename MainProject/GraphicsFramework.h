@@ -6,6 +6,7 @@
 #include <wingdi.h>
 
 #include "../Screen_Cheat/objRead.cpp"
+#include "Texture.h"
 #include "shader.h"
 #include "FrameWork.h"
 #include "objRead.cpp"
@@ -20,7 +21,6 @@ public:
     GLuint VBO_uv[100];
 
     int img = 7;
-    GLuint texture[20];
     int Imagenum = 0;
     int widthImage, heightImage, numberOfChannel = 0;
 

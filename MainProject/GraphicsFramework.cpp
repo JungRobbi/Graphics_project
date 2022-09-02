@@ -4,7 +4,7 @@
 void GraphicsFramework::run() // 한 프레임 출력
 {
 	if (!scenes.empty())
-		scenes.front()->scene->render();
+		scenes.front()->scene->update();
 }
 void GraphicsFramework::InitBuffer()
 {
@@ -17,10 +17,10 @@ void GraphicsFramework::InitTexture()
 {
 	BITMAPINFO* bmp;
 	std::string map[20] = { "main.png","B.png","C.png","D.png","E.png","body.png","face.png","gun_tex.png" };
-	glGenTextures(20, texture); //--- 텍스처 생성
+	glGenTextures(20, Texture::texture); //--- 텍스처 생성
 
 	for (int i = 0; i < 20; ++i) {
-		glBindTexture(GL_TEXTURE_2D, texture[i]); //--- 텍스처 바인딩
+		glBindTexture(GL_TEXTURE_2D, Texture::texture[i]); //--- 텍스처 바인딩
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT); //--- 현재 바인딩된 텍스처의 파라미터 설정하기
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);

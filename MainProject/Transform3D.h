@@ -10,6 +10,7 @@ class Transform3D : public Component
 public:
 	glm::vec3 position;
 	glm::vec3 scale;
+	glm::vec3 rotate;
 
 
 	glm::mat4 mat_Transform;
@@ -19,8 +20,15 @@ public:
 	void start() 
 	{
 		position = glm::vec3(0.0f, 0.0f, 0.0f);
+		rotate = glm::vec3(0.0f, 0.0f, 0.0f);
+		scale = glm::vec3(5.0f, 5.0f, 5.0f);
 		mat_Transform = glm::mat4(1.0f);
 	}
-	void update() {}
+	void update() 
+	{
+		mat_Transform = glm::mat4(1.0f);
+		mat_Transform = glm::translate(mat_Transform, position);
+		mat_Transform = glm::scale(mat_Transform, scale);
+	}
 };
 

@@ -13,9 +13,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "RenderComponent.h"
-#include "shader.h"
-#include "Transform3D.h"
-#include "Texture.h"
+// #include "shader.h"
 
 void RenderComponent::start()
 {
@@ -31,7 +29,7 @@ void RenderComponent::update()
 
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(tr));
 
-	glBindVertexArray(VAO::vao[0]);
-	glBindTexture(GL_TEXTURE_2D, Texture::texture[num_image]);
+	glBindVertexArray(p_VAO[0]);
+	glBindTexture(GL_TEXTURE_2D, p_texture[num_image]);
 	glDrawArrays(GL_TRIANGLES, 0, num_index);
 }

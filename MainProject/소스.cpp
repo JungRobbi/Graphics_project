@@ -25,6 +25,7 @@
 #include "Digitalv.h"
 
 #include "VAO.h"
+#include "GameScene.h"
 
 MCI_OPEN_PARMS m_mciOpenParms;
 MCI_PLAY_PARMS m_mciPlayParms;
@@ -470,6 +471,8 @@ void InitTexture()
 	int tLocation = glGetUniformLocation(s_program[0], "outTex"); //--- outTexture À¯´ÏÆû »ùÇÃ·¯ÀÇ À§Ä¡¸¦ °¡Á®¿È
 	glUniform1i(tLocation, 0); //--- »ùÇÃ·¯¸¦ 0¹ø À¯´ÖÀ¸·Î ¼³Á¤
 }
+
+GameScene* sc = new GameScene();
 
 void Display()
 {
@@ -954,8 +957,6 @@ void Display()
 
 		// ±×¸®±â ÄÚµå
 
-
-
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // ºí·»µù
 
@@ -968,6 +969,7 @@ void Display()
 			glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
 			item[i].Draw();
 		}
+
 		Imagenum = 4;
 		glBindVertexArray(VAO[0]);
 		TR = glm::mat4(1.0f);																		// ¸Ê
@@ -982,6 +984,10 @@ void Display()
 		glDisable(GL_BLEND); // ºí·»µù ÇØÁ¦
 
 	}
+
+	sc->update();
+	sc->render();
+
 	glutSwapBuffers();
 }
 

@@ -3,10 +3,9 @@
 #include <glm/ext.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "Transform3D.h"
 #include "GameObject.h"
 #include "Component.h"
-#include "stdafx.h"
-#include "VAO.h"
 
 class RenderComponent :
     public Component
@@ -14,7 +13,12 @@ class RenderComponent :
 	unsigned int modelLocation;
 	int num_index;
 	int num_image;
+
 public:
+	GLint* p_VAO;
+	GLint* p_texture;
+	GLuint* p_s_program;
+
 	void start();
 	void update();
 

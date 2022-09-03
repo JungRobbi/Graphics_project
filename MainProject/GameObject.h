@@ -3,6 +3,7 @@
 #include "stdafx.h"
 #include "Component.h"
 #include "Scene.h"
+#include <gl/glew.h>
 
 enum E_LIFE_TYPE { E_LIFE_LIVE, E_LIFE_REMAIN, E_LIFE_DEAD };
 
@@ -12,6 +13,11 @@ class GameObject
 
 public:
 	E_LIFE_TYPE lifeState{ E_LIFE_LIVE };
+
+	GLint* p_VAO;
+	GLint* p_texture;
+	GLuint* p_s_program;
+
 
 public:
 	GameObject();
@@ -31,7 +37,7 @@ public:
 		for (auto component : components)
 			component->update();
 	}
-	virtual void render() {}
+	virtual void render();
 
 	template<typename T>
 	T* AddComponent();

@@ -24,18 +24,12 @@
     <Filter Include="소스 파일\GameScene">
       <UniqueIdentifier>{ade65c85-7295-41d1-a194-7c75875b536d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\GameObject">
-      <UniqueIdentifier>{c18a6cb7-8805-479a-a53b-4b436ec4cfd6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\GameComponents">
       <UniqueIdentifier>{d1ece2fd-bd5e-4b83-aaa7-76780713d2f0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Framework.cpp">
-      <Filter>소스 파일\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
       <Filter>소스 파일\Framework</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
@@ -62,12 +56,21 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>소스 파일\PCH_AND_MISC</Filter>
     </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>소스 파일\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>소스 파일\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderComponent.cpp">
+      <Filter>소스 파일\GameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform3D.cpp">
+      <Filter>소스 파일\GameComponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FrameWork.h">
-      <Filter>소스 파일\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
       <Filter>소스 파일\Framework</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
@@ -90,6 +93,18 @@
     </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>소스 파일\PCH_AND_MISC</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>소스 파일\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>소스 파일\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderComponent.h">
+      <Filter>소스 파일\GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform3D.h">
+      <Filter>소스 파일\GameComponents</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

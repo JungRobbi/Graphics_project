@@ -11,6 +11,8 @@ class GameScene :
 
 public:
 	GameScene();
+	GameScene(int);
+	GameScene(int, int, GLint*, GLint*);
 	virtual ~GameScene()
 	{
 		for (auto object : gameObjects)
@@ -23,14 +25,16 @@ public:
 		auto player = CreateEmpty();
 	}
 	
-	GameObject* CreateBox()
+	GameObject* CreateBox(int index, GLint* tex, GLint* vao)
 	{
 		auto box = CreateEmpty();
 
 		box->AddComponent<Transform3D>();
-		box->AddComponent<RenderComponent>();
-		box->GetComponent<RenderComponent>()->SetNumImage(4);
-		//box->GetComponent<RenderComponent>()->SetNumIndex(loadObj_normalize_center_3f("Resource/cube.obj"));
+		//box->AddComponent<RenderComponent>();
+		//box->GetComponent<RenderComponent>()->SetNumImage(4);
+		//box->GetComponent<RenderComponent>()->SetNumIndex(index);
+		//box->GetComponent<RenderComponent>()->p_texture = tex;
+		//box->GetComponent<RenderComponent>()->p_VAO = vao;
 
 		return box;
 	}

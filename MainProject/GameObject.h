@@ -1,9 +1,12 @@
 #pragma once
-
 #include "stdafx.h"
-#include "Component.h"
-#include "Scene.h"
+
 #include <gl/glew.h>
+
+#include "Scene.h"
+
+#include "Component.h"
+
 
 enum E_LIFE_TYPE { E_LIFE_LIVE, E_LIFE_REMAIN, E_LIFE_DEAD };
 
@@ -14,10 +17,12 @@ class GameObject
 public:
 	E_LIFE_TYPE lifeState{ E_LIFE_LIVE };
 
-	GLint* p_VAO;
-	GLint* p_texture;
-	GLuint* p_s_program;
+	unsigned int modelLocation;
+	int num_index;
 
+	GLint VAO;
+	GLint texture;
+	GLuint s_program;
 
 public:
 	GameObject();

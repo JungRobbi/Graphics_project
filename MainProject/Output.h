@@ -1,10 +1,10 @@
 #pragma once
+#include "stdafx.h"
 
 #include <stdio.h>
 #include <memory.h>
 #include <Windows.h>
 
-#include "stdafx.h"
 
 //const int OUTPUT_WIDTH{ 15 };
 //const int OUTPUT_HEIGHT{ 13 };

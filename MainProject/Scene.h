@@ -3,7 +3,10 @@
 #include <list>
 #include <queue>
 #include <deque>
+
 #include "GameObject.h"
+
+class GameObject;
 
 class Scene
 {

@@ -3,16 +3,19 @@
 #include "Scene.h"
 
 #include "Transform3D.h"
-#include "RenderComponent.h"
 
-class GameScene :
-    public Scene
+class GameScene : public Scene
 {
+
+public:
+	unsigned int modelLocation;
+
+	GLuint* p_s_program;
 
 public:
 	GameScene();
 	GameScene(int);
-	GameScene(int, int, GLint*, GLint*);
+	GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, GLuint* program);
 	virtual ~GameScene()
 	{
 		for (auto object : gameObjects)
@@ -20,23 +23,19 @@ public:
 		gameObjects.clear();
 	}
 
-	void CreatePlayer()
-	{
-		auto player = CreateEmpty();
-	}
 	
-	GameObject* CreateBox(int index, GLint* tex, GLint* vao)
+	GameObject* CreateBox(int* index_list, GLuint* tex, GLuint* vao)
 	{
 		auto box = CreateEmpty();
 
 		box->AddComponent<Transform3D>();
-		//box->AddComponent<RenderComponent>();
-		//box->GetComponent<RenderComponent>()->SetNumImage(4);
-		//box->GetComponent<RenderComponent>()->SetNumIndex(index);
-		//box->GetComponent<RenderComponent>()->p_texture = tex;
-		//box->GetComponent<RenderComponent>()->p_VAO = vao;
+		box->num_index = index_list[0];
+		box->VAO = vao[0];
+		box->s_program = p_s_program[0];
+		box->texture = tex[1];
 
 		return box;
 	}
+
 };
 

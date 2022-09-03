@@ -62,9 +62,6 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>소스 파일\Framework</Filter>
     </ClCompile>
-    <ClCompile Include="RenderComponent.cpp">
-      <Filter>소스 파일\GameComponents</Filter>
-    </ClCompile>
     <ClCompile Include="Transform3D.cpp">
       <Filter>소스 파일\GameComponents</Filter>
     </ClCompile>
@@ -99,9 +96,6 @@
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>소스 파일\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderComponent.h">
-      <Filter>소스 파일\GameComponents</Filter>
     </ClInclude>
     <ClInclude Include="Transform3D.h">
       <Filter>소스 파일\GameComponents</Filter>

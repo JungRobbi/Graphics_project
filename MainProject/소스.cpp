@@ -17,6 +17,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <random>
 
+#include "Scene.h"
+
 #include "stb_image.h"
 #include "shader.h"
 #include "objRead.cpp"
@@ -74,7 +76,8 @@ int loadObj(const char* filename);
 int loadObj_normalize_center_3f(const char* filename);
 int loadObj_normalize_center_4f(const char* filename);
 float* sphere_object;
-int num_Triangle;
+int num_shape_list[10];
+
 int num_vertices = 3;
 int num_triangles = 1;
 int num_Sphere = 0;
@@ -223,17 +226,17 @@ public:
 		if (this->kind == 0) {								// 나무상자
 			glBindVertexArray(VAO[0]);
 			glBindTexture(GL_TEXTURE_2D, texture[1]);
-			glDrawArrays(GL_TRIANGLES, 0, num_Triangle);
+			glDrawArrays(GL_TRIANGLES, 0, num_shape_list[0]);
 		}
 		else if (this->kind == 1) {							// 세로 철창
 			glBindVertexArray(VAO[0]);
 			glBindTexture(GL_TEXTURE_2D, texture[2]);
-			glDrawArrays(GL_TRIANGLES, 0, num_Triangle);
+			glDrawArrays(GL_TRIANGLES, 0, num_shape_list[0]);
 		}
 		else if (this->kind == 2) {							// 가로 철창
 			glBindVertexArray(VAO[0]);
 			glBindTexture(GL_TEXTURE_2D, texture[2]);
-			glDrawArrays(GL_TRIANGLES, 0, num_Triangle);
+			glDrawArrays(GL_TRIANGLES, 0, num_shape_list[0]);
 		}
 		else if (this->kind == 3) {							// 탱크
 			glBindVertexArray(VAO[1]);
@@ -400,7 +403,7 @@ void InitBuffer()
 
 void InitBuffer_bind(const int street) {
 	if (street == 0) {
-		num_Triangle = loadObj_normalize_center_3f("Resource/cube.obj");
+		num_shape_list[0] = loadObj_normalize_center_3f("Resource/cube.obj");
 	}
 	else if (street == 1) {
 		num_Tank = loadObj_normalize_center_4f("Resource/tank.obj");
@@ -472,16 +475,13 @@ void InitTexture()
 	glUniform1i(tLocation, 0); //--- 샘플러를 0번 유닛으로 설정
 }
 
-GameScene* sc = new GameScene();
+GameScene* sc = new GameScene(1, num_shape_list, texture, VAO, s_program);
 
 void Display()
 {
 	//*************************************************************************
 	// 시작 변수(한번 만 설정 해야함)
 	if (!start) {
-
-
-
 
 		for (int i = 0; i < 12; ++i) {										// (0,1) (2,3) (4,5) (6,7) (8,9) (10,11) = 캐릭터
 			if (i < 6) {
@@ -614,7 +614,7 @@ void Display()
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
 
 		glBindTexture(GL_TEXTURE_2D, texture[Imagenum]);
-		glDrawArrays(GL_TRIANGLES, 0, num_Triangle);
+		glDrawArrays(GL_TRIANGLES, 0, num_shape_list[0]);
 
 
 		glBindVertexArray(VAO[0]);
@@ -631,7 +631,7 @@ void Display()
 
 				glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
 				glBindTexture(GL_TEXTURE_2D, texture[Imagenum]);
-				glDrawArrays(GL_TRIANGLES, 0, num_Triangle);
+				glDrawArrays(GL_TRIANGLES, 0, num_shape_list[0]);
 			}
 		}
 
@@ -648,7 +648,7 @@ void Display()
 
 		//	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
 		//	glBindTexture(GL_TEXTURE_2D, texture[Imagenum]);
-		//	glDrawArrays(GL_TRIANGLES, 0, num_Triangle);
+		//	glDrawArrays(GL_TRIANGLES, 0, num_shape_list[0]);
 		//}
 		if (item[itemnum].state == 0) {
 			itemnum--;
@@ -678,7 +678,7 @@ void Display()
 
 				glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
 				glBindTexture(GL_TEXTURE_2D, texture[Imagenum]);
-				glDrawArrays(GL_TRIANGLES, 0, num_Triangle);
+				glDrawArrays(GL_TRIANGLES, 0, num_shape_list[0]);
 
 				// 오른 다리 그리기
 				TR = glm::mat4(1.0f);
@@ -695,7 +695,7 @@ void Display()
 
 				glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
 				glBindTexture(GL_TEXTURE_2D, texture[Imagenum]);
-				glDrawArrays(GL_TRIANGLES, 0, num_Triangle);
+				glDrawArrays(GL_TRIANGLES, 0, num_shape_list[0]);
 
 				// 왼 팔 그리기
 				TR = glm::mat4(1.0f);
@@ -712,7 +712,7 @@ void Display()
 				modelLocation = glGetUniformLocation(s_program[0], "model");
 				glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
 				glBindTexture(GL_TEXTURE_2D, texture[Imagenum]);
-				glDrawArrays(GL_TRIANGLES, 0, num_Triangle);
+				glDrawArrays(GL_TRIANGLES, 0, num_shape_list[0]);
 
 				// 오른 팔 그리기
 				TR = glm::mat4(1.0f);
@@ -730,7 +730,7 @@ void Display()
 				modelLocation = glGetUniformLocation(s_program[0], "model");
 				glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
 				glBindTexture(GL_TEXTURE_2D, texture[Imagenum]);
-				glDrawArrays(GL_TRIANGLES, 0, num_Triangle);
+				glDrawArrays(GL_TRIANGLES, 0, num_shape_list[0]);
 
 				// 몸 그리기
 				TR = glm::mat4(1.0f);
@@ -742,7 +742,7 @@ void Display()
 				modelLocation = glGetUniformLocation(s_program[0], "model");
 				glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
 				glBindTexture(GL_TEXTURE_2D, texture[Imagenum]);
-				glDrawArrays(GL_TRIANGLES, 0, num_Triangle);
+				glDrawArrays(GL_TRIANGLES, 0, num_shape_list[0]);
 
 
 			}
@@ -771,7 +771,7 @@ void Display()
 				modelLocation = glGetUniformLocation(s_program[0], "model");
 				glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
 				glBindTexture(GL_TEXTURE_2D, texture[Imagenum]);
-				glDrawArrays(GL_TRIANGLES, 0, num_Triangle);
+				glDrawArrays(GL_TRIANGLES, 0, num_shape_list[0]);
 
 				// 오른 다리 그리기
 				TR = glm::mat4(1.0f);
@@ -789,7 +789,7 @@ void Display()
 				modelLocation = glGetUniformLocation(s_program[0], "model");
 				glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
 				glBindTexture(GL_TEXTURE_2D, texture[Imagenum]);
-				glDrawArrays(GL_TRIANGLES, 0, num_Triangle);
+				glDrawArrays(GL_TRIANGLES, 0, num_shape_list[0]);
 
 				// 왼 팔 그리기
 				TR = glm::mat4(1.0f);
@@ -807,7 +807,7 @@ void Display()
 				modelLocation = glGetUniformLocation(s_program[0], "model");
 				glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
 				glBindTexture(GL_TEXTURE_2D, texture[Imagenum]);
-				glDrawArrays(GL_TRIANGLES, 0, num_Triangle);
+				glDrawArrays(GL_TRIANGLES, 0, num_shape_list[0]);
 
 				// 오른 팔 그리기
 				TR = glm::mat4(1.0f);
@@ -825,7 +825,7 @@ void Display()
 				modelLocation = glGetUniformLocation(s_program[0], "model");
 				glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
 				glBindTexture(GL_TEXTURE_2D, texture[Imagenum]);
-				glDrawArrays(GL_TRIANGLES, 0, num_Triangle);
+				glDrawArrays(GL_TRIANGLES, 0, num_shape_list[0]);
 
 				// 몸 그리기
 				TR = glm::mat4(1.0f);
@@ -838,7 +838,7 @@ void Display()
 				modelLocation = glGetUniformLocation(s_program[0], "model");
 				glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
 				glBindTexture(GL_TEXTURE_2D, texture[Imagenum]);
-				glDrawArrays(GL_TRIANGLES, 0, num_Triangle);
+				glDrawArrays(GL_TRIANGLES, 0, num_shape_list[0]);
 
 			}
 		}
@@ -892,7 +892,7 @@ void Display()
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
 
 		glBindTexture(GL_TEXTURE_2D, texture[Imagenum]);
-		glDrawArrays(GL_TRIANGLES, 0, num_Triangle);
+		glDrawArrays(GL_TRIANGLES, 0, num_shape_list[0]);
 
 
 		glDisable(GL_CULL_FACE);
@@ -936,7 +936,7 @@ void Display()
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
 
 		glBindTexture(GL_TEXTURE_2D, texture[Imagenum]);
-		glDrawArrays(GL_TRIANGLES, 0, num_Triangle);
+		glDrawArrays(GL_TRIANGLES, 0, num_shape_list[0]);
 
 	}
 
@@ -978,7 +978,7 @@ void Display()
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
 
 		glBindTexture(GL_TEXTURE_2D, texture[Imagenum]);
-		glDrawArrays(GL_TRIANGLES, 0, num_Triangle);
+		glDrawArrays(GL_TRIANGLES, 0, num_shape_list[0]);
 
 
 		glDisable(GL_BLEND); // 블렌딩 해제

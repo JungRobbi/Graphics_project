@@ -42,3 +42,13 @@ GameObject* GameScene::CreateBox(int* index_list, GLuint tex, GLuint* vao) // Bo
 
 	return box;
 }
+
+void GameScene::update()
+{
+	Scene::update();
+}
+
+void GameScene::render()
+{
+	Scene::render();
+}

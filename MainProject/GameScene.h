@@ -23,6 +23,9 @@ public:
 		gameObjects.clear();
 	}
 
+	virtual void update();
+	virtual void render();
+
 	
 	GameObject* CreateBox(int* index_list, GLuint tex, GLuint* vao);
 

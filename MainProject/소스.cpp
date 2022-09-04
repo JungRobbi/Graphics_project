@@ -586,9 +586,11 @@ void Display()
 
 	glUseProgram(s_program[0]);
 
+	glViewport(0, 0, WINDOWX, WINDOWY);
+
 	if (!sc.empty()) {
-		sc[0]->update();
-		sc[0]->render();
+		Scene::scene->update();
+		Scene::scene->render();
 	}
 
 	if (game == 0) {

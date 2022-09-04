@@ -65,6 +65,9 @@
     <ClCompile Include="Transform3D.cpp">
       <Filter>소스 파일\GameComponents</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>소스 파일\GameComponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FrameWork.h">
@@ -98,6 +101,9 @@
       <Filter>소스 파일\Framework</Filter>
     </ClInclude>
     <ClInclude Include="Transform3D.h">
+      <Filter>소스 파일\GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
       <Filter>소스 파일\GameComponents</Filter>
     </ClInclude>
   </ItemGroup>

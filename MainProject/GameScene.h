@@ -3,12 +3,15 @@
 #include "Scene.h"
 
 #include "Transform3D.h"
+#include "Camera.h"
 
 class GameScene : public Scene
 {
 
 public:
 	unsigned int modelLocation;
+	unsigned int viewLocation;
+	unsigned int projLocation;
 
 	GLuint* p_s_program;
 

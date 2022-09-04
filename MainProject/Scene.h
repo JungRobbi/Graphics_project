@@ -16,6 +16,8 @@ class Scene
 public:
 	static Scene* scene;
 	int n_scene;
+
+	GameObject* p_player;
 protected:
 	GameObject* CreateEmpty();
 	std::list<GameObject*> gameObjects;

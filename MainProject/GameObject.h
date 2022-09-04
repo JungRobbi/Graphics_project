@@ -18,6 +18,7 @@ public:
 	E_LIFE_TYPE lifeState{ E_LIFE_LIVE };
 
 	unsigned int modelLocation;
+
 	int num_index;
 
 	GLint VAO;

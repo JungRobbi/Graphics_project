@@ -9,6 +9,7 @@ class GameScene : public Scene
 
 public:
 	unsigned int modelLocation;
+	int n_scene;
 
 	GLuint* p_s_program;
 
@@ -24,7 +25,7 @@ public:
 	}
 
 	
-	GameObject* CreateBox(int* index_list, GLuint* tex, GLuint* vao);
+	GameObject* CreateBox(int* index_list, GLuint tex, GLuint* vao);
 
 };
 

@@ -433,7 +433,7 @@ void InitBuffer_bind(const int street) {
 	glEnableVertexAttribArray(nAttribute);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO_uv[street]);
-	glBufferData(GL_ARRAY_BUFFER, outuv.size() * sizeof(glm::vec3), &outuv[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, outuv.size() * sizeof(glm::vec2), &outuv[0], GL_STATIC_DRAW);
 	GLint tAttribute = glGetAttribLocation(s_program[0], "aTex");
 	glVertexAttribPointer(tAttribute, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
 	glEnableVertexAttribArray(tAttribute);
@@ -475,7 +475,8 @@ void InitTexture()
 	glUniform1i(tLocation, 0); //--- 샘플러를 0번 유닛으로 설정
 }
 
-Scene* sc;
+
+std::vector<Scene*> sc;
 
 void Display()
 {
@@ -522,6 +523,9 @@ void Display()
 		clonespeed[4] = 0.012;
 
 		grav = 0.04;
+
+
+		sc.emplace_back(new GameScene(1, num_shape_list, texture, VAO, s_program));
 
 		start = true;
 	}
@@ -581,10 +585,10 @@ void Display()
 
 	glUseProgram(s_program[0]);
 
-	sc = new GameScene(1, num_shape_list, texture, VAO, s_program);
-
-	sc->update();
-	sc->render();
+	if (!sc.empty()) {
+		sc[0]->update();
+		sc[0]->render();
+	}
 
 	if (game == 0) {
 		glViewport(0, 0, WINDOWX, WINDOWY);
@@ -908,7 +912,7 @@ void Display()
 
 	}
 
-	else if (game == 1) {																			// 메인 화면
+	else if (game == 1) {																			// 타이틀 화면
 
 		lightPosLocation = glGetUniformLocation(s_program[0], "lightPos"); //--- lightPos 값 전달: (0.0, 0.0, 5.0);
 		glUniform3f(lightPosLocation, 1.0, 0.0, 0.0);
@@ -1151,19 +1155,20 @@ void keyboard(unsigned char key2, int x, int y) {
 	if (key2 == 27) {
 		exit(0);
 	}
+
 	switch (key2) {
-	case ',':
+	case '1':
 		game = 0;
 		break;
-
-	case '.':
+	case '2':
 		game = 1;
 		Imagenum = 0;
 		break;
-	case '/':
+	case '3':
 		game = 2;
 		break;
 	}
+
 	glutPostRedisplay();
 }
 void keyboard2(unsigned char key2, int x, int y) {

@@ -309,6 +309,7 @@ bool checkZtoB(float x, float y, float z, Item B2) {
 	}
 
 }
+void SceneChange(int num_scene);
 int main(int argc, char** argv)
 {
 	// create window using freeglut
@@ -1158,14 +1159,14 @@ void keyboard(unsigned char key2, int x, int y) {
 
 	switch (key2) {
 	case '1':
-		game = 0;
+		SceneChange(1);
 		break;
 	case '2':
-		game = 1;
+		SceneChange(2);
 		Imagenum = 0;
 		break;
 	case '3':
-		game = 2;
+		SceneChange(3);
 		break;
 	}
 
@@ -1637,4 +1638,19 @@ void TimerFunction(int value) {
 
 	glutTimerFunc(10, TimerFunction, 1);
 
+}
+
+void SceneChange(int num_scene)
+{
+
+	auto p = find_if(sc.begin(), sc.end(), [num_scene](const Scene* p_s) {
+		return p_s->n_scene == num_scene;
+		});
+
+	if (p == sc.end()) {
+		sc.emplace_back(new GameScene(num_scene, num_shape_list, texture, VAO, s_program));
+	}
+	else {
+		(*p)->scene = (*p);
+	}
 }

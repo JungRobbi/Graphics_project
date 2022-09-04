@@ -67,6 +67,15 @@ GameObject* GameScene::CreateBox(int* index_list, GLuint tex, GLuint* vao) // Bo
 void GameScene::update()
 {
 	Scene::update();
+
+
+	auto player_tran = p_player->GetComponent<Transform3D>();
+	auto player_camera = p_player->GetComponent<Camera>();
+
+	player_tran->direction.x = cos(glm::radians(player_camera->fpsup)) * cos(glm::radians(player_camera->fpsy)) + player_tran->position.x;
+	player_tran->direction.y = sin(glm::radians(player_camera->fpsup)) + player_tran->position.y;
+	player_tran->direction.z = cos(glm::radians(player_camera->fpsup)) * sin(glm::radians(player_camera->fpsy)) + player_tran->position.z;
+
 }
 
 void GameScene::render()

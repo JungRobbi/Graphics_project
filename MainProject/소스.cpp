@@ -714,13 +714,13 @@ void Motion2(int x, int y)
 			yoffset *= 0.2;
 
 			Scene::scene->p_player->GetComponent<Camera>()->fpsy += xoffset;
-			fpsup += yoffset;
+			Scene::scene->p_player->GetComponent<Camera>()->fpsup += yoffset;
 
 
-			if (fpsup > 70.0f)
-				fpsup = 70.0f;
-			if (fpsup < -25.0f)
-				fpsup = -25.0f;
+			if (Scene::scene->p_player->GetComponent<Camera>()->fpsup > 70.0f)
+				Scene::scene->p_player->GetComponent<Camera>()->fpsup = 70.0f;
+			if (Scene::scene->p_player->GetComponent<Camera>()->fpsup < -70.0f)
+				Scene::scene->p_player->GetComponent<Camera>()->fpsup = -70.0f;
 
 		}
 
@@ -1238,11 +1238,6 @@ void TimerFunction(int value) {
 	if (key[VK_SPACE] == true) {
 		jump[0] = true;
 	}
-
-	cameraDirection.x = cos(glm::radians(fpsup)) * cos(glm::radians(fpsy)) + cameraPos.x;
-	cameraDirection.y = sin(glm::radians(fpsup)) + cameraPos.y + walkmove;
-	cameraDirection.z = cos(glm::radians(fpsup)) * sin(glm::radians(fpsy)) + cameraPos.z;
-
 
 
 	glutPostRedisplay();

@@ -20,7 +20,7 @@ void Camera::update()
 	Cp = glm::rotate(Cp, (float)glm::radians(fpsy), glm::vec3(0.0f, 1.0f, 0.0f));
 
 	glm::vec4 c_pos4 = glm::vec4(c_pos3, 0.0f);
-	glm::vec4 c_dir4 = glm::vec4(c_dir3, 0.0f) * Cp;
+	// glm::vec4 c_dir4 = glm::vec4(c_dir3, 0.0f) * Cp;
 	glm::vec3 c_up = glm::vec3(0.0f, 1.0f, 0.0f);
 
 	Vw = glm::lookAt(c_pos3, c_dir3, c_up);

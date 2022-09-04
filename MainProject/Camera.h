@@ -17,6 +17,7 @@ public:
 	glm::mat4 Pj;
 
 	float fpsy = 0.0f;
+	float fpsup = 0.0f;
 
 public:
 

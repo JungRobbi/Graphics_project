@@ -407,7 +407,7 @@ void InitBuffer_bind(const int street) {
 		num_shape_list[0] = loadObj_normalize_center_3f("Resource/cube.obj");
 	}
 	else if (street == 1) {
-		num_Tank = loadObj_normalize_center_4f("Resource/tank.obj");
+		num_shape_list[1] = loadObj_normalize_center_3f("Resource/Star.obj");
 	}
 	else if (street == 2) {
 		num_Tong = loadObj_normalize_center_4f("Resource/sohwajeon.obj");

@@ -13,8 +13,6 @@ void GameObject::render()
 		return;
 	auto tr = GetComponent<Transform3D>()->mat_Transform;
 
-	modelLocation = glGetUniformLocation(s_program, "model");
-
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(tr));
 
 	glBindVertexArray(VAO);

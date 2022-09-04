@@ -475,7 +475,7 @@ void InitTexture()
 	glUniform1i(tLocation, 0); //--- »ùÇÃ·¯¸¦ 0¹ø À¯´ÖÀ¸·Î ¼³Á¤
 }
 
-GameScene* sc = new GameScene(1, num_shape_list, texture, VAO, s_program);
+Scene* sc;
 
 void Display()
 {
@@ -581,7 +581,10 @@ void Display()
 
 	glUseProgram(s_program[0]);
 
+	sc = new GameScene(1, num_shape_list, texture, VAO, s_program);
 
+	sc->update();
+	sc->render();
 
 	if (game == 0) {
 		glViewport(0, 0, WINDOWX, WINDOWY);
@@ -984,9 +987,6 @@ void Display()
 		glDisable(GL_BLEND); // ºí·»µù ÇØÁ¦
 
 	}
-
-	sc->update();
-	sc->render();
 
 	glutSwapBuffers();
 }

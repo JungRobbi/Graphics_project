@@ -22,7 +22,6 @@ public:
 
 	GLint VAO;
 	GLint texture;
-	GLuint s_program;
 
 public:
 	GameObject();

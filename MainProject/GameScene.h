@@ -24,18 +24,7 @@ public:
 	}
 
 	
-	GameObject* CreateBox(int* index_list, GLuint* tex, GLuint* vao)
-	{
-		auto box = CreateEmpty();
-
-		box->AddComponent<Transform3D>();
-		box->num_index = index_list[0];
-		box->VAO = vao[0];
-		box->s_program = p_s_program[0];
-		box->texture = tex[1];
-
-		return box;
-	}
+	GameObject* CreateBox(int* index_list, GLuint* tex, GLuint* vao);
 
 };
 

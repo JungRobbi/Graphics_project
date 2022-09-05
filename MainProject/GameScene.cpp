@@ -21,6 +21,9 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 	// player
 	p_player = CreateEmpty();
 	p_player->AddComponent<Transform3D>();
+	p_player->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 0.0f, 0.0f);
+	p_player->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 1.0f, 1.0f);
+
 	p_player->AddComponent<Camera>();
 	p_player->GetComponent<Camera>()->viewLocation = viewLocation;
 	p_player->GetComponent<Camera>()->projLocation = projLocation;
@@ -40,8 +43,8 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 			box->texture = tex[1]; // 1번 텍스쳐
 
 			box->GetComponent<Transform3D>()->rotate = glm::vec3(0.0f, 90.0f, 0.0f);
-			box->GetComponent<Transform3D>()->position = glm::vec3(10.0f, 0.0f, 0.0f);
-			box->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 0.0f, 1.0f);
+			box->GetComponent<Transform3D>()->position = glm::vec3(0.0f, -1.0f, 0.0f);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 0.3f, 1.0f);
 		}
 	}
 	else if (num_scene == 2) {

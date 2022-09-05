@@ -68,7 +68,6 @@ void GameScene::update()
 {
 	Scene::update();
 
-
 	auto player_tran = p_player->GetComponent<Transform3D>();
 	auto player_camera = p_player->GetComponent<Camera>();
 

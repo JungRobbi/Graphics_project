@@ -68,6 +68,12 @@
     <ClCompile Include="Camera.cpp">
       <Filter>소스 파일\GameComponents</Filter>
     </ClCompile>
+    <ClCompile Include="Collide.cpp">
+      <Filter>소스 파일\GameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerJump.cpp">
+      <Filter>소스 파일\GameComponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FrameWork.h">
@@ -104,6 +110,12 @@
       <Filter>소스 파일\GameComponents</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
+      <Filter>소스 파일\GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Collide.h">
+      <Filter>소스 파일\GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerJump.h">
       <Filter>소스 파일\GameComponents</Filter>
     </ClInclude>
   </ItemGroup>

@@ -132,6 +132,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Collide.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Framework.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -143,6 +144,7 @@
     </ClCompile>
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Output.cpp" />
+    <ClCompile Include="PlayerJump.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Time.cpp" />
@@ -157,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Collide.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="FrameWork.h" />
     <ClInclude Include="GameObject.h" />
@@ -168,6 +171,7 @@
     </ClInclude>
     <ClInclude Include="Input.h" />
     <ClInclude Include="Output.h" />
+    <ClInclude Include="PlayerJump.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Time.h" />

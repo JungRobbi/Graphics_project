@@ -5,6 +5,7 @@
 
 #include "Component.h"
 #include "Vector3.h"
+#include "Collide.h"
 class Transform3D : public Component
 {
 public:
@@ -33,5 +34,6 @@ public:
 		mat_Transform = glm::translate(mat_Transform, position);
 		mat_Transform = glm::scale(mat_Transform, scale);
 	}
+
 };
 

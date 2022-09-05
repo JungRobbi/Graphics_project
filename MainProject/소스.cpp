@@ -1239,7 +1239,6 @@ void TimerFunction(int value) {
 		jump[0] = true;
 	}
 
-
 	glutPostRedisplay();
 
 	glutTimerFunc(10, TimerFunction, 1);

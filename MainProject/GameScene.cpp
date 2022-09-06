@@ -29,6 +29,9 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 	p_player->GetComponent<Camera>()->viewLocation = viewLocation;
 	p_player->GetComponent<Camera>()->projLocation = projLocation;
 
+	p_player->AddComponent<Collide>();
+	p_player->AddComponent<Gravity>();
+
 
 	// object
 	if (num_scene == 1) {

@@ -22,7 +22,6 @@ public:
             object_tran->position.y = 0.0f - object_BoundBox.minY;
             object_tran->velocity.y = 0.0f;
         }
-
     }
 
 

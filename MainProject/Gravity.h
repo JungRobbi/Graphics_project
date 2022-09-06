@@ -7,7 +7,9 @@ class Gravity :
     public Component
 {
 public:
-    glm::vec3 graviti_acceleration = glm::vec3(0.0f, -0.0001f, 0.0f);
+    glm::vec3 graviti_acceleration = glm::vec3(0.0f, -0.001f, 0.0f);
+
+    float floor = 0.0f;
 
 public:
     void start() {}
@@ -18,10 +20,11 @@ public:
 
         object_tran->velocity += graviti_acceleration;
 
-        if (object_tran->position.y + object_BoundBox.minY <= 0.0f) {
-            object_tran->position.y = 0.0f - object_BoundBox.minY;
+        if (object_tran->position.y + object_BoundBox.minY <= floor) {
+            object_tran->position.y = floor - object_BoundBox.minY;
             object_tran->velocity.y = 0.0f;
         }
+
     }
 
 

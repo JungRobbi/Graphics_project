@@ -5,6 +5,7 @@
 #include "Transform3D.h"
 #include "Camera.h"
 #include "Gravity.h"
+#include "PlayerJump.h"
 
 class GameScene : public Scene
 {

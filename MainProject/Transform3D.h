@@ -5,6 +5,8 @@
 
 #include "Component.h"
 #include "Vector3.h"
+#include "GameObject.h"
+
 #include "Collide.h"
 class Transform3D : public Component
 {
@@ -38,6 +40,5 @@ public:
 
 		mat_Transform = glm::scale(mat_Transform, scale);
 	}
-
 };
 

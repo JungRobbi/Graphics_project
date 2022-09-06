@@ -53,7 +53,7 @@ GLuint VBO_uv[100];
 
 int polygon_mode = 2;
 
-
+enum ShapeTag{Cube,Star};
 
 void keyboard(unsigned char, int, int);
 void keyboard2(unsigned char key2, int x, int y);
@@ -77,14 +77,8 @@ int loadObj_normalize_center_3f(const char* filename);
 int loadObj_normalize_center_4f(const char* filename);
 float* sphere_object;
 int num_shape_list[10];
-
 int num_vertices = 3;
-int num_triangles = 1;
-int num_Sphere = 0;
-int num_cube = 0;
-int num_Gun;
-int num_Tank;
-int num_Tong;
+
 
 float sunSize;
 int shape = 1;					// 불러올 모양 (1. 육면체, 2. 구)
@@ -241,7 +235,7 @@ public:
 		else if (this->kind == 3) {							// 탱크
 			glBindVertexArray(VAO[1]);
 			glBindTexture(GL_TEXTURE_2D, texture[3]);
-			glDrawArrays(GL_TRIANGLES, 0, num_Tank);
+			glDrawArrays(GL_TRIANGLES, 0, num_shape_list[0]);
 		}
 	}
 
@@ -404,17 +398,17 @@ void InitBuffer()
 
 void InitBuffer_bind(const int street) {
 	if (street == 0) {
-		num_shape_list[0] = loadObj_normalize_center_3f("Resource/cube.obj");
+		num_shape_list[Cube] = loadObj_normalize_center_3f("Resource/cube.obj");
 
 	}
 	else if (street == 1) {
-		num_shape_list[1] = loadObj_normalize_center_3f("Resource/Star.obj");
+		num_shape_list[Star] = loadObj_normalize_center_3f("Resource/Star.obj");
 	}
 	else if (street == 2) {
-		num_Tong = loadObj_normalize_center_4f("Resource/sohwajeon.obj");
+		num_shape_list[1] = loadObj_normalize_center_4f("Resource/sohwajeon.obj");
 	}
 	else if (street == 3) {
-		num_Sphere = loadObj_normalize_center_3f("Resource/sphere.obj");
+		num_shape_list[1] = loadObj_normalize_center_3f("Resource/sphere.obj");
 	}
 	else if (street == 4) {
 

@@ -40,6 +40,7 @@ public:
 		mat_Transform = glm::rotate(mat_Transform, (float)glm::radians(roll), glm::vec3(1.0f, 0.0f, 0.0f));
 
 		mat_Transform = glm::scale(mat_Transform, scale);
+
 	}
 };
 

@@ -28,6 +28,6 @@ void Camera::update()
 	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &Vw[0][0]);
 
 	Pj = glm::mat4(1.0f);
-	Pj = glm::perspective(glm::radians(45.0f), (float)WINDOWX / (float)WINDOWY, 0.0005f, 40.0f);
+	Pj = glm::perspective(glm::radians(45.0f), (float)WINDOWX / (float)WINDOWY, 0.0005f, 100.0f);
 	glUniformMatrix4fv(projLocation, 1, GL_FALSE, &Pj[0][0]);
 }

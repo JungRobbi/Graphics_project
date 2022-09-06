@@ -314,7 +314,7 @@ void Display()
 
 
 	int lightPosLocation = glGetUniformLocation(s_program[0], "lightPos"); //--- lightPos 값 전달: (0.0, 0.0, 5.0);
-	glUniform3f(lightPosLocation, 0.0, 5.0, 3.0);
+	glUniform3f(lightPosLocation, 0.0, 0.0, 0.0);
 	int lightColorLocation = glGetUniformLocation(s_program[0], "lightColor"); //--- lightColor 값 전달: (1.0, 1.0, 1.0) 백색
 	glUniform3f(lightColorLocation, 1.0, 1.0, 1.0);
 
@@ -331,14 +331,6 @@ void Display()
 	}
 
 	Imagenum = 4;
-
-	//glBindVertexArray(VAO[0]);
-	//TR = glm::mat4(1.0f);																		// 맵
-	//TR = glm::translate(TR, glm::vec3(0.0f, 0.0f, 0.0f));
-	//TR = glm::scale(TR, glm::vec3(10.0, 10.0, 10.0));
-	//glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
-	//glBindTexture(GL_TEXTURE_2D, texture[Imagenum]);
-	//glDrawArrays(GL_TRIANGLES, 0, num_shape_list[0]);
 
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_BLEND); // 블렌딩 해제

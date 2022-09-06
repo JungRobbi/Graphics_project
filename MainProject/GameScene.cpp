@@ -39,12 +39,12 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 		{
 			CreateSkyBox(index_list, tex, vao);
 
-			auto star = CreateStar(index_list,tex,vao);
+			//auto star = CreateStar(index_list,tex,vao);
 
-			star->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 5.5f, 0.0f);
-			star->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 0.3f, 1.0f);
-			star->GetComponent<Transform3D>()->direction = glm::vec3(0.0f, 1.0f, 0.0f);
-			star->GetComponent<Transform3D>()->roll = 90.0f;
+			//star->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 5.5f, 0.0f);
+			//star->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 0.3f, 1.0f);
+			//star->GetComponent<Transform3D>()->direction = glm::vec3(0.0f, 1.0f, 0.0f);
+			//star->GetComponent<Transform3D>()->roll = 90.0f;
 		}
 	}
 	else if (num_scene == 2) {
@@ -103,11 +103,10 @@ void GameScene::CreateSkyBox(int* index_list, GLuint* tex, GLuint* vao) // SkyBo
 		auto plane = CreateEmpty();
 
 		plane->AddComponent<Transform3D>();
-		plane->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 10.0f, 0.0f);
-		plane->GetComponent<Transform3D>()->scale = glm::vec3(10.0f, 10.0f, 10.0f);
-		plane->GetComponent<Transform3D>()->pitch = 90.0f;
-		plane->GetComponent<Transform3D>()->yaw = 90.0f;
-	//	plane->GetComponent<Transform3D>()->roll = 90.0f;
+		plane->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 20.1f, 0.0f);
+		plane->GetComponent<Transform3D>()->scale = glm::vec3(20.0f, 20.0f, 20.0f);
+		plane->GetComponent<Transform3D>()->yaw = -90.0f;
+		plane->GetComponent<Transform3D>()->roll = 90.0f;
 
 
 		// render 부분
@@ -116,71 +115,77 @@ void GameScene::CreateSkyBox(int* index_list, GLuint* tex, GLuint* vao) // SkyBo
 		plane->VAO = vao[2]; // 사각형 메쉬
 		plane->texture = tex[8]; // top
 	}
-	//{
-	//	auto plane = CreateEmpty();
+	{
+		auto plane = CreateEmpty();
 
-	//	plane->AddComponent<Transform3D>();
-	//	plane->GetComponent<Transform3D>()->position = glm::vec3(2.0f, 0.0f, 0.0f);
-	//	plane->GetComponent<Transform3D>()->scale = glm::vec3(10.0f, 10.0f, 10.0f);
+		plane->AddComponent<Transform3D>();
+		plane->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 0.0f, -20.05f);
+		plane->GetComponent<Transform3D>()->scale = glm::vec3(20.0f, 20.0f, 20.0f);
 
-	//	// render 부분
-	//	plane->modelLocation = modelLocation;
-	//	plane->num_index = index_list[2]; // load() 첫 번째
-	//	plane->VAO = vao[2]; // 사각형 메쉬
-	//	plane->texture = tex[9]; // left
-	//}
-	//{
-	//	auto plane = CreateEmpty();
+		// render 부분
+		plane->modelLocation = modelLocation;
+		plane->num_index = index_list[2]; // load() 첫 번째
+		plane->VAO = vao[2]; // 사각형 메쉬
+		plane->texture = tex[9]; // left
+	}
+	{
+		auto plane = CreateEmpty();
 
-	//	plane->AddComponent<Transform3D>();
-	//	plane->GetComponent<Transform3D>()->position = glm::vec3(3.0f, 0.0f, 0.0f);
-	//	plane->GetComponent<Transform3D>()->scale = glm::vec3(10.0f, 10.0f, 10.0f);
+		plane->AddComponent<Transform3D>();
+		plane->GetComponent<Transform3D>()->position = glm::vec3(20.05f, 0.0f, 0.0f);
+		plane->GetComponent<Transform3D>()->scale = glm::vec3(20.0f, 20.0f, 20.0f);
+		plane->GetComponent<Transform3D>()->yaw = -90.0f;
 
-	//	// render 부분
-	//	plane->modelLocation = modelLocation;
-	//	plane->num_index = index_list[2]; // load() 첫 번째
-	//	plane->VAO = vao[2]; // 사각형 메쉬
-	//	plane->texture = tex[10]; // front
-	//}
-	//{
-	//	auto plane = CreateEmpty();
+		// render 부분
+		plane->modelLocation = modelLocation;
+		plane->num_index = index_list[2]; // load() 첫 번째
+		plane->VAO = vao[2]; // 사각형 메쉬
+		plane->texture = tex[10]; // front
+	}
+	{
+		auto plane = CreateEmpty();
 
-	//	plane->AddComponent<Transform3D>();
-	//	plane->GetComponent<Transform3D>()->position = glm::vec3(4.0f, 0.0f, 0.0f);
-	//	plane->GetComponent<Transform3D>()->scale = glm::vec3(10.0f, 10.0f, 10.0f);
+		plane->AddComponent<Transform3D>();
+		plane->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 0.0f, 20.05f);
+		plane->GetComponent<Transform3D>()->scale = glm::vec3(20.0f, 20.0f, 20.0f);
+		plane->GetComponent<Transform3D>()->yaw = 180.0f;
 
-	//	// render 부분
-	//	plane->modelLocation = modelLocation;
-	//	plane->num_index = index_list[2]; // load() 첫 번째
-	//	plane->VAO = vao[2]; // 사각형 메쉬
-	//	plane->texture = tex[11]; // right
-	//}
-	//{
-	//	auto plane = CreateEmpty();
+		// render 부분
+		plane->modelLocation = modelLocation;
+		plane->num_index = index_list[2]; // load() 첫 번째
+		plane->VAO = vao[2]; // 사각형 메쉬
+		plane->texture = tex[11]; // right
+	}
+	{
+		auto plane = CreateEmpty();
 
-	//	plane->AddComponent<Transform3D>();
-	//	plane->GetComponent<Transform3D>()->position = glm::vec3(5.0f, 0.0f, 0.0f);
-	//	plane->GetComponent<Transform3D>()->scale = glm::vec3(10.0f, 10.0f, 10.0f);
+		plane->AddComponent<Transform3D>();
+		plane->GetComponent<Transform3D>()->position = glm::vec3(-20.05f, 0.0f, 0.0f);
+		plane->GetComponent<Transform3D>()->scale = glm::vec3(20.0f, 20.0f, 20.0f);
+		plane->GetComponent<Transform3D>()->yaw = 90.0f;
 
-	//	// render 부분
-	//	plane->modelLocation = modelLocation;
-	//	plane->num_index = index_list[2]; // load() 첫 번째
-	//	plane->VAO = vao[2]; // 사각형 메쉬
-	//	plane->texture = tex[12]; // back
-	//}
-	//{
-	//	auto plane = CreateEmpty();
+		// render 부분
+		plane->modelLocation = modelLocation;
+		plane->num_index = index_list[2]; // load() 첫 번째
+		plane->VAO = vao[2]; // 사각형 메쉬
+		plane->texture = tex[12]; // back
+	}
+	{
+		auto plane = CreateEmpty();
 
-	//	plane->AddComponent<Transform3D>();
-	//	plane->GetComponent<Transform3D>()->position = glm::vec3(6.0f, 0.0f, 0.0f);
-	//	plane->GetComponent<Transform3D>()->scale = glm::vec3(10.0f, 10.0f, 10.0f);
+		plane->AddComponent<Transform3D>();
+		plane->GetComponent<Transform3D>()->position = glm::vec3(0.0f, -20.1f, 0.0f);
+		plane->GetComponent<Transform3D>()->scale = glm::vec3(20.0f, 20.0f, 20.0f);
+		plane->GetComponent<Transform3D>()->yaw = -90.0f;
+		plane->GetComponent<Transform3D>()->roll = -90.0f;
 
-	//	// render 부분
-	//	plane->modelLocation = modelLocation;
-	//	plane->num_index = index_list[2]; // load() 첫 번째
-	//	plane->VAO = vao[2]; // 사각형 메쉬
-	//	plane->texture = tex[13]; // bottom
-	//}
+
+		// render 부분
+		plane->modelLocation = modelLocation;
+		plane->num_index = index_list[2]; // load() 첫 번째
+		plane->VAO = vao[2]; // 사각형 메쉬
+		plane->texture = tex[13]; // bottom
+	}
 }
 
 void GameScene::render()

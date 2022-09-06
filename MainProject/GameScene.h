@@ -30,7 +30,8 @@ public:
 	virtual void render();
 
 	
-	GameObject* CreateBox(int* index_list, GLuint tex, GLuint* vao);
+	GameObject* CreateBox(int* index_list, GLuint* tex, GLuint* vao);
+	GameObject* CreateStar(int* index_list, GLuint* tex, GLuint* vao);
 
 };
 

@@ -2,9 +2,12 @@
 
 void Collide::start()
 {
-	BoundBox.x_dimention= 0.0f;
-	BoundBox.y_dimention = 0.0f;
-	BoundBox.z_dimention = 0.0f;
+	BoundBox.minX = 0.0f;
+	BoundBox.maxX = 0.0f;
+	BoundBox.minY = 0.0f;
+	BoundBox.maxY = 0.0f;
+	BoundBox.minZ = 0.0f;
+	BoundBox.maxZ = 0.0f;
 }
 
 void Collide::update()

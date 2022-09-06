@@ -33,20 +33,12 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 	// object
 	if (num_scene == 1) {
 		{
-			auto box = CreateEmpty();
+			auto star = CreateStar(index_list,tex,vao);
 
-			box->AddComponent<Transform3D>();
-
-			// render 부분
-			box->modelLocation = modelLocation;
-			box->num_index = index_list[1]; // load() 첫 번째
-			box->VAO = vao[1]; // 사각형 메쉬
-			box->texture = tex[1]; // 1번 텍스쳐
-
-			box->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 1.5f, 0.0f);
-			box->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 0.3f, 1.0f);
-			box->GetComponent<Transform3D>()->direction = glm::vec3(0.0f, 1.0f, 0.0f);
-			box->GetComponent<Transform3D>()->roll = 90.0f;
+			star->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 1.5f, 0.0f);
+			star->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 0.3f, 1.0f);
+			star->GetComponent<Transform3D>()->direction = glm::vec3(0.0f, 1.0f, 0.0f);
+			star->GetComponent<Transform3D>()->roll = 90.0f;
 		}
 	}
 	else if (num_scene == 2) {
@@ -54,7 +46,7 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 	}
 }
 
-GameObject* GameScene::CreateBox(int* index_list, GLuint tex, GLuint* vao) // Box 자동 생성
+GameObject* GameScene::CreateBox(int* index_list, GLuint* tex, GLuint* vao) // Box 자동 생성
 {
 	auto box = CreateEmpty();
 
@@ -64,9 +56,24 @@ GameObject* GameScene::CreateBox(int* index_list, GLuint tex, GLuint* vao) // Bo
 	box->modelLocation = modelLocation;
 	box->num_index = index_list[0]; // load() 첫 번째
 	box->VAO = vao[0]; // 사각형 메쉬
-	box->texture = tex; // 1번 텍스쳐
+	box->texture = tex[0]; // 1번 텍스쳐
 
 	return box;
+}
+
+GameObject* GameScene::CreateStar(int* index_list, GLuint* tex, GLuint* vao) // Star 자동 생성
+{
+	auto star = CreateEmpty();
+
+	star->AddComponent<Transform3D>();
+
+	// render 부분
+	star->modelLocation = modelLocation;
+	star->num_index = index_list[1]; // load() 첫 번째
+	star->VAO = vao[1]; // 사각형 메쉬
+	star->texture = tex[1]; // 1번 텍스쳐
+
+	return star;
 }
 
 void GameScene::update()

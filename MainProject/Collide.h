@@ -3,7 +3,7 @@
 
 struct  BoundingBox
 {
-    float x_dimention, y_dimention, z_dimention;
+    float minX, maxX, minY, maxY, minZ, maxZ;
 };
 
 class Collide :

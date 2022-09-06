@@ -13,6 +13,8 @@ public:
 	glm::vec3 scale = glm::vec3(1.0f, 1.0f, 1.0f);
 	glm::vec3 direction = glm::vec3(0.0f, 0.0f, -1.0f);
 
+	glm::vec3 velocity = glm::vec3(0.0f, 0.0f, 0.0f);
+
 	float pitch = 0.0f; // x °¢
 	float yaw = 0.0f; // y°¢
 	float roll = 0.0f; // z°¢
@@ -25,6 +27,8 @@ public:
 	}
 	void update() 
 	{
+		position += velocity;
+
 		mat_Transform = glm::mat4(1.0f);
 		mat_Transform = glm::translate(mat_Transform, position);
 
@@ -33,7 +37,6 @@ public:
 		mat_Transform = glm::rotate(mat_Transform, (float)glm::radians(roll), glm::vec3(0.0f, 0.0f, 1.0f));
 
 		mat_Transform = glm::scale(mat_Transform, scale);
-
 	}
 
 };

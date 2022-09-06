@@ -74,6 +74,9 @@
     <ClCompile Include="PlayerJump.cpp">
       <Filter>소스 파일\GameComponents</Filter>
     </ClCompile>
+    <ClCompile Include="Gravity.cpp">
+      <Filter>소스 파일\GameComponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FrameWork.h">
@@ -116,6 +119,9 @@
       <Filter>소스 파일\GameComponents</Filter>
     </ClInclude>
     <ClInclude Include="PlayerJump.h">
+      <Filter>소스 파일\GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Gravity.h">
       <Filter>소스 파일\GameComponents</Filter>
     </ClInclude>
   </ItemGroup>

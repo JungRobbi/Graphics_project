@@ -4,6 +4,7 @@
 
 #include "Transform3D.h"
 #include "Camera.h"
+#include "Gravity.h"
 
 class GameScene : public Scene
 {
@@ -34,4 +35,3 @@ public:
 	GameObject* CreateStar(int* index_list, GLuint* tex, GLuint* vao);
 
 };
-

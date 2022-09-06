@@ -37,6 +37,8 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 	// object
 	if (num_scene == 1) {
 		{
+			CreateSkyBox(index_list, tex, vao);
+
 			auto star = CreateStar(index_list,tex,vao);
 
 			star->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 5.5f, 0.0f);
@@ -93,6 +95,92 @@ void GameScene::update()
 	player_tran->direction.y = sin(glm::radians(player_camera->fpsup)) + player_tran->position.y;
 	player_tran->direction.z = cos(glm::radians(player_camera->fpsup)) * sin(glm::radians(player_camera->fpsy)) + player_tran->position.z;
 
+}
+
+void GameScene::CreateSkyBox(int* index_list, GLuint* tex, GLuint* vao) // SkyBox 생성
+{
+	{
+		auto plane = CreateEmpty();
+
+		plane->AddComponent<Transform3D>();
+		plane->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 10.0f, 0.0f);
+		plane->GetComponent<Transform3D>()->scale = glm::vec3(10.0f, 10.0f, 10.0f);
+		plane->GetComponent<Transform3D>()->pitch = 90.0f;
+		plane->GetComponent<Transform3D>()->yaw = 90.0f;
+	//	plane->GetComponent<Transform3D>()->roll = 90.0f;
+
+
+		// render 부분
+		plane->modelLocation = modelLocation;
+		plane->num_index = index_list[2]; // load() 첫 번째
+		plane->VAO = vao[2]; // 사각형 메쉬
+		plane->texture = tex[8]; // top
+	}
+	//{
+	//	auto plane = CreateEmpty();
+
+	//	plane->AddComponent<Transform3D>();
+	//	plane->GetComponent<Transform3D>()->position = glm::vec3(2.0f, 0.0f, 0.0f);
+	//	plane->GetComponent<Transform3D>()->scale = glm::vec3(10.0f, 10.0f, 10.0f);
+
+	//	// render 부분
+	//	plane->modelLocation = modelLocation;
+	//	plane->num_index = index_list[2]; // load() 첫 번째
+	//	plane->VAO = vao[2]; // 사각형 메쉬
+	//	plane->texture = tex[9]; // left
+	//}
+	//{
+	//	auto plane = CreateEmpty();
+
+	//	plane->AddComponent<Transform3D>();
+	//	plane->GetComponent<Transform3D>()->position = glm::vec3(3.0f, 0.0f, 0.0f);
+	//	plane->GetComponent<Transform3D>()->scale = glm::vec3(10.0f, 10.0f, 10.0f);
+
+	//	// render 부분
+	//	plane->modelLocation = modelLocation;
+	//	plane->num_index = index_list[2]; // load() 첫 번째
+	//	plane->VAO = vao[2]; // 사각형 메쉬
+	//	plane->texture = tex[10]; // front
+	//}
+	//{
+	//	auto plane = CreateEmpty();
+
+	//	plane->AddComponent<Transform3D>();
+	//	plane->GetComponent<Transform3D>()->position = glm::vec3(4.0f, 0.0f, 0.0f);
+	//	plane->GetComponent<Transform3D>()->scale = glm::vec3(10.0f, 10.0f, 10.0f);
+
+	//	// render 부분
+	//	plane->modelLocation = modelLocation;
+	//	plane->num_index = index_list[2]; // load() 첫 번째
+	//	plane->VAO = vao[2]; // 사각형 메쉬
+	//	plane->texture = tex[11]; // right
+	//}
+	//{
+	//	auto plane = CreateEmpty();
+
+	//	plane->AddComponent<Transform3D>();
+	//	plane->GetComponent<Transform3D>()->position = glm::vec3(5.0f, 0.0f, 0.0f);
+	//	plane->GetComponent<Transform3D>()->scale = glm::vec3(10.0f, 10.0f, 10.0f);
+
+	//	// render 부분
+	//	plane->modelLocation = modelLocation;
+	//	plane->num_index = index_list[2]; // load() 첫 번째
+	//	plane->VAO = vao[2]; // 사각형 메쉬
+	//	plane->texture = tex[12]; // back
+	//}
+	//{
+	//	auto plane = CreateEmpty();
+
+	//	plane->AddComponent<Transform3D>();
+	//	plane->GetComponent<Transform3D>()->position = glm::vec3(6.0f, 0.0f, 0.0f);
+	//	plane->GetComponent<Transform3D>()->scale = glm::vec3(10.0f, 10.0f, 10.0f);
+
+	//	// render 부분
+	//	plane->modelLocation = modelLocation;
+	//	plane->num_index = index_list[2]; // load() 첫 번째
+	//	plane->VAO = vao[2]; // 사각형 메쉬
+	//	plane->texture = tex[13]; // bottom
+	//}
 }
 
 void GameScene::render()

@@ -56,8 +56,6 @@ GLuint VBO_uv[100];
 
 int polygon_mode = 2;
 
-enum ShapeTag{Cube,Star};
-
 void keyboard(unsigned char, int, int);
 void keyboard2(unsigned char key2, int x, int y);
 void Mouse(int button, int state, int x, int y);
@@ -89,7 +87,7 @@ int shape = 1;					// 불러올 모양 (1. 육면체, 2. 구)
 // 텍스쳐 변수
 
 int img = 7;
-GLuint texture[20];
+GLuint texture[30];
 int Imagenum = 0;
 int widthImage, heightImage, numberOfChannel = 0;
 
@@ -220,13 +218,12 @@ void InitBuffer()
 void InitBuffer_bind(const int street) {
 	if (street == 0) {
 		num_shape_list[Cube] = loadObj_normalize_center_3f("Resource/cube.obj");
-
 	}
 	else if (street == 1) {
 		num_shape_list[Star] = loadObj_normalize_center_3f("Resource/Star.obj");
 	}
 	else if (street == 2) {
-		num_shape_list[1] = loadObj_normalize_center_4f("Resource/sohwajeon.obj");
+		num_shape_list[Plane] = loadObj_normalize_center_3f("Resource/plane.obj");
 	}
 	else if (street == 3) {
 		num_shape_list[1] = loadObj_normalize_center_3f("Resource/sphere.obj");
@@ -269,13 +266,14 @@ void InitBuffer_bind(const int street) {
 
 
 void InitTexture()
-{
+{	
 	BITMAPINFO* bmp;
-	string map[20] = { "Resource/main.png","Resource/B.png","Resource/C.png","Resource/D.png","Resource/E.png","Resource/body.png",
-		"Resource/face.png","Resource/gun_tex.png" };
-	glGenTextures(20, texture); //--- 텍스처 생성
+	string map[30] = { "Resource/main.png","Resource/B.png","Resource/C.png","Resource/D.png","Resource/E.png","Resource/body.png",
+		"Resource/face.png","Resource/gun_tex.png", "Resource/skybox1_top.png", "Resource/skybox1_left.png", "Resource/skybox1_front.png", "Resource/skybox1_right.png",
+		"Resource/skybox1_back.png", "Resource/skybox1_bottom.png" };
+	glGenTextures(30, texture); //--- 텍스처 생성
 
-	for (int i = 0; i < 20; ++i) {
+	for (int i = 0; i < 30; ++i) {
 		glBindTexture(GL_TEXTURE_2D, texture[i]); //--- 텍스처 바인딩
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT); //--- 현재 바인딩된 텍스처의 파라미터 설정하기
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
@@ -334,13 +332,13 @@ void Display()
 
 	Imagenum = 4;
 
-	glBindVertexArray(VAO[0]);
-	TR = glm::mat4(1.0f);																		// 맵
-	TR = glm::translate(TR, glm::vec3(0.0f, 1.7f, 0.0f));
-	TR = glm::scale(TR, glm::vec3(7.0, 3.0, 7.0));
-	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
-	glBindTexture(GL_TEXTURE_2D, texture[Imagenum]);
-	glDrawArrays(GL_TRIANGLES, 0, num_shape_list[0]);
+	//glBindVertexArray(VAO[0]);
+	//TR = glm::mat4(1.0f);																		// 맵
+	//TR = glm::translate(TR, glm::vec3(0.0f, 0.0f, 0.0f));
+	//TR = glm::scale(TR, glm::vec3(10.0, 10.0, 10.0));
+	//glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
+	//glBindTexture(GL_TEXTURE_2D, texture[Imagenum]);
+	//glDrawArrays(GL_TRIANGLES, 0, num_shape_list[0]);
 
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_BLEND); // 블렌딩 해제

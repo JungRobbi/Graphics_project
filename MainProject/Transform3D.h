@@ -32,11 +32,12 @@ public:
 		position += velocity;
 
 		mat_Transform = glm::mat4(1.0f);
+
 		mat_Transform = glm::translate(mat_Transform, position);
 
-		mat_Transform = glm::rotate(mat_Transform, (float)glm::radians(pitch), glm::vec3(1.0f, 0.0f, 0.0f));
+		mat_Transform = glm::rotate(mat_Transform, (float)glm::radians(pitch), glm::vec3(0.0f, 0.0f, 1.0f));
 		mat_Transform = glm::rotate(mat_Transform, (float)glm::radians(yaw), glm::vec3(0.0f, 1.0f, 0.0f));
-		mat_Transform = glm::rotate(mat_Transform, (float)glm::radians(roll), glm::vec3(0.0f, 0.0f, 1.0f));
+		mat_Transform = glm::rotate(mat_Transform, (float)glm::radians(roll), glm::vec3(1.0f, 0.0f, 0.0f));
 
 		mat_Transform = glm::scale(mat_Transform, scale);
 	}

@@ -104,208 +104,23 @@ float fpsy = 0;					// 1p 좌 우 시야
 float fpsup = 0;				// 1p 위 아래 시야
 float fpsy2 = 0;					// 1p 좌 우 시야
 float fpsup2 = 0;				// 1p 위 아래 시야
-float walkmove = 0;				// 1p 걷는 흔들림
-bool walkmove2 = false;
-float shootmove = 0;			// 1p 총 흔들림
-bool shootmove2 = false;
-bool shoot = false;
-float jumpcount = 0;			// 캐릭터 점프 이동거리
-
-float cx = 0;					// 카메라 x
-float cz = 0;					// 카메라 z
-float ry = 0;					// 회전
-
-int clone[5];					// 좀비
-float mx[6];					// 캐릭터들 x
-float my[6];					// 캐릭터들 y
-float mz[6];					// 캐릭터들 z
-float leg[6];					// 캐릭터들 다리 움직임
-float turn[6];					// 캐릭터들 돌기
-bool walk[6];					// 캐릭터들 걷기 체크1
-bool walk2[6];					// 캐릭터들 걷기 체크2
-bool jump[6];					// 캐릭터들 점프 체크
-float savey[6];					// 캐릭터들 점프 시 y저장
-int dir[6];						// 캐릭터들 방향
-int mummy;
 
 float mousex = 0;				// 마우스 x
 float mousey = 0;				// 마우스 y
 
-float makelegX[5];				// 좀비 다리만들기 x
-float makelegY[5];				// 좀비 다리만들기 y
-float makehead[5];				// 좀비 머리만들기 x
-float makearmX[5];				// 좀비 팔만들기 x
-float makearmY[5];				// 좀비 팔만들기 y
-float makenose[5];				// 좀비 코만들기
-
-float boom[6];					// 캐릭터들 폭발
-bool fireball = false;			// 공격
-
-int dir2;						// 주인공의 마지막 움직임
-float clonespeed[5];			// 좀비 이동속도
-
-float turnY2 = 0;
-float boxturn = 0;
-int num = 0;
-float zsize = 1;
-
-int count2 = 0;
-
-int now;
-float color2[3];
-float fb[4];
-
-float dieing = 0;				// 죽는 애니메이션
-bool die[6];					// 캐릭터 죽음 체크
-
-float grav = 0;
-
-glm::vec3 cameraPos = glm::vec4(mx[0], my[0], mz[0], 0.0f);
-glm::vec3 cameraDirection = glm::vec4(0.0, fpsup + walkmove, -2.0, 0.0f);
-glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
-
-glm::vec3 gunPos = glm::vec3(0.0f, 1.0f, 0.0f);
-
-// 맵 만들기 변수
-
-int itemnum = 0;
-int itemkind = 0;
-bool cl = false;
-
-class Item {
-private:
-
-public:
-	int state = 0;											// 0 = 마우스 위		1 = 설치됨
-	int kind = 0;
-	float left = 0;
-	float right = 0;
-	float top = 0;
-	float bottom = 0;
-	float front = 0;
-	float back = 0;
-	float x = 0;
-	float y = 0;
-	float z = 0;
-	float plus = 0;
-	float savey = 0;
-
-	glm::vec3 s;
-	glm::vec3 r;
-	glm::vec3 t;
 
 
 
-	void Update() {
 
-		if (this->state == 0) {
-			this->kind = itemkind;
-		}
-
-		if (this->kind == 0) {								// 나무 상자
-			this->s = glm::vec3(0.3f + this->plus, 0.3f + this->plus, 0.3f + this->plus);
-		}
-		else if (this->kind == 1) {							// 세로 철창
-			this->s = glm::vec3(1.0f + this->plus, 1.0f + this->plus, 0.001f);
-		}
-		else if (this->kind == 2) {							// 가로 철창
-			this->s = glm::vec3(0.001f, 1.0f + this->plus, 1.0f + this->plus);
-		}
-		else if (this->kind == 3) {							// 탱크
-			this->s = glm::vec3(0.7f + this->plus, 0.4f + this->plus, 0.6f + this->plus);
-		}
-
-		this->t = glm::vec3(this->x, this->y, this->z);
-		this->savey = this->y + this->s.y;
-	}
-
-	void Draw() {
-		if (this->kind == 0) {								// 나무상자
-			glBindVertexArray(VAO[0]);
-			glBindTexture(GL_TEXTURE_2D, texture[1]);
-			glDrawArrays(GL_TRIANGLES, 0, num_shape_list[0]);
-		}
-		else if (this->kind == 1) {							// 세로 철창
-			glBindVertexArray(VAO[0]);
-			glBindTexture(GL_TEXTURE_2D, texture[2]);
-			glDrawArrays(GL_TRIANGLES, 0, num_shape_list[0]);
-		}
-		else if (this->kind == 2) {							// 가로 철창
-			glBindVertexArray(VAO[0]);
-			glBindTexture(GL_TEXTURE_2D, texture[2]);
-			glDrawArrays(GL_TRIANGLES, 0, num_shape_list[0]);
-		}
-		else if (this->kind == 3) {							// 탱크
-			glBindVertexArray(VAO[1]);
-			glBindTexture(GL_TEXTURE_2D, texture[3]);
-			glDrawArrays(GL_TRIANGLES, 0, num_shape_list[0]);
-		}
-	}
-
-	bool check(float mx, float my, float mz) {
-		float x1, x2, y1, y2, z1, z2;
-		x1 = this->x - this->s.x;
-		x2 = this->x + this->s.x;
-		y1 = this->y - this->s.y;
-		y2 = this->y + this->s.y;
-		z1 = this->z - this->s.z;
-		z2 = this->z + this->s.z;
-		if (x1 < mx + 0.03 && mx - 0.03 < x2 &&
-			y1 < my + 0.5 && my - 0.03 < y2 &&
-			z1 < mz + 0.03 && mz - 0.03 < z2
-			) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-
-};
-
-Item item[1000];
-Item setblock;
-
-
-
-// 응가 변수
 
 glm::mat4 TR = glm::mat4(1.0f);
-int Click = 0;
+
 bool key[256];
 float msx, msy = 0;
 bool start = false;
 
-bool checkBtoB(Item B1, Item B2);
-bool checkZtoB(float x, float y, float z, Item B2);
-bool checkBtoB(Item B1, Item B2) {
+std::vector<Scene*> sc;
 
-	if (B2.x - B2.s.x < B1.x + B1.s.x && B1.x - B1.s.x < B2.x + B2.s.x &&
-		B2.y - B2.s.y < B1.y + B1.s.y && B1.y - B1.s.y < B2.y + B2.s.y &&
-		B2.z - B2.s.z < B1.z + B1.s.z && B1.z - B1.s.z < B2.z + B2.s.z
-		) {
-
-		return true;
-	}
-	else {
-		return false;
-	}
-}
-bool checkZtoB(float x, float y, float z, Item B2) {
-
-	if (B2.x - B2.s.x < x + 0.03 && x - 0.03 < B2.x + B2.s.x &&
-		B2.y - B2.s.y < y + 0.5 && y - 0.03 < B2.y + B2.s.y &&
-		B2.z - B2.s.z < z + 0.03 && z - 0.03 < B2.z + B2.s.z
-		) {
-
-		return true;
-	}
-	else {
-		return false;
-	}
-
-}
 void SceneChange(int num_scene);
 int main(int argc, char** argv)
 {
@@ -367,6 +182,9 @@ int main(int argc, char** argv)
 
 		mciSendCommand(dwID, MCI_PLAY, MCI_DGV_PLAY_REPEAT, (DWORD)(LPVOID)&m_mciPlayParms);
 	}
+
+	sc.emplace_back(new GameScene(1, num_shape_list, texture, VAO, s_program));
+
 
 	// callback functions
 	glutDisplayFunc(Display);
@@ -474,63 +292,10 @@ void InitTexture()
 	glUniform1i(tLocation, 0); //--- 샘플러를 0번 유닛으로 설정
 }
 
-
-std::vector<Scene*> sc;
-
 void Display()
 {
 	//*************************************************************************
-	// 시작 변수(한번 만 설정 해야함)
-	if (!start) {
-
-		for (int i = 0; i < 12; ++i) {										// (0,1) (2,3) (4,5) (6,7) (8,9) (10,11) = 캐릭터
-			if (i < 6) {
-				walk[i] = false;
-				walk2[i] = false;
-				jump[i] = false;
-				savey[i] = -1.3;
-				dir[i] = 1;
-				mx[i] = uid(dre);
-				my[i] = -0.65;
-				mz[i] = uid(dre);
-				leg[i] = 0;
-				turn[i] = 0;
-				if (i < 5) {
-					clone[i] = 1;
-					makelegX[i] = 0;
-					makelegY[i] = 0;
-					makehead[i] = 0;
-					makearmX[i] = 0;
-					makearmY[i] = 0;
-					makenose[i] = 0;
-
-				}
-				boom[i] = 0;
-				die[i] = false;
-			}
-		}
-
-		my[0] = -0.5;
-		for (int i = 0; i < 3; ++i) {
-			color2[i] = 1.0;
-		}
-
-		clonespeed[0] = 0.007;
-		clonespeed[1] = 0.009;
-		clonespeed[2] = 0.008;
-		clonespeed[3] = 0.010;
-		clonespeed[4] = 0.012;
-
-		grav = 0.04;
-
-		game = 0;
-		sc.emplace_back(new GameScene(1, num_shape_list, texture, VAO, s_program));
-
-		start = true;
-	}
-	//*************************************************************************
 	// 출력 설정
-
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -543,30 +308,9 @@ void Display()
 		ShowCursor(true);
 	}
 
-
 	//*************************************************************************
 	// 카메라 설정
 	unsigned int modelLocation = glGetUniformLocation(s_program[0], "model");
-	//unsigned int viewLocation = glGetUniformLocation(s_program[0], "view");
-	//unsigned int projLocation = glGetUniformLocation(s_program[0], "projection");
-
-	//glm::mat4 Vw = glm::mat4(1.0f);
-	//glm::mat4 Cp = glm::mat4(1.0f);
-
-	//Cp = glm::rotate(Cp, (float)glm::radians(fpsy), glm::vec3(0.0f, 1.0f, 0.0f));
-
-	//cameraPos = glm::vec4(mx[0], my[0], mz[0], 0.0f);
-	////cameraDirection = glm::vec4(0.0, fpsup + walkmove, -2.0, 0.0f) * Cp;
-	//cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
-
-	//Vw = glm::lookAt(cameraPos, cameraDirection, cameraUp);
-	//glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &Vw[0][0]);
-
-	//glm::mat4 Pj = glm::mat4(1.0f);
-
-	//Pj = glm::perspective(glm::radians(45.0f), (float)WINDOWX / (float)WINDOWY, 0.0005f, 40.0f);
-	//glUniformMatrix4fv(projLocation, 1, GL_FALSE, &Pj[0][0]);
-
 	//*************************************************************************
 	// 조명 설정
 
@@ -618,75 +362,13 @@ void Mouse(int button, int state, int x, int y)
 	msx = ((float)x - ((float)WINDOWX / (float)2)) / ((float)WINDOWX / (float)2);
 	msy = -((float)y - ((float)WINDOWY / (float)2)) / ((float)WINDOWY / (float)2);
 
-	if (game == 1) {
-
-		if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-
-			if (msx > -0.8 && msx<-0.2 && msy>-0.8 && msy < -0.2) {
-				game = 2;
-			}
-			else if (msx < 0.8 && msx > 0.2 && msy > -0.8 && msy < -0.2) {
-				game = 0;
-			}
-
-
-		}
-
-
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
+		mousex = ((float)x - ((float)WINDOWX / (float)2)) / ((float)WINDOWX / (float)2) * 90;
+		mousey = -((float)y - ((float)WINDOWY / (float)2)) / ((float)WINDOWY / (float)2) * 1.5;
 	}
-	else if (game == 0) {
-		if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-			mousex = ((float)x - ((float)WINDOWX / (float)2)) / ((float)WINDOWX / (float)2) * 90;
-			mousey = -((float)y - ((float)WINDOWY / (float)2)) / ((float)WINDOWY / (float)2) * 1.5;
-			Click = 1;
-			fireball = true;
-			fb[0] = gunPos.x;
-			fb[1] = gunPos.y;
-			fb[2] = gunPos.z;
-			fb[3] = 1;
-			shoot = true;
-		}
-		if (button == GLUT_LEFT_BUTTON && state == GLUT_UP) {
-			Scene::scene->p_player->GetComponent<Camera>()->fpsy += fpsy2;
-			fpsup += fpsup2;
-			fpsy2 = 0;
-			fpsup2 = 0;
-			Click = 0;
-		}
-	}
-	else if (game == 2) {
-		if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-			item[itemnum].x = ((float)x - ((float)WINDOWX / (float)2)) / ((float)WINDOWX / (float)2) * 5;
-			item[itemnum].y = -1.3 + item[itemnum].s.y;
-			item[itemnum].z = ((float)y - ((float)WINDOWY / (float)2)) / ((float)WINDOWY / (float)2) * 5;
-
-			item[itemnum].state = 1;
-			cl = true;
-			Click = 1;
-
-
-			bool Ycollide = false;
-			for (int i = 0; i < itemnum; ++i) {
-				Ycollide = checkBtoB(item[itemnum], item[i]);
-				if (Ycollide) {
-					if (item[itemnum].y <= item[i].y + item[i].s.y + item[itemnum].s.y) {
-						item[itemnum].y = item[i].y + item[i].s.y + item[itemnum].s.y;
-					}
-
-				}
-			}
-		}
-		if (button == GLUT_LEFT_BUTTON && state == GLUT_UP) {
-			Click = 0;
-			if (cl == true) {
-				itemnum++;
-				cl = false;
-			}
-			item[itemnum].x = ((float)x - ((float)WINDOWX / (float)2)) / ((float)WINDOWX / (float)2) * 5;
-			item[itemnum].z = ((float)y - ((float)WINDOWY / (float)2)) / ((float)WINDOWY / (float)2) * 5;
-
-
-		}
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_UP) {
+		Scene::scene->p_player->GetComponent<Camera>()->fpsy += fpsy2;
+		fpsy2 = 0;
 	}
 }
 void Motion(int x, int y)
@@ -721,11 +403,6 @@ void Motion2(int x, int y)
 				Scene::scene->p_player->GetComponent<Camera>()->fpsup = -70.0f;
 
 		}
-
-	}
-	else if (game == 2) {
-		item[itemnum].x = ((float)x - ((float)WINDOWX / (float)2)) / ((float)WINDOWX / (float)2) * 5;
-		item[itemnum].z = ((float)y - ((float)WINDOWY / (float)2)) / ((float)WINDOWY / (float)2) * 5;
 	}
 }
 
@@ -765,65 +442,20 @@ void TimerFunction(int value) {
 	bool collide = false;
 
 	if (key['a'] == true) {						// 위로 이동
-		walk[0] = true;
-
-		for (int i = 0; i < itemnum + 1; ++i) {
-			collide = item[i].check(mx[0] + sin((float)glm::radians(fpsy + fpsy2)) * 0.015, my[0] - 0.4, mz[0] - cos((float)glm::radians(fpsy + fpsy2)) * 0.015);
-			if (collide) {
-
-				break;
-			}
-		}
-		if (!collide) {
-			Scene::scene->p_player->GetComponent<Transform3D>()->position.x += sin((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy + fpsy2)) * 0.015;
-			Scene::scene->p_player->GetComponent<Transform3D>()->position.z -= cos((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy + fpsy2)) * 0.015;
-		}
-		dir[0] = 3;
+		Scene::scene->p_player->GetComponent<Transform3D>()->position.x += sin((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy + fpsy2)) * 0.015;
+		Scene::scene->p_player->GetComponent<Transform3D>()->position.z -= cos((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy + fpsy2)) * 0.015;
 	}
 	if (key['d'] == true) {						// 아래로 이동
-		walk[0] = true;
-		for (int i = 0; i < itemnum + 1; ++i) {
-			collide = item[i].check(mx[0] - sin((float)glm::radians(fpsy + fpsy2)) * 0.015, my[0] - 0.4, mz[0] + cos((float)glm::radians(fpsy + fpsy2)) * 0.015);
-			if (collide) {
-
-				break;
-			}
-		}
-		if (!collide) {
-			Scene::scene->p_player->GetComponent<Transform3D>()->position.x -= sin((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy + fpsy2)) * 0.015;
-			Scene::scene->p_player->GetComponent<Transform3D>()->position.z += cos((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy + fpsy2)) * 0.015;
-		}
-		dir[0] = 4;
+		Scene::scene->p_player->GetComponent<Transform3D>()->position.x -= sin((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy + fpsy2)) * 0.015;
+		Scene::scene->p_player->GetComponent<Transform3D>()->position.z += cos((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy + fpsy2)) * 0.015;
 	}
 	if (key['s'] == true) {						// 왼쪽으로 이동
-		walk[0] = true;
-		for (int i = 0; i < itemnum + 1; ++i) {
-			collide = item[i].check(mx[0] - cos((float)glm::radians(fpsy + fpsy2)) * 0.015, my[0] - 0.4, mz[0] - sin((float)glm::radians(fpsy + fpsy2)) * 0.015);
-			if (collide) {
-
-				break;
-			}
-		}
-		if (!collide) {
-			Scene::scene->p_player->GetComponent<Transform3D>()->position.x -= cos((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy + fpsy2)) * 0.015;
-			Scene::scene->p_player->GetComponent<Transform3D>()->position.z -= sin((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy + fpsy2)) * 0.015;
-		}
-		dir[0] = 2;
+		Scene::scene->p_player->GetComponent<Transform3D>()->position.x -= cos((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy + fpsy2)) * 0.015;
+		Scene::scene->p_player->GetComponent<Transform3D>()->position.z -= sin((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy + fpsy2)) * 0.015;
 	}
 	if (key['w'] == true) {						// 오른쪽으로 이동
-		walk[0] = true;
-		for (int i = 0; i < itemnum + 1; ++i) {
-			collide = item[i].check(mx[0] + cos((float)glm::radians(fpsy + fpsy2)) * 0.015, my[0] - 0.4, mz[0] + sin((float)glm::radians(fpsy + fpsy2)) * 0.015);
-			if (collide) {
-
-				break;
-			}
-		}
-		if (!collide) {
-			Scene::scene->p_player->GetComponent<Transform3D>()->position.x += cos((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy + fpsy2)) * 0.015;
-			Scene::scene->p_player->GetComponent<Transform3D>()->position.z += sin((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy + fpsy2)) * 0.015;
-		}
-		dir[0] = 1;
+		Scene::scene->p_player->GetComponent<Transform3D>()->position.x += cos((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy + fpsy2)) * 0.015;
+		Scene::scene->p_player->GetComponent<Transform3D>()->position.z += sin((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy + fpsy2)) * 0.015;
 	}
 
 	glutPostRedisplay();

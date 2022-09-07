@@ -30,7 +30,7 @@ void Camera::update()
 		if (c_pos3.y >= 18.8f) {
 			//c_pos3 = top_pos;
 			c_dir3 = top_dir;
-			//c_up = top_up;
+			c_up = top_up;
 			state = TOP_VIEW;
 		}
 	}

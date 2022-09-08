@@ -29,6 +29,7 @@
 #include "VAO.h"
 #include "GameScene.h"
 #include "PlayerJump.h"
+
 #include "Input.h"
 
 MCI_OPEN_PARMS m_mciOpenParms;
@@ -83,7 +84,7 @@ int num_vertices = 3;
 float sunSize;
 int shape = 1;					// 불러올 모양 (1. 육면체, 2. 구)
 
-vector<ObjRoad> objs;
+ObjRoad obj;
 
 // 텍스쳐 변수
 
@@ -212,9 +213,9 @@ void InitBuffer()
 }
 
 void InitBuffer_bind(const int street) {
-	ObjRoad obj;
 	if (street == 0) {
 		num_shape_list[Cube] = obj.loadObj_normalize_center_3f("Resource/cube.obj");
+		
 	}
 	else if (street == 1) {
 		num_shape_list[Star] = obj.loadObj_normalize_center_3f("Resource/Star.obj");
@@ -249,18 +250,16 @@ void InitBuffer_bind(const int street) {
 	glVertexAttribPointer(tAttribute, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
 	glEnableVertexAttribArray(tAttribute);
 
-	//obj.outvertex = std::vector< glm::vec3 >(0.0f);  // 다음 obj 불러오기 위한 초기화
-	//obj.outnormal = std::vector< glm::vec3 >(0.0f);
-	//obj.outuv = std::vector< glm::vec2 >(0.0f);
+	obj.outvertex = std::vector< glm::vec3 >(0.0f);  // 다음 obj 불러오기 위한 초기화
+	obj.outnormal = std::vector< glm::vec3 >(0.0f);
+	obj.outuv = std::vector< glm::vec2 >(0.0f);
 
-	//obj.vertexIndices = std::vector< unsigned int >(0.0f);
-	//obj.uvIndices = std::vector< unsigned int >(0.0f);
-	//obj.normalIndices = std::vector< unsigned int >(0.0f);
-	//obj.temp_vertices = std::vector< glm::vec3 >(0.0f);
-	//obj.temp_uvs = std::vector< glm::vec2 >(0.0f);
-	//obj.temp_normals = std::vector< glm::vec3 >(0.0f);
-
-	objs.push_back(obj);
+	obj.vertexIndices = std::vector< unsigned int >(0.0f);
+	obj.uvIndices = std::vector< unsigned int >(0.0f);
+	obj.normalIndices = std::vector< unsigned int >(0.0f);
+	obj.temp_vertices = std::vector< glm::vec3 >(0.0f);
+	obj.temp_uvs = std::vector< glm::vec2 >(0.0f);
+	obj.temp_normals = std::vector< glm::vec3 >(0.0f);
 }
 
 

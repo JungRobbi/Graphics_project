@@ -1,11 +1,5 @@
 #include "GameScene.h"
-#include "ObjRead.h"
-#include <iostream>
-#include <vector>
 
-using namespace std;
-
-extern vector<ObjRoad> objs;
 
 GameScene::GameScene() : Scene()
 {
@@ -48,7 +42,7 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 			auto star = CreateStar(index_list,tex,vao);
 
 			star->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 5.5f, 0.0f);
-			star->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 1.0f, 1.0f);
+			star->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 0.3f, 1.0f);
 			star->GetComponent<Transform3D>()->direction = glm::vec3(0.0f, 1.0f, 0.0f);
 			star->GetComponent<Transform3D>()->roll = 90.0f;
 		}
@@ -63,14 +57,6 @@ GameObject* GameScene::CreateBox(int* index_list, GLuint* tex, GLuint* vao) // B
 	auto box = CreateEmpty();
 
 	box->AddComponent<Transform3D>();
-	box->AddComponent<Collide>();
-
-	box->GetComponent<Collide>()->BoundBox.maxX = objs[Cube].maxX;
-	box->GetComponent<Collide>()->BoundBox.minX = objs[Cube].minX;
-	box->GetComponent<Collide>()->BoundBox.maxY = objs[Cube].maxY;
-	box->GetComponent<Collide>()->BoundBox.minY = objs[Cube].minY;
-	box->GetComponent<Collide>()->BoundBox.maxZ = objs[Cube].maxZ;
-	box->GetComponent<Collide>()->BoundBox.minZ = objs[Cube].minZ;
 
 	// render 부분
 	box->modelLocation = modelLocation;
@@ -88,15 +74,6 @@ GameObject* GameScene::CreateStar(int* index_list, GLuint* tex, GLuint* vao) // 
 	star->AddComponent<Transform3D>();
 	star->AddComponent<Collide>();
 	star->AddComponent<Gravity>();
-
-	star->AddComponent<Collide>();
-
-	star->GetComponent<Collide>()->BoundBox.maxX = objs[Star].maxX;
-	star->GetComponent<Collide>()->BoundBox.minX = objs[Star].minX;
-	star->GetComponent<Collide>()->BoundBox.maxY = objs[Star].maxY;
-	star->GetComponent<Collide>()->BoundBox.minY = objs[Star].minY;
-	star->GetComponent<Collide>()->BoundBox.maxZ = objs[Star].maxZ;
-	star->GetComponent<Collide>()->BoundBox.minZ = objs[Star].minZ;
 
 	// render 부분
 	star->modelLocation = modelLocation;

@@ -11,13 +11,13 @@ public:
 
 
 	float sumX = 0.0, sumY = 0.0, sumZ = 0.0;
-	float aveX, aveY, aveZ;
-	float scaleX, scaleY, scaleZ;
+	float aveX = 0.0, aveY = 0.0, aveZ = 0.0;
+	float scaleX = 0.0, scaleY = 0.0, scaleZ = 0.0;
 	float minX = 0.0, minY = 0.0, minZ = 0.0;
 	float maxX = 0.0, maxY = 0.0, maxZ = 0.0;
-	float scaleAll;
+	float scaleAll = 0.0;
 
-	float sizeX, sizeY, sizeZ;
+	float sizeX = 0.0,sizeY = 0.0,  sizeZ = 0.0;
 
 
 	int loadObj(const char* filename)

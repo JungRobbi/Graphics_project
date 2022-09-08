@@ -294,11 +294,10 @@ void Display()
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-	if (game == 0 || game == 2) {
-		ShowCursor(false);
-	}
-	else {
+	if (Scene::scene->p_player->GetComponent<Camera>()->state != FIRST_VIEW)
 		ShowCursor(true);
+	else {
+		ShowCursor(false);
 	}
 
 	//*************************************************************************
@@ -362,7 +361,7 @@ void Motion(int x, int y)
 
 void Motion2(int x, int y)
 {
-	if (game == 0) {
+	if (Scene::scene->p_player->GetComponent<Camera>()->state == FIRST_VIEW) {
 		if (x > WINDOWX - 100 || x < 100 || y > WINDOWY - 100 || y < 100) {
 			SetCursorPos(WINDOWX / 2, WINDOWY / 2);
 		}
@@ -376,21 +375,20 @@ void Motion2(int x, int y)
 
 			xoffset *= 0.2;
 			yoffset *= 0.2;
-
-			if (Scene::scene->p_player->GetComponent<Camera>()->state == FIRST_VIEW) {
-
-				Scene::scene->p_player->GetComponent<Camera>()->fpsy += xoffset;
-				Scene::scene->p_player->GetComponent<Camera>()->fpsup += yoffset;
+		
+			Scene::scene->p_player->GetComponent<Camera>()->fpsy += xoffset;
+			Scene::scene->p_player->GetComponent<Camera>()->fpsup += yoffset;
 
 
-				if (Scene::scene->p_player->GetComponent<Camera>()->fpsup > 70.0f)
-					Scene::scene->p_player->GetComponent<Camera>()->fpsup = 70.0f;
-				if (Scene::scene->p_player->GetComponent<Camera>()->fpsup < -70.0f)
-					Scene::scene->p_player->GetComponent<Camera>()->fpsup = -70.0f;
+			if (Scene::scene->p_player->GetComponent<Camera>()->fpsup > 70.0f)
+				Scene::scene->p_player->GetComponent<Camera>()->fpsup = 70.0f;
+			if (Scene::scene->p_player->GetComponent<Camera>()->fpsup < -70.0f)
+				Scene::scene->p_player->GetComponent<Camera>()->fpsup = -70.0f;
 
-			}
 		}
 	}
+
+
 }
 
 void keyboard(unsigned char key2, int x, int y) {

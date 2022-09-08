@@ -1,5 +1,7 @@
 #pragma once
-
+#include <iostream>
+#include <vector>
+#include <string>
 class ObjRoad {
 public:
 	std::vector< unsigned int > vertexIndices, uvIndices, normalIndices;

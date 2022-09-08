@@ -213,6 +213,7 @@ void InitBuffer()
 void InitBuffer_bind(const int street) {
 	if (street == 0) {
 		num_shape_list[Cube] = obj.loadObj_normalize_center_3f("Resource/cube.obj");
+		
 	}
 	else if (street == 1) {
 		num_shape_list[Star] = obj.loadObj_normalize_center_3f("Resource/Star.obj");

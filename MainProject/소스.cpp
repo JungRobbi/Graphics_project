@@ -315,6 +315,7 @@ void Display()
 	else {
 		ShowCursor(false);
 	}
+	ShowCursor(false);
 
 	//*************************************************************************
 	// 카메라 설정
@@ -340,6 +341,15 @@ void Display()
 		Scene::scene->render();
 	}
 
+	if (Scene::scene->p_player->GetComponent<Camera>()->state == TOP_VIEW) {
+		glBindVertexArray(VAO[0]);
+		TR = glm::mat4(1.0f);
+		TR = glm::translate(TR, glm::vec3(msx * 8.0f, 1.0f, -msy * 8.0f));
+		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
+		glBindTexture(GL_TEXTURE_2D, texture[1]);
+		glDrawArrays(GL_TRIANGLES, 0, num_shape_list[Cube]);
+	}
+
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_BLEND); // 블렌딩 해제
 
@@ -356,12 +366,8 @@ void Reshape(int w, int h)
 
 void Mouse(int button, int state, int x, int y)
 {
-	msx = ((float)x - ((float)WINDOWX / (float)2)) / ((float)WINDOWX / (float)2);
-	msy = -((float)y - ((float)WINDOWY / (float)2)) / ((float)WINDOWY / (float)2);
-
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-		mousex = ((float)x - ((float)WINDOWX / (float)2)) / ((float)WINDOWX / (float)2) * 90;
-		mousey = -((float)y - ((float)WINDOWY / (float)2)) / ((float)WINDOWY / (float)2) * 1.5;
+		
 	}
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_UP) {
 
@@ -374,6 +380,10 @@ void Motion(int x, int y)
 
 void Motion2(int x, int y)
 {
+	if (Scene::scene->p_player->GetComponent<Camera>()->state == TOP_VIEW) {
+		msx = ((float)x - ((float)WINDOWX / (float)2)) / ((float)WINDOWX / (float)2);
+		msy = -((float)y - ((float)WINDOWY / (float)2)) / ((float)WINDOWY / (float)2);
+	}
 	if (Scene::scene->p_player->GetComponent<Camera>()->state == FIRST_VIEW) {
 		if (x > WINDOWX - 100 || x < 100 || y > WINDOWY - 100 || y < 100) {
 			SetCursorPos(WINDOWX / 2, WINDOWY / 2);
@@ -400,8 +410,6 @@ void Motion2(int x, int y)
 
 		}
 	}
-
-
 }
 
 void keyboard(unsigned char key2, int x, int y) {
@@ -413,8 +421,11 @@ void keyboard(unsigned char key2, int x, int y) {
 
 	switch (key2) {
 	case '1':
-		//SceneChange(1);
-		Scene::scene->p_player->GetComponent<Camera>()->state = FIRST_VIEW;
+		if (Scene::scene->p_player->GetComponent<Camera>()->state == FIRST_TO_TOP ||
+			Scene::scene->p_player->GetComponent<Camera>()->state == FIRST_VIEW)
+			Scene::scene->p_player->GetComponent<Camera>()->state = FIRST_TO_TOP;
+		else
+			Scene::scene->p_player->GetComponent<Camera>()->state = TOP_TO_FIRST;
 		break;
 	case '2':
 		if (Scene::scene->p_player->GetComponent<Camera>()->state == FIRST_TO_TOP || 
@@ -422,12 +433,21 @@ void keyboard(unsigned char key2, int x, int y) {
 			Scene::scene->p_player->GetComponent<Camera>()->state = FIRST_TO_TOP;
 		else 
 			Scene::scene->p_player->GetComponent<Camera>()->state = TOP_TO_FIRST;
-
-		//SceneChange(2);
 		break;
 	case '3':
-		Scene::scene->p_player->GetComponent<Camera>()->state = TOP_VIEW;
-		//SceneChange(3);
+		if (Scene::scene->p_player->GetComponent<Camera>()->state == FIRST_TO_TOP ||
+			Scene::scene->p_player->GetComponent<Camera>()->state == FIRST_VIEW)
+			Scene::scene->p_player->GetComponent<Camera>()->state = FIRST_TO_TOP;
+		else
+			Scene::scene->p_player->GetComponent<Camera>()->state = TOP_TO_FIRST;
+		break;
+	case 'q':
+
+
+		break;
+	case 'e':
+
+
 		break;
 	case VK_SPACE:
 		if (Scene::scene->p_player->GetComponent<PlayerJump>() && Scene::scene->p_player->GetComponent<Transform3D>()->velocity.y == 0.0f)

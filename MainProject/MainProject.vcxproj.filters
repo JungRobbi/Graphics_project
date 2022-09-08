@@ -124,5 +124,8 @@
     <ClInclude Include="Gravity.h">
       <Filter>소스 파일\GameComponents</Filter>
     </ClInclude>
+    <ClInclude Include="ObjRead.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

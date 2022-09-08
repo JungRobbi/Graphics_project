@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -172,6 +172,7 @@
     </ClInclude>
     <ClInclude Include="Gravity.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="ObjRead.h" />
     <ClInclude Include="Output.h" />
     <ClInclude Include="PlayerJump.h" />
     <ClInclude Include="Scene.h" />

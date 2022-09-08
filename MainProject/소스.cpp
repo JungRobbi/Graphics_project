@@ -21,7 +21,7 @@
 
 #include "stb_image.h"
 #include "shader.h"
-#include "objRead.cpp"
+#include "objRead.h"
 
 #include "Mmsystem.h"
 #include "Digitalv.h"
@@ -29,7 +29,6 @@
 #include "VAO.h"
 #include "GameScene.h"
 #include "PlayerJump.h"
-
 #include "Input.h"
 
 MCI_OPEN_PARMS m_mciOpenParms;
@@ -83,6 +82,8 @@ int num_vertices = 3;
 
 float sunSize;
 int shape = 1;					// 불러올 모양 (1. 육면체, 2. 구)
+
+vector<ObjRoad> objs;
 
 // 텍스쳐 변수
 
@@ -211,17 +212,18 @@ void InitBuffer()
 }
 
 void InitBuffer_bind(const int street) {
+	ObjRoad obj;
 	if (street == 0) {
-		num_shape_list[Cube] = loadObj_normalize_center_3f("Resource/cube.obj");
+		num_shape_list[Cube] = obj.loadObj_normalize_center_3f("Resource/cube.obj");
 	}
 	else if (street == 1) {
-		num_shape_list[Star] = loadObj_normalize_center_3f("Resource/Star.obj");
+		num_shape_list[Star] = obj.loadObj_normalize_center_3f("Resource/Star.obj");
 	}
 	else if (street == 2) {
-		num_shape_list[Plane] = loadObj_normalize_center_3f("Resource/plane.obj");
+		num_shape_list[Plane] = obj.loadObj_normalize_center_3f("Resource/plane.obj");
 	}
 	else if (street == 3) {
-		num_shape_list[1] = loadObj_normalize_center_3f("Resource/sphere.obj");
+		num_shape_list[1] = obj.loadObj_normalize_center_3f("Resource/sphere.obj");
 	}
 	else if (street == 4) {
 
@@ -230,33 +232,35 @@ void InitBuffer_bind(const int street) {
 	glUseProgram(s_program[0]);
 	glBindVertexArray(VAO[street]);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO_position[street]);
-	glBufferData(GL_ARRAY_BUFFER, outvertex.size() * sizeof(glm::vec3), &outvertex[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, obj.outvertex.size() * sizeof(glm::vec3), &obj.outvertex[0], GL_STATIC_DRAW);
 	GLint pAttribute = glGetAttribLocation(s_program[0], "aPos");
 	glVertexAttribPointer(pAttribute, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
 	glEnableVertexAttribArray(pAttribute);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO_normal[street]);
-	glBufferData(GL_ARRAY_BUFFER, outnormal.size() * sizeof(glm::vec3), &outnormal[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, obj.outnormal.size() * sizeof(glm::vec3), &obj.outnormal[0], GL_STATIC_DRAW);
 	GLint nAttribute = glGetAttribLocation(s_program[0], "aNormal");
 	glVertexAttribPointer(nAttribute, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
 	glEnableVertexAttribArray(nAttribute);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO_uv[street]);
-	glBufferData(GL_ARRAY_BUFFER, outuv.size() * sizeof(glm::vec2), &outuv[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, obj.outuv.size() * sizeof(glm::vec2), &obj.outuv[0], GL_STATIC_DRAW);
 	GLint tAttribute = glGetAttribLocation(s_program[0], "aTex");
 	glVertexAttribPointer(tAttribute, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
 	glEnableVertexAttribArray(tAttribute);
 
-	outvertex = std::vector< glm::vec3 >(0.0f);  // 다음 obj 불러오기 위한 초기화
-	outnormal = std::vector< glm::vec3 >(0.0f);
-	outuv = std::vector< glm::vec2 >(0.0f);
+	//obj.outvertex = std::vector< glm::vec3 >(0.0f);  // 다음 obj 불러오기 위한 초기화
+	//obj.outnormal = std::vector< glm::vec3 >(0.0f);
+	//obj.outuv = std::vector< glm::vec2 >(0.0f);
 
-	vertexIndices = std::vector< unsigned int >(0.0f);
-	uvIndices = std::vector< unsigned int >(0.0f);
-	normalIndices = std::vector< unsigned int >(0.0f);
-	temp_vertices = std::vector< glm::vec3 >(0.0f);
-	temp_uvs = std::vector< glm::vec2 >(0.0f);
-	temp_normals = std::vector< glm::vec3 >(0.0f);
+	//obj.vertexIndices = std::vector< unsigned int >(0.0f);
+	//obj.uvIndices = std::vector< unsigned int >(0.0f);
+	//obj.normalIndices = std::vector< unsigned int >(0.0f);
+	//obj.temp_vertices = std::vector< glm::vec3 >(0.0f);
+	//obj.temp_uvs = std::vector< glm::vec2 >(0.0f);
+	//obj.temp_normals = std::vector< glm::vec3 >(0.0f);
+
+	objs.push_back(obj);
 }
 
 

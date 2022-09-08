@@ -1,5 +1,4 @@
-#include <vector>
-#include <string>
+
 
 std::vector< unsigned int > vertexIndices, uvIndices, normalIndices;
 std::vector< glm::vec3 > temp_vertices;

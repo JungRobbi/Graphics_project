@@ -324,11 +324,8 @@ void Display()
 		Scene::scene->render();
 	}
 
-	Imagenum = 4;
-
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_BLEND); // 블렌딩 해제
-
 
 	glutSwapBuffers();
 }

@@ -7,6 +7,8 @@
 #include "Gravity.h"
 #include "PlayerJump.h"
 
+extern BoundingBox BoundBox[10];
+
 class GameScene : public Scene
 {
 

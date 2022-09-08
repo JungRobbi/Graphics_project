@@ -1,4 +1,5 @@
 #include "GameScene.h"
+#include <iostream>
 
 
 GameScene::GameScene() : Scene()
@@ -65,6 +66,13 @@ GameObject* GameScene::CreateBox(int* index_list, GLuint* tex, GLuint* vao) // B
 	auto box = CreateEmpty();
 
 	box->AddComponent<Transform3D>();
+	box->AddComponent<Collide>();
+	box->GetComponent<Collide>()->BoundBox = BoundBox[Cube];
+
+	//std::cout << std::endl << std::endl << BoundBox[Cube].maxX << " " << BoundBox[Cube].maxY << std::endl;
+	//std::cout << BoundBox[Cube].minX << " " << BoundBox[Cube].minY << std::endl;
+
+	box->AddComponent<Gravity>();
 
 	// render 부분
 	box->modelLocation = modelLocation;
@@ -81,6 +89,11 @@ GameObject* GameScene::CreateStar(int* index_list, GLuint* tex, GLuint* vao) // 
 
 	star->AddComponent<Transform3D>();
 	star->AddComponent<Collide>();
+	star->GetComponent<Collide>()->BoundBox = BoundBox[Star];
+
+	//std::cout << std::endl << std::endl << BoundBox[Star].maxX << " " << BoundBox[Star].maxY << std::endl;
+	//std::cout << BoundBox[Star].minX << " " << BoundBox[Star].minY << std::endl;
+
 	star->AddComponent<Gravity>();
 
 	// render 부분

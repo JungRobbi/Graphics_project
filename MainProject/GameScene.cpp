@@ -65,8 +65,6 @@ GameObject* GameScene::CreateBox(int* index_list, GLuint* tex, GLuint* vao) // B
 	auto box = CreateEmpty();
 
 	box->AddComponent<Transform3D>();
-	box->AddComponent<Collide>();
-	box->AddComponent<Gravity>();
 
 	// render ºÎºÐ
 	box->modelLocation = modelLocation;

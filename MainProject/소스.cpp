@@ -104,6 +104,8 @@ int intmpy = 0;
 float mousex = 0;				// 마우스 x
 float mousey = 0;				// 마우스 y
 
+float create_height = 2.0f;
+
 BoundingBox BoundBox[10];
 
 
@@ -343,21 +345,21 @@ void Display()
 	}
 
 	if (Scene::scene->p_player->GetComponent<Camera>()->state == TOP_VIEW) {
-		if (n_model == 0) {
-			glBindVertexArray(VAO[n_model]);
+		if (n_model == Cube) {
+			glBindVertexArray(VAO[Cube]);
 			TR = glm::mat4(1.0f);
-			TR = glm::translate(TR, glm::vec3(msx * 8.0f, 1.0f, -msy * 8.0f));
+			TR = glm::translate(TR, glm::vec3(msx * 8.0f, create_height, -msy * 8.0f));
 			glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
 			glBindTexture(GL_TEXTURE_2D, texture[1]);
-			glDrawArrays(GL_TRIANGLES, 0, num_shape_list[n_model]);
+			glDrawArrays(GL_TRIANGLES, 0, num_shape_list[Cube]);
 		}
-		else if (n_model == 1) {
-			glBindVertexArray(VAO[n_model]);
+		else if (n_model == Star) {
+			glBindVertexArray(VAO[Star]);
 			TR = glm::mat4(1.0f);
-			TR = glm::translate(TR, glm::vec3(msx * 8.0f, 1.0f, -msy * 8.0f));
+			TR = glm::translate(TR, glm::vec3(msx * 8.0f, create_height, -msy * 8.0f));
 			glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
 			glBindTexture(GL_TEXTURE_2D, texture[1]);
-			glDrawArrays(GL_TRIANGLES, 0, num_shape_list[n_model]);
+			glDrawArrays(GL_TRIANGLES, 0, num_shape_list[Star]);
 		}
 	}
 
@@ -377,10 +379,23 @@ void Reshape(int w, int h)
 
 void Mouse(int button, int state, int x, int y)
 {
-	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-		
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && Scene::scene->p_player->GetComponent<Camera>()->state == TOP_VIEW) {
+		if (n_model == Cube) {
+			auto box = Scene::scene->CreateBox(num_shape_list, texture, VAO);
+			box->GetComponent<Transform3D>()->position = glm::vec3(msx * 8.0f, create_height, -msy * 8.0f);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 1.0f, 1.0f);
+			box->GetComponent<Transform3D>()->direction = glm::vec3(0.0f, 1.0f, 0.0f);
+		}
+		else if (n_model == Star) {
+			/*auto star = CreateStar(index_list, tex, vao);
+
+			star->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 5.5f, 0.0f);
+			star->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 0.3f, 1.0f);
+			star->GetComponent<Transform3D>()->direction = glm::vec3(0.0f, 1.0f, 0.0f);
+			star->GetComponent<Transform3D>()->roll = 90.0f;*/
+		} 
 	}
-	if (button == GLUT_LEFT_BUTTON && state == GLUT_UP) {
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_UP && Scene::scene->p_player->GetComponent<Camera>()->state == TOP_VIEW) {
 
 	}
 }

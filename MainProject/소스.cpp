@@ -30,6 +30,7 @@
 #include "GameScene.h"
 #include "PlayerJump.h"
 
+#include "Collide.h"
 #include "Input.h"
 
 MCI_OPEN_PARMS m_mciOpenParms;
@@ -103,9 +104,7 @@ int intmpy = 0;
 float mousex = 0;				// 마우스 x
 float mousey = 0;				// 마우스 y
 
-
-
-
+BoundingBox BoundBox[4];
 
 
 glm::mat4 TR = glm::mat4(1.0f);
@@ -213,12 +212,26 @@ void InitBuffer()
 }
 
 void InitBuffer_bind(const int street) {
+	
 	if (street == 0) {
 		num_shape_list[Cube] = obj.loadObj_normalize_center_3f("Resource/cube.obj");
-		
+		BoundingBox& bb = BoundBox[Cube];
+		bb.maxX = obj.maxX;
+		bb.minX = obj.minX;
+		bb.maxY = obj.maxY;
+		bb.minY = obj.minY;
+		bb.maxZ = obj.maxZ;
+		bb.minZ = obj.minZ;
 	}
 	else if (street == 1) {
 		num_shape_list[Star] = obj.loadObj_normalize_center_3f("Resource/Star.obj");
+		BoundingBox& bb = BoundBox[Star];
+		bb.maxX = obj.maxX;
+		bb.minX = obj.minX;
+		bb.maxY = obj.maxY;
+		bb.minY = obj.minY;
+		bb.maxZ = obj.maxZ;
+		bb.minZ = obj.minZ;
 	}
 	else if (street == 2) {
 		num_shape_list[Plane] = obj.loadObj_normalize_center_3f("Resource/plane.obj");

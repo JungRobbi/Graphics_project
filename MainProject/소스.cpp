@@ -90,7 +90,8 @@ ObjRoad obj;
 
 int img = 7;
 GLuint texture[30];
-int Imagenum = 0;
+int n_model = 0;
+int n_max_model = 2;
 int widthImage, heightImage, numberOfChannel = 0;
 
 // 게임 변수
@@ -325,7 +326,7 @@ void Display()
 
 
 	int lightPosLocation = glGetUniformLocation(s_program[0], "lightPos"); //--- lightPos 값 전달: (0.0, 0.0, 5.0);
-	glUniform3f(lightPosLocation, 0.0, 0.0, 0.0);
+	glUniform3f(lightPosLocation, 0.0, 10.0, 0.0);
 	int lightColorLocation = glGetUniformLocation(s_program[0], "lightColor"); //--- lightColor 값 전달: (1.0, 1.0, 1.0) 백색
 	glUniform3f(lightColorLocation, 1.0, 1.0, 1.0);
 
@@ -342,12 +343,22 @@ void Display()
 	}
 
 	if (Scene::scene->p_player->GetComponent<Camera>()->state == TOP_VIEW) {
-		glBindVertexArray(VAO[0]);
-		TR = glm::mat4(1.0f);
-		TR = glm::translate(TR, glm::vec3(msx * 8.0f, 1.0f, -msy * 8.0f));
-		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
-		glBindTexture(GL_TEXTURE_2D, texture[1]);
-		glDrawArrays(GL_TRIANGLES, 0, num_shape_list[Cube]);
+		if (n_model == 0) {
+			glBindVertexArray(VAO[n_model]);
+			TR = glm::mat4(1.0f);
+			TR = glm::translate(TR, glm::vec3(msx * 8.0f, 1.0f, -msy * 8.0f));
+			glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
+			glBindTexture(GL_TEXTURE_2D, texture[1]);
+			glDrawArrays(GL_TRIANGLES, 0, num_shape_list[n_model]);
+		}
+		else if (n_model == 1) {
+			glBindVertexArray(VAO[n_model]);
+			TR = glm::mat4(1.0f);
+			TR = glm::translate(TR, glm::vec3(msx * 8.0f, 1.0f, -msy * 8.0f));
+			glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
+			glBindTexture(GL_TEXTURE_2D, texture[1]);
+			glDrawArrays(GL_TRIANGLES, 0, num_shape_list[n_model]);
+		}
 	}
 
 	glDisable(GL_CULL_FACE);
@@ -442,12 +453,16 @@ void keyboard(unsigned char key2, int x, int y) {
 			Scene::scene->p_player->GetComponent<Camera>()->state = TOP_TO_FIRST;
 		break;
 	case 'q':
-
-
+		if (Scene::scene->p_player->GetComponent<Camera>()->state == TOP_VIEW) {
+			if (--n_model < 0)
+				n_model = 0;
+		}
 		break;
 	case 'e':
-
-
+		if (Scene::scene->p_player->GetComponent<Camera>()->state == TOP_VIEW) {
+			if (++n_model == n_max_model)
+				n_model = n_max_model - 1;
+		}
 		break;
 	case VK_SPACE:
 		if (Scene::scene->p_player->GetComponent<PlayerJump>() && Scene::scene->p_player->GetComponent<Transform3D>()->velocity.y == 0.0f)

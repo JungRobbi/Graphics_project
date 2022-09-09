@@ -27,7 +27,7 @@ void main()
   	specularLight = pow(specularLight, shininess);
   	vec3 specular = specularLight * lightColor;
 
-  	vec3 result = (diffuse+specular+ambient) * (1.0, 1.0, 1.0);
+  	vec3 result = (diffuse+specular+ambient);
 
   	vec4 texcolor = texture(outTex, Tex);
 

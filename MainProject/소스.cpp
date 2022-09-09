@@ -487,11 +487,14 @@ void keyboard(unsigned char key2, int x, int y) {
 		}
 		break;
 	case 'c': // юс╫ц clear е╟
-		for (int i{}; i < 3; ++i)
-			f_Light_ambients[i] = 0.3f;
-
-
-
+		if (f_Light_ambients[0] < 0.3f) {
+			for (int i{}; i < 3; ++i)
+				f_Light_ambients[i] = 0.3f;
+		}
+		else {
+			for (int i{}; i < 3; ++i)
+				f_Light_ambients[i] = 0.03f;
+		}
 		break;
 	case VK_SPACE:
 		if (Scene::scene->p_player->GetComponent<PlayerJump>() && Scene::scene->p_player->GetComponent<Transform3D>()->velocity.y == 0.0f)

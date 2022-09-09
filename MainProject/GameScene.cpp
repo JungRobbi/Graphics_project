@@ -41,19 +41,19 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 			CreateSkyBox(index_list, tex, vao);
 		}
 		{
-			auto star = CreateStar(index_list,tex,vao);
+		/*	auto star = CreateStar(index_list,tex,vao);
 
 			star->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 5.5f, 0.0f);
 			star->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 0.3f, 1.0f);
 			star->GetComponent<Transform3D>()->direction = glm::vec3(0.0f, 1.0f, 0.0f);
-			star->GetComponent<Transform3D>()->roll = 90.0f;
+			star->GetComponent<Transform3D>()->roll = 90.0f;*/
 		}
 		{
-			auto box = CreateBox(index_list, tex, vao);
+			/*auto box = CreateBox(index_list, tex, vao);
 
 			box->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 5.5f, 2.0f);
 			box->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 1.0f, 1.0f);
-			box->GetComponent<Transform3D>()->direction = glm::vec3(0.0f, 1.0f, 0.0f);
+			box->GetComponent<Transform3D>()->direction = glm::vec3(0.0f, 1.0f, 0.0f);*/
 		}
 	}
 	else if (num_scene == 2) {

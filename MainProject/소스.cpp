@@ -104,7 +104,7 @@ int intmpy = 0;
 float mousex = 0;				// 마우스 x
 float mousey = 0;				// 마우스 y
 
-float create_height = 2.0f;
+float create_height = 5.0f;
 
 BoundingBox BoundBox[10];
 

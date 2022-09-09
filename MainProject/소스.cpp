@@ -370,6 +370,12 @@ void Display()
 		}
 	}
 
+	if (f_Light_ambients[0] < 0.3f) { // 다음 창
+		glBindVertexArray(VAO[Plane]);
+		glBindTexture(GL_TEXTURE_2D, texture[0]);
+		glDrawArrays(GL_TRIANGLES, 0, num_shape_list[Plane]);
+	}
+
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_BLEND); // 블렌딩 해제
 

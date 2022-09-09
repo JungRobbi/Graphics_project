@@ -106,6 +106,8 @@ float mousey = 0;				// 마우스 y
 
 float create_height = 5.0f;
 
+float f_Light_ambients[3];
+
 BoundingBox BoundBox[10];
 
 
@@ -160,6 +162,9 @@ int main(int argc, char** argv)
 	checkCompileErrors(s_program[0], "PROGRAM");
 
 	{ // initialize
+		for (int i{}; i < 3; ++i)
+			f_Light_ambients[i] = 0.3f;
+
 		InitBuffer();
 		InitTexture();
 		InitBuffer_bind(0); // 0 : 정육면체, 1 : 탱크, 2 : 총
@@ -331,6 +336,8 @@ void Display()
 	glUniform3f(lightPosLocation, 0.0, 10.0, 0.0);
 	int lightColorLocation = glGetUniformLocation(s_program[0], "lightColor"); //--- lightColor 값 전달: (1.0, 1.0, 1.0) 백색
 	glUniform3f(lightColorLocation, 1.0, 1.0, 1.0);
+	int lighAmbientLocation = glGetUniformLocation(s_program[0], "lightAmbient"); //--- lightAmbient 
+	glUniform3f(lighAmbientLocation, f_Light_ambients[0], f_Light_ambients[1], f_Light_ambients[2]);
 
 	//*************************************************************************
 	// 그리기 부분
@@ -478,6 +485,13 @@ void keyboard(unsigned char key2, int x, int y) {
 			if (++n_model == n_max_model)
 				n_model = n_max_model - 1;
 		}
+		break;
+	case 'c': // 임시 clear 키
+		for (int i{}; i < 3; ++i)
+			f_Light_ambients[i] = 0.3f;
+
+
+
 		break;
 	case VK_SPACE:
 		if (Scene::scene->p_player->GetComponent<PlayerJump>() && Scene::scene->p_player->GetComponent<Transform3D>()->velocity.y == 0.0f)

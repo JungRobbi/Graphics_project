@@ -92,7 +92,7 @@ ObjRoad obj;
 int img = 7;
 GLuint texture[30];
 int n_model = 0;
-int n_max_model = 2;
+int n_max_model = 4;
 int widthImage, heightImage, numberOfChannel = 0;
 
 // 게임 변수
@@ -246,7 +246,7 @@ void InitBuffer_bind(const int street) {
 		num_shape_list[Plane] = obj.loadObj_normalize_center_3f("Resource/plane.obj");
 	}
 	else if (street == 3) {
-		num_shape_list[1] = obj.loadObj_normalize_center_3f("Resource/sphere.obj");
+		num_shape_list[3] = obj.loadObj_normalize_center_4f("Resource/pickaxe.obj");
 	}
 	else if (street == 4) {
 
@@ -289,8 +289,8 @@ void InitTexture()
 {	
 	BITMAPINFO* bmp;
 	string map[30] = { "Resource/main.png","Resource/B.png","Resource/C.png","Resource/D.png","Resource/E.png","Resource/body.png",
-		"Resource/face.png","Resource/gun_tex.png", "Resource/skybox1_top.png", "Resource/skybox1_left.png", "Resource/skybox1_front.png", "Resource/skybox1_right.png",
-		"Resource/skybox1_back.png", "Resource/skybox1_bottom.png" };
+		"Resource/face.png","Resource/gun_tex.png", "Resource/skybox2_top.png", "Resource/skybox2_left.png", "Resource/skybox2_front.png", "Resource/skybox2_right.png",
+		"Resource/skybox2_back.png", "Resource/skybox2_bottom.png"};
 	glGenTextures(30, texture); //--- 텍스처 생성
 
 	for (int i = 0; i < 30; ++i) {
@@ -370,6 +370,13 @@ void Display()
 			glDrawArrays(GL_TRIANGLES, 0, num_shape_list[Star]);
 		}
 	}
+
+	glBindVertexArray(VAO[3]);
+	TR = glm::mat4(1.0f);
+	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
+	glBindTexture(GL_TEXTURE_2D, texture[1]);
+	glDrawArrays(GL_TRIANGLES, 0, num_shape_list[3]);
+
 
 	if (f_Light_ambients[0] < 0.3f) { 
 		Display_Sub1();

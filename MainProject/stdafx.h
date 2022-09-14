@@ -3,7 +3,7 @@
 #define WINDOWY 800
 #define pie 3.14159265358979324846
 
-enum ShapeTag { Cube, Star, Plane };
+enum ShapeTag { Cube, Star, Plane, Pickaxe, Shoes };
 
 #include <chrono>
 #include <list>

@@ -144,6 +144,7 @@
     </ClCompile>
     <ClCompile Include="Gravity.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="ItemRotate.cpp" />
     <ClCompile Include="Output.cpp" />
     <ClCompile Include="PlayerJump.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -172,6 +173,7 @@
     </ClInclude>
     <ClInclude Include="Gravity.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="ItemRotate.h" />
     <ClInclude Include="ObjRead.h" />
     <ClInclude Include="Output.h" />
     <ClInclude Include="PlayerJump.h" />

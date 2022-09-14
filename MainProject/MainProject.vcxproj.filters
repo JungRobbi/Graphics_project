@@ -77,6 +77,9 @@
     <ClCompile Include="Gravity.cpp">
       <Filter>소스 파일\GameComponents</Filter>
     </ClCompile>
+    <ClCompile Include="ItemRotate.cpp">
+      <Filter>소스 파일\GameComponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FrameWork.h">
@@ -126,6 +129,9 @@
     </ClInclude>
     <ClInclude Include="ObjRead.h">
       <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemRotate.h">
+      <Filter>소스 파일\GameComponents</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

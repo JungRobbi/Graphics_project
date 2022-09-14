@@ -168,10 +168,9 @@ int main(int argc, char** argv)
 
 		InitBuffer();
 		InitTexture();
-		InitBuffer_bind(0); // 0 : ¡§¿∞∏È√º, 1 : ≈ ≈©, 2 : √—
-		InitBuffer_bind(1);
-		InitBuffer_bind(2);
-		InitBuffer_bind(3);
+		for (int i{}; i < 5; ++i) {
+			InitBuffer_bind(i);
+		}
 
 		glEnable(GL_DEPTH_TEST);
 		mciOpen.lpstrElementName = "Resource/bgm.mp3";
@@ -246,10 +245,10 @@ void InitBuffer_bind(const int street) {
 		num_shape_list[Plane] = obj.loadObj_normalize_center_3f("Resource/plane.obj");
 	}
 	else if (street == 3) {
-		num_shape_list[3] = obj.loadObj_normalize_center_4f("Resource/pickaxe.obj");
+		num_shape_list[Pickaxe] = obj.loadObj_normalize_center_4f("Resource/pickaxe.obj");
 	}
 	else if (street == 4) {
-
+		num_shape_list[Shoes] = obj.loadObj_normalize_center_4f("Resource/shoe.obj");
 	}
 
 	glUseProgram(s_program[0]);
@@ -288,7 +287,7 @@ void InitBuffer_bind(const int street) {
 void InitTexture()
 {	
 	BITMAPINFO* bmp;
-	string map[30] = { "Resource/main.png","Resource/gold.png","Resource/C.png","Resource/D.png","Resource/E.png","Resource/body.png",
+	string map[30] = { "Resource/main.png","Resource/B.png","Resource/gold.png","Resource/D.png","Resource/E.png","Resource/body.png",
 		"Resource/face.png","Resource/gun_tex.png", "Resource/skybox2_top.png", "Resource/skybox2_left.png", "Resource/skybox2_front.png", "Resource/skybox2_right.png",
 		"Resource/skybox2_back.png", "Resource/skybox2_bottom.png"};
 	glGenTextures(30, texture); //--- ≈ÿΩ∫√≥ ª˝º∫
@@ -371,11 +370,11 @@ void Display()
 		}
 	}
 
-	glBindVertexArray(VAO[3]);
-	TR = glm::mat4(1.0f);
-	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
-	glBindTexture(GL_TEXTURE_2D, texture[1]);
-	glDrawArrays(GL_TRIANGLES, 0, num_shape_list[3]);
+	//glBindVertexArray(VAO[3]);
+	//TR = glm::mat4(1.0f);
+	//glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
+	//glBindTexture(GL_TEXTURE_2D, texture[1]);
+	//glDrawArrays(GL_TRIANGLES, 0, num_shape_list[3]);
 
 
 	if (f_Light_ambients[0] < 0.3f) { 

@@ -6,8 +6,11 @@
 #include "Camera.h"
 #include "Gravity.h"
 #include "PlayerJump.h"
+#include "ItemRotate.h"
 
 extern BoundingBox BoundBox[10];
+
+enum {ITEM_PICKAXE = 3, ITEM_SHOE};
 
 class GameScene : public Scene
 {
@@ -35,6 +38,8 @@ public:
 
 	GameObject* CreateBox(int* index_list, GLuint* tex, GLuint* vao);
 	GameObject* CreateStar(int* index_list, GLuint* tex, GLuint* vao);
+	GameObject* CreateItem_Pickaxe(int* index_list, GLuint* tex, GLuint* vao);
+	GameObject* CreateItem_Shoes(int* index_list, GLuint* tex, GLuint* vao);
 	void CreateSkyBox(int* index_list, GLuint* tex, GLuint* vao);
 
 

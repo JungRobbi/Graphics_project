@@ -2,6 +2,7 @@
 #include <iostream>
 
 
+
 GameScene::GameScene() : Scene()
 {
 
@@ -55,6 +56,21 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 			box->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 1.0f, 1.0f);
 			box->GetComponent<Transform3D>()->direction = glm::vec3(0.0f, 1.0f, 0.0f);*/
 		}
+		{
+			auto axe = CreateItem_Pickaxe(index_list, tex, vao);
+			axe->GetComponent<Transform3D>()->position = glm::vec3(1.0f, 0.0f, 0.0f);
+			axe->GetComponent<Transform3D>()->scale = glm::vec3(0.1f, 0.1f, 0.05f);
+			axe->GetComponent<Transform3D>()->direction = glm::vec3(0.0f, 1.0f, 0.0f);
+
+		}
+		{
+			auto shoes = CreateItem_Shoes(index_list, tex, vao);
+			shoes->GetComponent<Transform3D>()->roll = -90.0f;
+			shoes->GetComponent<Transform3D>()->position = glm::vec3(1.0f, 0.0f, 0.2f);
+			shoes->GetComponent<Transform3D>()->scale = glm::vec3(0.1f, 0.1f, 0.05f);
+			shoes->GetComponent<Transform3D>()->direction = glm::vec3(0.0f, 1.0f, 0.0f);
+
+		}
 	}
 	else if (num_scene == 2) {
 
@@ -103,6 +119,40 @@ GameObject* GameScene::CreateStar(int* index_list, GLuint* tex, GLuint* vao) // 
 	star->texture = tex[1]; // 1번 텍스쳐
 
 	return star;
+}
+
+GameObject* GameScene::CreateItem_Pickaxe(int* index_list, GLuint* tex, GLuint* vao)
+{
+	auto axe = CreateEmpty();
+
+	axe->AddComponent<Transform3D>();
+	axe->AddComponent<Collide>();
+	axe->AddComponent<ItemRotate>();
+
+	// render 부분
+	axe->modelLocation = modelLocation;
+	axe->num_index = index_list[Pickaxe]; // load()
+	axe->VAO = vao[Pickaxe]; // 메쉬
+	axe->texture = tex[2]; // 텍스쳐
+
+	return axe;
+}
+
+GameObject* GameScene::CreateItem_Shoes(int* index_list, GLuint* tex, GLuint* vao)
+{
+	auto shoes = CreateEmpty();
+
+	shoes->AddComponent<Transform3D>();
+	shoes->AddComponent<Collide>();
+	shoes->AddComponent<ItemRotate>();
+
+	// render 부분
+	shoes->modelLocation = modelLocation;
+	shoes->num_index = index_list[Shoes]; // load()
+	shoes->VAO = vao[Shoes]; // 메쉬
+	shoes->texture = tex[2]; // 텍스쳐
+
+	return shoes;
 }
 
 void GameScene::update()

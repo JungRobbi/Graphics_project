@@ -24,7 +24,7 @@ void Collide::update()
 				gameObject->GetComponent<Gravity>()->floor = obj->GetComponent<Collide>()->BoundBox.maxY;
 				
 			}
-			printf("%f", BoundBox.maxX);
+			//printf("%f", BoundBox.maxX);
 		}
 	}
 }

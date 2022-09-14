@@ -17,7 +17,7 @@ public:
 
 	glm::vec3 velocity = glm::vec3(0.0f, 0.0f, 0.0f);
 
-	float pitch = 0.0f; // x 각
+	float pitch = 0.0f; // x 각 모델 좌표계 기준
 	float yaw = 0.0f; // y각
 	float roll = 0.0f; // z각
 

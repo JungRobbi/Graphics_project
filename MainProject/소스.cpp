@@ -288,7 +288,7 @@ void InitBuffer_bind(const int street) {
 void InitTexture()
 {	
 	BITMAPINFO* bmp;
-	string map[30] = { "Resource/main.png","Resource/B.png","Resource/C.png","Resource/D.png","Resource/E.png","Resource/body.png",
+	string map[30] = { "Resource/main.png","Resource/gold.png","Resource/C.png","Resource/D.png","Resource/E.png","Resource/body.png",
 		"Resource/face.png","Resource/gun_tex.png", "Resource/skybox2_top.png", "Resource/skybox2_left.png", "Resource/skybox2_front.png", "Resource/skybox2_right.png",
 		"Resource/skybox2_back.png", "Resource/skybox2_bottom.png"};
 	glGenTextures(30, texture); //--- 텍스처 생성

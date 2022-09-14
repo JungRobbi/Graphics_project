@@ -37,6 +37,6 @@ public:
 	GameObject* CreateStar(int* index_list, GLuint* tex, GLuint* vao);
 	void CreateSkyBox(int* index_list, GLuint* tex, GLuint* vao);
 
-	bool CheckBoxtoBox(GameObject& a, GameObject& b);
+
 
 };

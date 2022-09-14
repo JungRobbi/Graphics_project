@@ -3,6 +3,7 @@
 #include "Component.h"
 #include "GameObject.h"
 #include "Transform3D.h"
+
 class Gravity :
     public Component
 {

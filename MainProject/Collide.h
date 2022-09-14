@@ -16,6 +16,7 @@ public:
 public:
     void start();
     void update();
+    bool CheckBoxtoBox(BoundingBox& a, BoundingBox& b);
     
 };
 

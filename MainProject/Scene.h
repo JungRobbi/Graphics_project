@@ -20,9 +20,10 @@ public:
 	GameObject* p_player;
 protected:
 	GameObject* CreateEmpty();
-	std::list<GameObject*> gameObjects;
+	
 
 public:
+	std::list<GameObject*> gameObjects;
 	Scene();
 	virtual ~Scene()
 	{

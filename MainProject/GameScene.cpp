@@ -213,7 +213,7 @@ void GameScene::render()
 	Scene::render();
 }
 
-bool GameScene::CheckBoxtoBox(GameObject a, GameObject b)
+bool GameScene::CheckBoxtoBox(GameObject& a, GameObject& b)
 {
 	if (b.GetComponent<Collide>()->BoundBox.minX < a.GetComponent<Collide>()->BoundBox.maxX && a.GetComponent<Collide>()->BoundBox.minX < b.GetComponent<Collide>()->BoundBox.maxX &&
 		b.GetComponent<Collide>()->BoundBox.minY < a.GetComponent<Collide>()->BoundBox.maxY && a.GetComponent<Collide>()->BoundBox.minY < b.GetComponent<Collide>()->BoundBox.maxY &&

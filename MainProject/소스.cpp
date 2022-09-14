@@ -168,7 +168,7 @@ int main(int argc, char** argv)
 
 		InitBuffer();
 		InitTexture();
-		for (int i{}; i < 5; ++i) {
+		for (int i{}; i < 6; ++i) {
 			InitBuffer_bind(i);
 		}
 
@@ -249,6 +249,9 @@ void InitBuffer_bind(const int street) {
 	}
 	else if (street == 4) {
 		num_shape_list[Shoes] = obj.loadObj_normalize_center_4f("Resource/shoe.obj");
+	}
+	else if (street == 5) {
+		num_shape_list[5] = obj.loadObj_normalize_center_4f("Resource/pickaxe.obj");
 	}
 
 	glUseProgram(s_program[0]);

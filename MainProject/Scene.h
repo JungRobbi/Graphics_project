@@ -18,7 +18,7 @@ public:
 	int n_scene;
 
 	GameObject* p_player;
-protected:
+public:
 	GameObject* CreateEmpty();
 	
 

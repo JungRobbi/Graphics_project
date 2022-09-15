@@ -42,16 +42,16 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 			CreateSkyBox(index_list, tex, vao);
 		}
 		{
-			auto temp = CreateEmpty();
+			//auto temp = CreateEmpty();
 
-			temp->AddComponent<Transform3D>();
-			temp->AddComponent<Collide>();
+			//temp->AddComponent<Transform3D>();
+			//temp->AddComponent<Collide>();
 
-			// render 부분
-			temp->modelLocation = modelLocation;
-			temp->num_index = index_list[5]; // load()
-			temp->VAO = vao[5]; // 메쉬
-			temp->texture = tex[1]; // 텍스쳐
+			//// render 부분
+			//temp->modelLocation = modelLocation;
+			//temp->num_index = index_list[5]; // load()
+			//temp->VAO = vao[5]; // 메쉬
+			//temp->texture = tex[1]; // 텍스쳐
 		}
 		{
 		/*	auto star = CreateStar(index_list,tex,vao);
@@ -69,18 +69,18 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 			box->GetComponent<Transform3D>()->direction = glm::vec3(0.0f, 1.0f, 0.0f);*/
 		}
 		{
-			auto axe = CreateItem_Pickaxe(index_list, tex, vao);
+			/*auto axe = CreateItem_Pickaxe(index_list, tex, vao);
 			axe->GetComponent<Transform3D>()->position = glm::vec3(1.0f, 0.0f, 0.0f);
 			axe->GetComponent<Transform3D>()->scale = glm::vec3(0.1f, 0.1f, 0.05f);
-			axe->GetComponent<Transform3D>()->direction = glm::vec3(0.0f, 1.0f, 0.0f);
+			axe->GetComponent<Transform3D>()->direction = glm::vec3(0.0f, 1.0f, 0.0f);*/
 
 		}
 		{
-			auto shoes = CreateItem_Shoes(index_list, tex, vao);
+			/*auto shoes = CreateItem_Shoes(index_list, tex, vao);
 			shoes->GetComponent<Transform3D>()->roll = -90.0f;
 			shoes->GetComponent<Transform3D>()->position = glm::vec3(1.0f, 0.0f, 0.2f);
 			shoes->GetComponent<Transform3D>()->scale = glm::vec3(0.1f, 0.1f, 0.05f);
-			shoes->GetComponent<Transform3D>()->direction = glm::vec3(0.0f, 1.0f, 0.0f);
+			shoes->GetComponent<Transform3D>()->direction = glm::vec3(0.0f, 1.0f, 0.0f);*/
 
 		}
 	}

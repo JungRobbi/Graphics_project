@@ -17,6 +17,7 @@ class DestroyEffect :
 
 public:
     bool destroy = false;
+    bool subObject = false;
     int destroy_frame_time = 100;
     
 
@@ -26,23 +27,31 @@ public:
         if (!destroy)
             return;
 
-
-        //--destroy_frame_time;
-        //if (destroy_frame_time >= 0)
-        //  return;
+        if (subObject) {
+            --destroy_frame_time;
+            if (destroy_frame_time <= 0)
+                Scene::scene->PushDelete(gameObject);
+            return;
+        }
+        Scene::scene->PushDelete(gameObject);
 
         for (int i{}; i < EFFECT_OBJECT_NUM; ++i) {
             auto box = Scene::scene->CreateEmpty();
 
             box->AddComponent<Transform3D>();
             box->AddComponent<Collide>();
+
             box->GetComponent<Collide>()->BoundBox = BoundingBox{};
 
             box->AddComponent<Gravity>();
+            box->AddComponent<DestroyEffect>();
+            box->GetComponent<DestroyEffect>()->destroy = true;
+            box->GetComponent<DestroyEffect>()->subObject = true;
 
             box->GetComponent<Transform3D>()->position = gameObject->GetComponent<Transform3D>()->position;
-            box->GetComponent<Transform3D>()->scale = glm::vec3(0.3f, 0.3f, 0.3f);
-
+            box->GetComponent<Transform3D>()->scale.x = gameObject->GetComponent<Transform3D>()->scale.x * 0.3f;
+            box->GetComponent<Transform3D>()->scale.y = gameObject->GetComponent<Transform3D>()->scale.y * 0.3f;
+            box->GetComponent<Transform3D>()->scale.z = gameObject->GetComponent<Transform3D>()->scale.z * 0.3f;
             
             std::random_device rad;
             std::default_random_engine dre(rad());
@@ -57,9 +66,6 @@ public:
             box->VAO = gameObject->VAO; // 사각형 메쉬
             box->texture = gameObject->texture; // 1번 텍스쳐
         }
-
-        Scene::scene->PushDelete(gameObject);
-
     }
 };
 

@@ -134,6 +134,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collide.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="DestroyEffect.cpp" />
     <ClCompile Include="Framework.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameScene.cpp">
@@ -163,6 +164,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collide.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="DestroyEffect.h" />
     <ClInclude Include="FrameWork.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameScene.h">

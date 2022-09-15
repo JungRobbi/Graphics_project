@@ -407,7 +407,7 @@ void Display_Sub1()
 	//*************************************************************************
 	// 조명 설정
 	int lightPosLocation = glGetUniformLocation(s_program[0], "lightPos"); //--- lightPos 값 전달: (0.0, 0.0, 5.0);
-	glUniform3f(lightPosLocation, 0.0, 0.0, 10.0);
+	glUniform3f(lightPosLocation, 0.0, 0.0, 0.0);
 	int lightColorLocation = glGetUniformLocation(s_program[0], "lightColor"); //--- lightColor 값 전달: (1.0, 1.0, 1.0) 백색
 	glUniform3f(lightColorLocation, 1.0, 1.0, 1.0);
 	//*************************************************************************
@@ -533,14 +533,19 @@ void keyboard(unsigned char key2, int x, int y) {
 		}
 		break;
 	case 'c': // 임시 clear 키
-		if (f_Light_ambients[0] < 0.3f) {
+		/*if (f_Light_ambients[0] < 0.3f) {
 			for (int i{}; i < 3; ++i)
 				f_Light_ambients[i] = 0.3f;
 		}
 		else {
 			for (int i{}; i < 3; ++i)
 				f_Light_ambients[i] = 0.29f;
+		}*/
+		for (auto& gameobject : Scene::scene->gameObjects) {
+			if (gameobject->VAO == VAO[Cube])
+				cout << "box!" << endl;
 		}
+
 		break;
 	case VK_SPACE:
 		if (Scene::scene->p_player->GetComponent<PlayerJump>() && Scene::scene->p_player->GetComponent<Transform3D>()->velocity.y == 0.0f)

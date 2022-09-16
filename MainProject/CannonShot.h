@@ -1,4 +1,5 @@
 #pragma once
+#include <cmath>
 #include "Component.h"
 #include "GameObject.h"
 #include "Scene.h"

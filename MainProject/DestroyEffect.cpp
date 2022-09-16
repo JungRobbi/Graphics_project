@@ -1,4 +1,5 @@
 #include "DestroyEffect.h"
+#include "ItemRotate.h"
 
 void DestroyEffect::update()
 {
@@ -21,6 +22,10 @@ void DestroyEffect::update()
         box->GetComponent<DestroyEffect>()->destroy = true;
         box->GetComponent<DestroyEffect>()->subObject = true;
 
+        box->AddComponent<ItemRotate>();
+        box->GetComponent<ItemRotate>()->rotating_axis[0] = true;
+        box->GetComponent<ItemRotate>()->rotating_axis[2] = true;
+
         box->GetComponent<Transform3D>()->position = gameObject->GetComponent<Transform3D>()->position;
         box->GetComponent<Transform3D>()->scale.x = gameObject->GetComponent<Transform3D>()->scale.x * 0.3f;
         box->GetComponent<Transform3D>()->scale.y = gameObject->GetComponent<Transform3D>()->scale.y * 0.3f;
@@ -40,6 +45,10 @@ void DestroyEffect::update()
         
         box->GetComponent<Transform3D>()->position += glm::vec3(r_x, r_y, r_z);
         box->GetComponent<Transform3D>()->velocity = glm::vec3(uid1(dre), uid1abs(dre), uid1(dre));
+        
+        box->GetComponent<ItemRotate>()->rotating_speedx = uid1abs(dre) * 150;
+        box->GetComponent<ItemRotate>()->rotating_speedy = uid1abs(dre) * 150;
+        box->GetComponent<ItemRotate>()->rotating_speedz = uid1abs(dre) * 150;
 
         // render ºÎºÐ
         box->modelLocation = gameObject->modelLocation;

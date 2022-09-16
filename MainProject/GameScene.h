@@ -38,6 +38,7 @@ public:
 	GameObject* CreateStar(int* index_list, GLuint* tex, GLuint* vao);
 	GameObject* CreateItem_Pickaxe(int* index_list, GLuint* tex, GLuint* vao);
 	GameObject* CreateItem_Shoes(int* index_list, GLuint* tex, GLuint* vao);
+	GameObject* CreateCannon(int* index_list, GLuint* tex, GLuint* vao);
 	void CreateSkyBox(int* index_list, GLuint* tex, GLuint* vao);
 
 

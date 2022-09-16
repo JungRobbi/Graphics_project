@@ -44,19 +44,7 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 			CreateSkyBox(index_list, tex, vao);
 		}
 		{
-			auto temp = CreateEmpty();
-
-			temp->AddComponent<Transform3D>();
-			temp->GetComponent<Transform3D>()->roll = -90.0f;
-
-			temp->AddComponent<CannonShot>();
-			temp->AddComponent<Collide>();
-
-			// render 부분
-			temp->modelLocation = modelLocation;
-			temp->num_index = index_list[5]; //
-			temp->VAO = vao[5]; //
-			temp->texture = tex[1]; // 
+			auto temp = CreateCannon(index_list, tex, vao);
 		}
 		{
 		/*	auto star = CreateStar(index_list,tex,vao);
@@ -170,6 +158,26 @@ GameObject* GameScene::CreateItem_Shoes(int* index_list, GLuint* tex, GLuint* va
 	shoes->texture = tex[2]; // 텍스쳐
 
 	return shoes;
+}
+
+GameObject* GameScene::CreateCannon(int* index_list, GLuint* tex, GLuint* vao)
+{
+	auto cannon = CreateEmpty();
+
+	cannon->AddComponent<Transform3D>();
+	cannon->GetComponent<Transform3D>()->roll = -90.0f;
+
+	cannon->AddComponent<CannonShot>();
+	cannon->AddComponent<Collide>();
+	cannon->AddComponent<Gravity>();
+
+	// render 부분
+	cannon->modelLocation = modelLocation;
+	cannon->num_index = index_list[5]; //
+	cannon->VAO = vao[5]; //
+	cannon->texture = tex[1]; // 
+
+	return cannon;
 }
 
 void GameScene::update()

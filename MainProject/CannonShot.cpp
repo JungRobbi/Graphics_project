@@ -1,6 +1,7 @@
 #include "CannonShot.h"
 #include "Transform3D.h"
 #include "Gravity.h"
+#include "ItemRotate.h"
 
 void CannonShot::update()
 {
@@ -22,7 +23,10 @@ void CannonShot::update()
         ball->GetComponent<CannonShot>()->subObject = true;
 
         ball->GetComponent<Transform3D>()->position = gameObject->GetComponent<Transform3D>()->position;
-        ball->GetComponent<Transform3D>()->velocity = glm::vec3(0.0f, 0.05f, 0.0f);
+
+        auto theta = gameObject->GetComponent<Transform3D>()->yaw;
+        
+        ball->GetComponent<Transform3D>()->velocity = glm::vec3(0.05f , 0.05f, 0.0f);
 
         // render ºÎºÐ
         ball->modelLocation = gameObject->modelLocation;

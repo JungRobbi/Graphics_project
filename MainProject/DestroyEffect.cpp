@@ -16,9 +16,6 @@ void DestroyEffect::update()
         auto box = Scene::scene->CreateEmpty();
 
         box->AddComponent<Transform3D>();
-        box->AddComponent<Collide>();
-
-        box->GetComponent<Collide>()->BoundBox = gameObject->GetComponent<Collide>()->BoundBox * 0.3f;
         box->AddComponent<Gravity>();
         box->AddComponent<DestroyEffect>();
         box->GetComponent<DestroyEffect>()->destroy = true;

@@ -16,7 +16,7 @@ void Camera::update()
 	if (state == FIRST_VIEW) {
 		c_pos3 = gameObject->GetComponent<Transform3D>()->position;
 		c_dir3 = gameObject->GetComponent<Transform3D>()->direction;
-
+		
 	}
 	else if (state == FIRST_TO_TOP) {
 		glm::vec3 to_top_pos = (top_pos - gameObject->GetComponent<Transform3D>()->position) / 50.0f;

@@ -34,10 +34,12 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 	p_player->GetComponent<Camera>()->projLocation = projLocation;
 
 	p_player->AddComponent<Collide>();
+	p_player->GetComponent<Collide>()->BoundBox = BoundBox[Cube] * 3;
+
 	p_player->AddComponent<Gravity>();
 	p_player->AddComponent<PlayerJump>();
 
-
+	
 	// object
 	if (num_scene == 1) {
 		{
@@ -78,7 +80,18 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 		}
 	}
 	else if (num_scene == 2) {
+		{
+			CreateSkyBox(index_list, tex, vao);
+		}
+		{
+			auto box = CreateBox(index_list, tex, vao);
 
+			box->GetComponent<Transform3D>()->position = glm::vec3(2.0f, 0.0f, 0.0f);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(0.25f, 0.05f, 0.25f);
+
+			box->texture = Scene::scene->p_tex[4];
+			
+		}
 	}
 }
 
@@ -89,9 +102,6 @@ GameObject* GameScene::CreateBox(int* index_list, GLuint* tex, GLuint* vao) // B
 	box->AddComponent<Transform3D>();
 	box->AddComponent<Collide>();
 	box->GetComponent<Collide>()->BoundBox = BoundBox[Cube];
-
-	//std::cout << std::endl << std::endl << BoundBox[Cube].maxX << " " << BoundBox[Cube].maxY << std::endl;
-	//std::cout << BoundBox[Cube].minX << " " << BoundBox[Cube].minY << std::endl;
 
 	box->AddComponent<Gravity>();
 

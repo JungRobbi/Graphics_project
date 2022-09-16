@@ -4,6 +4,7 @@
 #include "Component.h"
 #include "Transform3D.h"
 #include "GameObject.h"
+#include <iostream>
 
 enum Camera_state { FIRST_VIEW, FIRST_TO_TOP, TOP_VIEW, TOP_TO_FIRST };
 

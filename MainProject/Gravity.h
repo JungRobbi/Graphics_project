@@ -3,7 +3,7 @@
 #include "Component.h"
 #include "GameObject.h"
 #include "Transform3D.h"
-
+#include <iostream>
 class Gravity :
     public Component
 {
@@ -27,6 +27,7 @@ public:
         if (object_tran->position.y + object_BoundBox->BoundBox.minY <= floor) {
             object_tran->position.y = floor - object_BoundBox->BoundBox.minY;
             object_tran->velocity.y = 0.0f;
+
         }
     }
 

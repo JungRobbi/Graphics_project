@@ -8,7 +8,7 @@ struct  BoundingBox
 
     BoundingBox operator*(float rhs)
     {
-        return BoundingBox{ minX *= rhs, maxX *= rhs,minY *= rhs, maxY *= rhs,minZ *= rhs, maxZ *= rhs };
+        return BoundingBox{ minX * rhs, maxX * rhs,minY * rhs, maxY * rhs,minZ * rhs, maxZ * rhs };
     }
 };
 

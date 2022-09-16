@@ -167,7 +167,7 @@ int main(int argc, char** argv)
 
 		InitBuffer();
 		InitTexture();
-		for (int i{}; i < 7; ++i) {
+		for (int i{}; i < 3; ++i) {
 			InitBuffer_bind(i);
 		}
 
@@ -244,16 +244,16 @@ void InitBuffer_bind(const int street) {
 		num_shape_list[Plane] = obj.loadObj_normalize_center_3f("Resource/plane.obj");
 	}
 	else if (street == 3) {
-		num_shape_list[Pickaxe] = obj.loadObj_normalize_center_4f("Resource/pickaxe.obj");
+		//num_shape_list[Pickaxe] = obj.loadObj_normalize_center_4f("Resource/pickaxe.obj");
 	}
 	else if (street == 4) {
-		num_shape_list[Shoes] = obj.loadObj_normalize_center_4f("Resource/shoe.obj");
+		//num_shape_list[Shoes] = obj.loadObj_normalize_center_4f("Resource/shoe.obj");
 	}
 	else if (street == 5) {
-		num_shape_list[5] = obj.loadObj_normalize_center_4f("Resource/Cannon.obj");
+		//num_shape_list[5] = obj.loadObj_normalize_center_4f("Resource/Cannon.obj");
 	}
 	else if (street == 6) {
-		num_shape_list[6] = obj.loadObj_normalize_center_3f("Resource/sphere.obj");
+		//num_shape_list[6] = obj.loadObj_normalize_center_3f("Resource/sphere.obj");
 	}
 
 	glUseProgram(s_program[0]);
@@ -468,7 +468,7 @@ void Motion2(int x, int y)
 		msy = -((float)y - ((float)WINDOWY / (float)2)) / ((float)WINDOWY / (float)2);
 	}
 	if (Scene::scene->p_player->GetComponent<Camera>()->state == FIRST_VIEW) {
-		if (x > WINDOWX - 100 || x < 100 || y > WINDOWY - 100 || y < 100) {
+		if (x > WINDOWX  - 100 || x < 100 || y > WINDOWY - 100 || y < 100) {
 			SetCursorPos(WINDOWX / 2, WINDOWY / 2);
 		}
 
@@ -518,11 +518,7 @@ void keyboard(unsigned char key2, int x, int y) {
 			Scene::scene->p_player->GetComponent<Camera>()->state = TOP_TO_FIRST;
 		break;
 	case '3':
-		if (Scene::scene->p_player->GetComponent<Camera>()->state == FIRST_TO_TOP ||
-			Scene::scene->p_player->GetComponent<Camera>()->state == FIRST_VIEW)
-			Scene::scene->p_player->GetComponent<Camera>()->state = FIRST_TO_TOP;
-		else
-			Scene::scene->p_player->GetComponent<Camera>()->state = TOP_TO_FIRST;
+		SceneChange(sc.size() + 1);
 		break;
 	case 'q':
 		if (Scene::scene->p_player->GetComponent<Camera>()->state == TOP_VIEW) {
@@ -554,8 +550,8 @@ void keyboard(unsigned char key2, int x, int y) {
 
 		break;
 	case VK_SPACE:
-		if (Scene::scene->p_player->GetComponent<PlayerJump>() && Scene::scene->p_player->GetComponent<Transform3D>()->velocity.y == 0.0f)
-			Scene::scene->p_player->GetComponent<Transform3D>()->velocity += Scene::scene->p_player->GetComponent<PlayerJump>()->jump_acceleration;
+		//if (Scene::scene->p_player->GetComponent<PlayerJump>() && Scene::scene->p_player->GetComponent<Transform3D>()->velocity.y == 0.0f)
+			//Scene::scene->p_player->GetComponent<Transform3D>()->velocity += Scene::scene->p_player->GetComponent<PlayerJump>()->jump_acceleration;
 		break;
 	}
 
@@ -585,6 +581,9 @@ void TimerFunction(int value) {
 	if (key['w'] == true) {						// 오른쪽으로 이동
 		Scene::scene->p_player->GetComponent<Transform3D>()->position.x += cos((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy)) * 0.015;
 		Scene::scene->p_player->GetComponent<Transform3D>()->position.z += sin((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy)) * 0.015;
+	}
+	if (key[VK_SPACE]) {
+		Scene::scene->p_player->GetComponent<Transform3D>()->velocity.y = 0.015;
 	}
 
 	glutPostRedisplay();

@@ -101,6 +101,9 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 
 			box->texture = Scene::scene->p_tex[4];
 		}
+		{
+			auto grass = CreateGrass(index_list, tex, vao);
+		}
 
 	}
 }
@@ -200,6 +203,23 @@ GameObject* GameScene::CreateCannon(int* index_list, GLuint* tex, GLuint* vao)
 	cannon->texture = tex[1]; // 
 
 	return cannon;
+}
+
+GameObject* GameScene::CreateGrass(int* index_list, GLuint* tex, GLuint* vao)
+{
+	auto grass = CreateEmpty();
+
+	grass->AddComponent<Transform3D>();
+	grass->GetComponent<Transform3D>()->roll = -90.0f;
+	grass->GetComponent<Transform3D>()->scale = glm::vec3(5.0f, 5.0f, 0.5f);
+
+	// render ºÎºÐ
+	grass->modelLocation = modelLocation;
+	grass->num_index = index_list[3]; //
+	grass->VAO = vao[3]; //
+	grass->texture = tex[5]; // 
+
+	return grass;
 }
 
 void GameScene::update()

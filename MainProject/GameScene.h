@@ -40,6 +40,8 @@ public:
 	GameObject* CreateItem_Shoes(int* index_list, GLuint* tex, GLuint* vao);
 	GameObject* CreateCannon(int* index_list, GLuint* tex, GLuint* vao);
 	GameObject* CreateGrass(int* index_list, GLuint* tex, GLuint* vao);
+	GameObject* CreateBook(int* index_list, GLuint* tex, GLuint* vao);
+	GameObject* CreateSpike(int* index_list, GLuint* tex, GLuint* vao);
 	void CreateSkyBox(int* index_list, GLuint* tex, GLuint* vao);
 
 

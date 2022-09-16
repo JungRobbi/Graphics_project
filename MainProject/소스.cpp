@@ -95,6 +95,7 @@ int n_max_model = 4;
 int widthImage, heightImage, numberOfChannel = 0;
 
 // 게임 변수
+int num_ob = 10;
 
 int game = 0;					// 게임 state
 
@@ -167,7 +168,7 @@ int main(int argc, char** argv)
 
 		InitBuffer();
 		InitTexture();
-		for (int i{}; i < 4; ++i) {
+		for (int i{}; i < num_ob; ++i) {
 			InitBuffer_bind(i);
 		}
 
@@ -218,42 +219,54 @@ void InitBuffer()
 }
 
 void InitBuffer_bind(const int street) {
+	BoundingBox* bb = nullptr;
 	if (street == 0) {
 		num_shape_list[Cube] = obj.loadObj_normalize_center_3f("Resource/cube.obj");
-
-		BoundingBox& bb = BoundBox[Cube];
-		bb.maxX = obj.maxX;
-		bb.minX = obj.minX;
-		bb.maxY = obj.maxY;
-		bb.minY = obj.minY;
-		bb.maxZ = obj.maxZ;
-		bb.minZ = obj.minZ;
+		bb = &BoundBox[Cube];
 	}
 	else if (street == 1) {
 		num_shape_list[Star] = obj.loadObj_normalize_center_3f("Resource/Star.obj");
-
-		BoundingBox& bb = BoundBox[Star];
-		bb.maxX = obj.maxX;
-		bb.minX = obj.minX;
-		bb.maxY = obj.maxY;
-		bb.minY = obj.minY;
-		bb.maxZ = obj.maxZ;
-		bb.minZ = obj.minZ;
+		bb = &BoundBox[Star];
 	}
 	else if (street == 2) {
 		num_shape_list[Plane] = obj.loadObj_normalize_center_3f("Resource/plane.obj");
 	}
 	else if (street == 3) {
-		num_shape_list[Pickaxe] = obj.loadObj_normalize_center_4f("Resource/grass.obj");
+		num_shape_list[Pickaxe] = obj.loadObj_normalize_center_4f("Resource/Pickaxe.obj");
+		bb = &BoundBox[Pickaxe];
 	}
 	else if (street == 4) {
-		//num_shape_list[Shoes] = obj.loadObj_normalize_center_4f("Resource/shoe.obj");
+		num_shape_list[Grass] = obj.loadObj_normalize_center_4f("Resource/grass.obj");
+		bb = &BoundBox[Grass];
 	}
 	else if (street == 5) {
-		//num_shape_list[5] = obj.loadObj_normalize_center_4f("Resource/Cannon.obj");
+		num_shape_list[Shoes] = obj.loadObj_normalize_center_4f("Resource/Shoe.obj");
+		bb = &BoundBox[Shoes];
 	}
 	else if (street == 6) {
-		//num_shape_list[6] = obj.loadObj_normalize_center_3f("Resource/sphere.obj");
+		num_shape_list[Cannon] = obj.loadObj_normalize_center_4f("Resource/Cannon.obj");
+		bb = &BoundBox[Cannon];
+	}
+	else if (street == 7) {
+		num_shape_list[Ball] = obj.loadObj_normalize_center_3f("Resource/sphere.obj");
+		bb = &BoundBox[Ball];
+	}
+	else if (street == 8) {
+		num_shape_list[Book] = obj.loadObj_normalize_center_3f("Resource/Book.obj");
+		bb = &BoundBox[Book];
+	}
+	else if (street == 9) {
+		num_shape_list[Spike] = obj.loadObj_normalize_center_3f("Resource/spike.obj");
+		bb = &BoundBox[Spike];
+	}
+
+	if (bb) {
+		bb->maxX = obj.maxX;
+		bb->minX = obj.minX;
+		bb->maxY = obj.maxY;
+		bb->minY = obj.minY;
+		bb->maxZ = obj.maxZ;
+		bb->minZ = obj.minZ;
 	}
 
 	glUseProgram(s_program[0]);

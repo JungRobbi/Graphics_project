@@ -20,8 +20,6 @@ public:
 	unsigned int viewLocation;
 	unsigned int projLocation;
 
-	GLuint* p_s_program;
-
 public:
 	GameScene();
 	GameScene(int);

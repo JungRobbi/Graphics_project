@@ -1,5 +1,6 @@
 #include "GameScene.h"
 #include <iostream>
+#include "CannonShot.h"
 
 
 
@@ -13,7 +14,8 @@ GameScene::GameScene(int num_scene) : Scene()
 
 }
 
-GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, GLuint* program) : Scene()
+GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, GLuint* program) 
+	: Scene(num_scene, index_list, tex, vao, program)
 {
 	n_scene = num_scene;
 	modelLocation = glGetUniformLocation(program[0], "model");
@@ -46,7 +48,8 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 
 			temp->AddComponent<Transform3D>();
 			temp->GetComponent<Transform3D>()->roll = -90.0f;
-		
+
+			temp->AddComponent<CannonShot>();
 			temp->AddComponent<Collide>();
 
 			// render ºÎºÐ

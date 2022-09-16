@@ -4,6 +4,7 @@
 #include <queue>
 #include <deque>
 
+#include "stdafx.h"
 #include "GameObject.h"
 
 class GameObject;
@@ -15,9 +16,14 @@ class Scene
 
 public:
 	static Scene* scene;
-	int n_scene;
 
 	GameObject* p_player;
+	int n_scene;
+	int* p_index_list;
+	GLuint* p_tex;
+	GLuint* p_vao;
+	GLuint* p_s_program;
+
 public:
 	GameObject* CreateEmpty();
 	
@@ -25,6 +31,7 @@ public:
 public:
 	std::list<GameObject*> gameObjects;
 	Scene();
+	Scene(int n_scene, int* p_index_list, GLuint* p_tex, GLuint* p_vao, GLuint* p_s_program);
 	virtual ~Scene()
 	{
 		for (auto object : gameObjects)

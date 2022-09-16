@@ -9,6 +9,12 @@ Scene::Scene()
 	scene = this;
 }
 
+Scene::Scene(int n_scene, int* p_index_list, GLuint* p_tex, GLuint* p_vao, GLuint* p_s_program)
+	: n_scene{ n_scene }, p_index_list{ p_index_list }, p_tex{ p_tex }, p_vao{ p_vao }, p_s_program{p_s_program}
+{
+	scene = this;
+}
+
 GameObject* Scene::CreateEmpty()
 {
 	return new GameObject();

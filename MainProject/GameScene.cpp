@@ -33,10 +33,10 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 	p_player->GetComponent<Camera>()->viewLocation = viewLocation;
 	p_player->GetComponent<Camera>()->projLocation = projLocation;
 
-	p_player->AddComponent<Collide>();
-	p_player->GetComponent<Collide>()->BoundBox = BoundBox[Cube] * 3;
+	//p_player->AddComponent<Collide>();
+	//p_player->GetComponent<Collide>()->BoundBox = BoundBox[Cube] * 3;
 
-	p_player->AddComponent<Gravity>();
+	//p_player->AddComponent<Gravity>();
 	p_player->AddComponent<PlayerJump>();
 
 	
@@ -112,6 +112,7 @@ GameObject* GameScene::CreateBox(int* index_list, GLuint* tex, GLuint* vao) // B
 	box->AddComponent<Transform3D>();
 	box->AddComponent<Collide>();
 	box->GetComponent<Collide>()->BoundBox = BoundBox[Cube];
+	box->GetComponent<Collide>()->BoundBox.pos = box->GetComponent<Transform3D>()->position;
 
 	box->AddComponent<Gravity>();
 
@@ -131,6 +132,7 @@ GameObject* GameScene::CreateStar(int* index_list, GLuint* tex, GLuint* vao) // 
 	star->AddComponent<Transform3D>();
 	star->AddComponent<Collide>();
 	star->GetComponent<Collide>()->BoundBox = BoundBox[Star];
+	star->GetComponent<Collide>()->BoundBox.pos = star->GetComponent<Transform3D>()->position;
 
 	//std::cout << std::endl << std::endl << BoundBox[Star].maxX << " " << BoundBox[Star].maxY << std::endl;
 	//std::cout << BoundBox[Star].minX << " " << BoundBox[Star].minY << std::endl;

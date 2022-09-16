@@ -1,9 +1,13 @@
 #pragma once
+#include <glm/glm.hpp>
+#include <glm/ext.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include "Component.h"
 
 struct  BoundingBox
 {
     float minX, maxX, minY, maxY, minZ, maxZ;
+    glm::vec3 pos;
 
 
     BoundingBox operator*(float rhs)

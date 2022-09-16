@@ -230,6 +230,7 @@ void InitBuffer_bind(const int street) {
 	}
 	else if (street == 2) {
 		num_shape_list[Plane] = obj.loadObj_normalize_center_3f("Resource/plane.obj");
+		bb = &BoundBox[Plane];
 	}
 	else if (street == 3) {
 		num_shape_list[Pickaxe] = obj.loadObj_normalize_center_4f("Resource/Pickaxe.obj");
@@ -252,11 +253,11 @@ void InitBuffer_bind(const int street) {
 		bb = &BoundBox[Ball];
 	}
 	else if (street == 8) {
-		num_shape_list[Book] = obj.loadObj_normalize_center_3f("Resource/Book.obj");
+		num_shape_list[Book] = obj.loadObj_normalize_center_4f("Resource/Book.obj");
 		bb = &BoundBox[Book];
 	}
 	else if (street == 9) {
-		num_shape_list[Spike] = obj.loadObj_normalize_center_3f("Resource/spike.obj");
+		num_shape_list[Spike] = obj.loadObj_normalize_center_4f("Resource/spike.obj");
 		bb = &BoundBox[Spike];
 	}
 

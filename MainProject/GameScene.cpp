@@ -33,11 +33,11 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 	p_player->GetComponent<Camera>()->viewLocation = viewLocation;
 	p_player->GetComponent<Camera>()->projLocation = projLocation;
 
-	/*p_player->AddComponent<Collide>();
+	p_player->AddComponent<Collide>();
 	p_player->GetComponent<Collide>()->BoundBox = BoundBox[Cube] * 0.25;
 	p_player->GetComponent<Collide>()->sub_BoundBox = p_player->GetComponent<Collide>()->BoundBox * 0.75;
 	p_player->GetComponent<Collide>()->sub_BoundBox.minY = p_player->GetComponent<Collide>()->BoundBox.minY * 3;
-	p_player->GetComponent<Collide>()->BoundBox.minY *= 2;*/
+	p_player->GetComponent<Collide>()->BoundBox.minY *= 2;
 
 	p_player->AddComponent<Gravity>();
 	p_player->AddComponent<PlayerJump>();
@@ -93,22 +93,23 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 		{
 			auto object = CreateItem_Pickaxe(index_list, tex, vao);
 			object->GetComponent<Transform3D>()->position = glm::vec3(1.0f, 0.0f, 0.0f);
+			object->GetComponent<Transform3D>()->scale = glm::vec3(0.25f, 0.25f, 0.25f);
 		}
 		{
-			auto object = CreateItem_Shoes(index_list, tex, vao);
-			object->GetComponent<Transform3D>()->position = glm::vec3(2.0f, 0.0f, 0.0f);
+			//auto object = CreateItem_Shoes(index_list, tex, vao);
+			//object->GetComponent<Transform3D>()->position = glm::vec3(2.0f, 0.0f, 0.0f);
 		}
 		{
-			auto object = CreateCannon(index_list, tex, vao);
-			object->GetComponent<Transform3D>()->position = glm::vec3(3.0f, 4.0f, 0.0f);
+			//auto object = CreateCannon(index_list, tex, vao);
+			//object->GetComponent<Transform3D>()->position = glm::vec3(3.0f, 1.0f, 3.0f);
 		}
 		{
-			auto object = CreateBook(index_list, tex, vao);
-			object->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 0.0f, 2.0f);
+			//auto object = CreateBook(index_list, tex, vao);
+			//object->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 0.0f, 2.0f);
 		}
 		{
-			auto object = CreateSpike(index_list, tex, vao);
-			object->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 0.0f, 3.0f);
+			//auto object = CreateSpike(index_list, tex, vao);
+			//object->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 0.0f, 3.0f);
 		}
 	}
 }
@@ -197,7 +198,6 @@ GameObject* GameScene::CreateCannon(int* index_list, GLuint* tex, GLuint* vao)
 
 	cannon->AddComponent<Transform3D>();
 	cannon->AddComponent<CannonShot>();
-	cannon->AddComponent<Gravity>();
 	cannon->AddComponent<Collide>();
 	cannon->GetComponent<Collide>()->BoundBox = BoundBox[Cannon];
 	cannon->GetComponent<Collide>()->BoundBox.pos = cannon->GetComponent<Transform3D>()->position;

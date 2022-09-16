@@ -85,13 +85,23 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 		}
 		{
 			auto box = CreateBox(index_list, tex, vao);
+			box->GetComponent<Gravity>()->graviti_acceleration.y = 0;
 
 			box->GetComponent<Transform3D>()->position = glm::vec3(2.0f, 0.0f, 0.0f);
 			box->GetComponent<Transform3D>()->scale = glm::vec3(0.25f, 0.05f, 0.25f);
 
 			box->texture = Scene::scene->p_tex[4];
-			
 		}
+		{
+			auto box = CreateBox(index_list, tex, vao);
+			box->GetComponent<Gravity>()->graviti_acceleration.y = 0;
+
+			box->GetComponent<Transform3D>()->position = glm::vec3(2.25f, 0.50f, 0.0f);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(0.25f, 0.05f, 0.25f);
+
+			box->texture = Scene::scene->p_tex[4];
+		}
+
 	}
 }
 

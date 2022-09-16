@@ -25,7 +25,15 @@ public:
 
 	void start() 
 	{
-
+		auto collde = gameObject->GetComponent<Collide>();
+		if (collde) {
+			collde->BoundBox.minX *= scale.x;
+			collde->BoundBox.maxX *= scale.x;
+			collde->BoundBox.minY *= scale.y;
+			collde->BoundBox.maxY *= scale.y;
+			collde->BoundBox.minZ *= scale.z;
+			collde->BoundBox.maxZ *= scale.z;
+		}
 	}
 	void update() 
 	{

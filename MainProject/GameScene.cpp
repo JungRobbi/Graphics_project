@@ -44,7 +44,7 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 			CreateSkyBox(index_list, tex, vao);
 		}
 		{
-			auto temp = CreateCannon(index_list, tex, vao);
+			//auto temp = CreateCannon(index_list, tex, vao);
 		}
 		{
 		/*	auto star = CreateStar(index_list,tex,vao);
@@ -99,7 +99,7 @@ GameObject* GameScene::CreateBox(int* index_list, GLuint* tex, GLuint* vao) // B
 	box->modelLocation = modelLocation;
 	box->num_index = index_list[0]; // load() 첫 번째
 	box->VAO = vao[0]; // 사각형 메쉬
-	box->texture = tex[1]; // 1번 텍스쳐
+	box->texture = tex[4]; // 1번 텍스쳐
 
 	return box;
 }

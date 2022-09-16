@@ -34,7 +34,7 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 	p_player->GetComponent<Camera>()->projLocation = projLocation;
 
 	p_player->AddComponent<Collide>();
-	p_player->GetComponent<Collide>()->BoundBox = BoundBox[Cube] * 3;
+	p_player->GetComponent<Collide>()->BoundBox = BoundBox[Cube] * 0.25;
 
 	p_player->AddComponent<Gravity>();
 	p_player->AddComponent<PlayerJump>();
@@ -44,26 +44,6 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 	if (num_scene == 1) {
 		{
 			CreateSkyBox(index_list, tex, vao);
-		}
-		{
-			auto box = CreateBox(index_list, tex, vao);
-			box->GetComponent<Gravity>()->graviti_acceleration.y = 0;
-
-			box->GetComponent<Transform3D>()->position = glm::vec3(1.0f, 0.0f, 0.0f);
-			box->GetComponent<Transform3D>()->scale = glm::vec3(1, 1, 1);
-			box->GetComponent<Collide>()->BoundBox.pos = box->GetComponent<Transform3D>()->position;
-
-			box->texture = Scene::scene->p_tex[4];
-		}
-		{
-			auto box = CreateBox(index_list, tex, vao);
-			box->GetComponent<Gravity>()->graviti_acceleration.y = 0;
-
-			box->GetComponent<Transform3D>()->position = glm::vec3(2.0f, 0.0f, 0.0f);
-			box->GetComponent<Transform3D>()->scale = glm::vec3(1, 1, 1);
-			box->GetComponent<Collide>()->BoundBox.pos = box->GetComponent<Transform3D>()->position;
-
-			box->texture = Scene::scene->p_tex[4];
 		}
 		{
 			//auto temp = CreateCannon(index_list, tex, vao);

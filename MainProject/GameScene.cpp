@@ -46,11 +46,24 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 			CreateSkyBox(index_list, tex, vao);
 		}
 		{
-			auto box = CreateStar(index_list, tex, vao);
-			box->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 0.0f, 0.0f);
-			box->GetComponent<Transform3D>()->scale = glm::vec3(0.25f, 0.25f, 0.25f);
+			auto box = CreateBox(index_list, tex, vao);
+			box->GetComponent<Gravity>()->graviti_acceleration.y = 0;
 
-			box->texture = Scene::scene->p_tex[2];
+			box->GetComponent<Transform3D>()->position = glm::vec3(1.0f, 0.0f, 0.0f);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(1, 1, 1);
+			box->GetComponent<Collide>()->BoundBox.pos = box->GetComponent<Transform3D>()->position;
+
+			box->texture = Scene::scene->p_tex[4];
+		}
+		{
+			auto box = CreateBox(index_list, tex, vao);
+			box->GetComponent<Gravity>()->graviti_acceleration.y = 0;
+
+			box->GetComponent<Transform3D>()->position = glm::vec3(2.0f, 0.0f, 0.0f);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(1, 1, 1);
+			box->GetComponent<Collide>()->BoundBox.pos = box->GetComponent<Transform3D>()->position;
+
+			box->texture = Scene::scene->p_tex[4];
 		}
 		{
 			//auto temp = CreateCannon(index_list, tex, vao);
@@ -249,7 +262,7 @@ void GameScene::CreateSkyBox(int* index_list, GLuint* tex, GLuint* vao) // SkyBo
 		auto plane = CreateEmpty();
 
 		plane->AddComponent<Transform3D>();
-		plane->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 20.1f, 0.0f);
+		plane->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 20.0f, 0.0f);
 		plane->GetComponent<Transform3D>()->scale = glm::vec3(20.0f, 20.0f, 20.0f);
 		plane->GetComponent<Transform3D>()->yaw = -90.0f;
 		plane->GetComponent<Transform3D>()->roll = 90.0f;
@@ -264,7 +277,7 @@ void GameScene::CreateSkyBox(int* index_list, GLuint* tex, GLuint* vao) // SkyBo
 		auto plane = CreateEmpty();
 
 		plane->AddComponent<Transform3D>();
-		plane->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 0.0f, -20.05f);
+		plane->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 0.0f, -19.88f);
 		plane->GetComponent<Transform3D>()->scale = glm::vec3(20.0f, 20.0f, 20.0f);
 
 		// render ºÎºÐ
@@ -277,7 +290,7 @@ void GameScene::CreateSkyBox(int* index_list, GLuint* tex, GLuint* vao) // SkyBo
 		auto plane = CreateEmpty();
 
 		plane->AddComponent<Transform3D>();
-		plane->GetComponent<Transform3D>()->position = glm::vec3(20.05f, 0.0f, 0.0f);
+		plane->GetComponent<Transform3D>()->position = glm::vec3(19.88f, 0.0f, 0.0f);
 		plane->GetComponent<Transform3D>()->scale = glm::vec3(20.0f, 20.0f, 20.0f);
 		plane->GetComponent<Transform3D>()->yaw = -90.0f;
 
@@ -291,7 +304,7 @@ void GameScene::CreateSkyBox(int* index_list, GLuint* tex, GLuint* vao) // SkyBo
 		auto plane = CreateEmpty();
 
 		plane->AddComponent<Transform3D>();
-		plane->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 0.0f, 20.05f);
+		plane->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 0.0f, 19.88f);
 		plane->GetComponent<Transform3D>()->scale = glm::vec3(20.0f, 20.0f, 20.0f);
 		plane->GetComponent<Transform3D>()->yaw = 180.0f;
 
@@ -305,7 +318,7 @@ void GameScene::CreateSkyBox(int* index_list, GLuint* tex, GLuint* vao) // SkyBo
 		auto plane = CreateEmpty();
 
 		plane->AddComponent<Transform3D>();
-		plane->GetComponent<Transform3D>()->position = glm::vec3(-20.05f, 0.0f, 0.0f);
+		plane->GetComponent<Transform3D>()->position = glm::vec3(-19.88f, 0.0f, 0.0f);
 		plane->GetComponent<Transform3D>()->scale = glm::vec3(20.0f, 20.0f, 20.0f);
 		plane->GetComponent<Transform3D>()->yaw = 90.0f;
 
@@ -319,7 +332,7 @@ void GameScene::CreateSkyBox(int* index_list, GLuint* tex, GLuint* vao) // SkyBo
 		auto plane = CreateEmpty();
 
 		plane->AddComponent<Transform3D>();
-		plane->GetComponent<Transform3D>()->position = glm::vec3(0.0f, -20.1f, 0.0f);
+		plane->GetComponent<Transform3D>()->position = glm::vec3(0.0f, -20.0f, 0.0f);
 		plane->GetComponent<Transform3D>()->scale = glm::vec3(20.0f, 20.0f, 20.0f);
 		plane->GetComponent<Transform3D>()->yaw = -90.0f;
 		plane->GetComponent<Transform3D>()->roll = -90.0f;

@@ -42,16 +42,18 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 			CreateSkyBox(index_list, tex, vao);
 		}
 		{
-			//auto temp = CreateEmpty();
+			auto temp = CreateEmpty();
 
-			//temp->AddComponent<Transform3D>();
-			//temp->AddComponent<Collide>();
+			temp->AddComponent<Transform3D>();
+			temp->GetComponent<Transform3D>()->roll = -90.0f;
+		
+			temp->AddComponent<Collide>();
 
-			//// render 부분
-			//temp->modelLocation = modelLocation;
-			//temp->num_index = index_list[5]; // load()
-			//temp->VAO = vao[5]; // 메쉬
-			//temp->texture = tex[1]; // 텍스쳐
+			// render 부분
+			temp->modelLocation = modelLocation;
+			temp->num_index = index_list[5]; //
+			temp->VAO = vao[5]; //
+			temp->texture = tex[1]; // 
 		}
 		{
 		/*	auto star = CreateStar(index_list,tex,vao);

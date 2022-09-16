@@ -83,6 +83,9 @@
     <ClCompile Include="DestroyEffect.cpp">
       <Filter>소스 파일\GameComponents</Filter>
     </ClCompile>
+    <ClCompile Include="CannonShot.cpp">
+      <Filter>소스 파일\GameComponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FrameWork.h">
@@ -137,6 +140,9 @@
       <Filter>소스 파일\GameComponents</Filter>
     </ClInclude>
     <ClInclude Include="DestroyEffect.h">
+      <Filter>소스 파일\GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="CannonShot.h">
       <Filter>소스 파일\GameComponents</Filter>
     </ClInclude>
   </ItemGroup>

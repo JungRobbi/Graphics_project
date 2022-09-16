@@ -136,6 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CannonShot.cpp" />
     <ClCompile Include="Collide.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="DestroyEffect.cpp" />
@@ -166,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CannonShot.h" />
     <ClInclude Include="Collide.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="DestroyEffect.h" />

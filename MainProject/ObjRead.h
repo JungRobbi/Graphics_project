@@ -137,6 +137,8 @@ public:
 			printf("Impossible to open the file !\n");
 			return false;
 		}
+
+		printf("=== filename : %s ===\n", filename);
 		while (1) {
 
 			char lineHeader[128];
@@ -247,6 +249,9 @@ public:
 			printf("Impossible to open the file !\n");
 			return false;
 		}
+		
+		printf("=== filename : %s ===\n", filename);
+
 		while (!feof(objFile)) {
 
 			char lineHeader[128];

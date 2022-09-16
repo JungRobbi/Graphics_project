@@ -91,17 +91,18 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 			grass->GetComponent<Transform3D>()->position.y = -0.5;
 		}
 		{
-			auto object = CreateItem_Pickaxe(index_list, tex, vao);
-			object->GetComponent<Transform3D>()->position = glm::vec3(1.0f, 0.0f, 0.0f);
-			object->GetComponent<Transform3D>()->scale = glm::vec3(0.25f, 0.25f, 0.25f);
+			//auto object = CreateItem_Pickaxe(index_list, tex, vao);
+			//object->GetComponent<Transform3D>()->position = glm::vec3(1.0f, 0.0f, 0.0f);
+			//object->GetComponent<Transform3D>()->scale = glm::vec3(0.1f, 0.1f, 0.1f);
 		}
 		{
 			//auto object = CreateItem_Shoes(index_list, tex, vao);
-			//object->GetComponent<Transform3D>()->position = glm::vec3(2.0f, 0.0f, 0.0f);
+			//object->GetComponent<Transform3D>()->position = glm::vec3(1.0f, 0.0f, 0.0f);
+			//object->GetComponent<Transform3D>()->scale = glm::vec3(3.0f, 0.1f, 3.0f);
 		}
 		{
-			//auto object = CreateCannon(index_list, tex, vao);
-			//object->GetComponent<Transform3D>()->position = glm::vec3(3.0f, 1.0f, 3.0f);
+			auto object = CreateCannon(index_list, tex, vao);
+			object->GetComponent<Transform3D>()->position = glm::vec3(3.0f, 0.0f, 0.0f);
 		}
 		{
 			//auto object = CreateBook(index_list, tex, vao);
@@ -178,9 +179,9 @@ GameObject* GameScene::CreateItem_Shoes(int* index_list, GLuint* tex, GLuint* va
 	auto shoes = CreateEmpty();
 
 	shoes->AddComponent<Transform3D>();
-	/*shoes->AddComponent<Collide>();
+	shoes->AddComponent<Collide>();
 	shoes->GetComponent<Collide>()->BoundBox = BoundBox[Shoes];
-	shoes->GetComponent<Collide>()->BoundBox.pos = shoes->GetComponent<Transform3D>()->position;*/
+	shoes->GetComponent<Collide>()->BoundBox.pos = shoes->GetComponent<Transform3D>()->position;
 	shoes->AddComponent<ItemRotate>();
 
 	// render ºÎºÐ

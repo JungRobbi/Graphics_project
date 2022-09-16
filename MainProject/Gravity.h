@@ -24,10 +24,18 @@ public:
         if (!object_BoundBox)
             return;
 
-        if (object_tran->position.y + object_BoundBox->BoundBox.minY <= floor) {
-            object_tran->position.y = floor - object_BoundBox->BoundBox.minY;
-            object_tran->velocity.y = 0.0f;
 
+        if (gameObject == Scene::scene->p_player) {
+            if (object_tran->position.y + object_BoundBox->sub_BoundBox.minY <= floor) {
+                object_tran->position.y = floor - object_BoundBox->sub_BoundBox.minY;
+                object_tran->velocity.y = 0.0f;
+            }
+        }
+        else {
+            if (object_tran->position.y + object_BoundBox->BoundBox.minY <= floor) {
+                object_tran->position.y = floor - object_BoundBox->BoundBox.minY;
+                object_tran->velocity.y = 0.0f;
+            }
         }
     }
 

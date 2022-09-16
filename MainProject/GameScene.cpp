@@ -33,10 +33,10 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 	p_player->GetComponent<Camera>()->viewLocation = viewLocation;
 	p_player->GetComponent<Camera>()->projLocation = projLocation;
 
-	//p_player->AddComponent<Collide>();
-	//p_player->GetComponent<Collide>()->BoundBox = BoundBox[Cube] * 3;
+	p_player->AddComponent<Collide>();
+	p_player->GetComponent<Collide>()->BoundBox = BoundBox[Cube] * 3;
 
-	//p_player->AddComponent<Gravity>();
+	p_player->AddComponent<Gravity>();
 	p_player->AddComponent<PlayerJump>();
 
 	
@@ -44,6 +44,13 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 	if (num_scene == 1) {
 		{
 			CreateSkyBox(index_list, tex, vao);
+		}
+		{
+			auto box = CreateStar(index_list, tex, vao);
+			box->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 0.0f, 0.0f);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(0.25f, 0.25f, 0.25f);
+
+			box->texture = Scene::scene->p_tex[2];
 		}
 		{
 			//auto temp = CreateCannon(index_list, tex, vao);
@@ -89,6 +96,7 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 
 			box->GetComponent<Transform3D>()->position = glm::vec3(2.0f, 0.0f, 0.0f);
 			box->GetComponent<Transform3D>()->scale = glm::vec3(0.25f, 0.05f, 0.25f);
+			box->GetComponent<Collide>()->BoundBox.pos = box->GetComponent<Transform3D>()->position;
 
 			box->texture = Scene::scene->p_tex[4];
 		}
@@ -98,11 +106,14 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 
 			box->GetComponent<Transform3D>()->position = glm::vec3(2.25f, 0.50f, 0.0f);
 			box->GetComponent<Transform3D>()->scale = glm::vec3(0.25f, 0.05f, 0.25f);
+			box->GetComponent<Collide>()->BoundBox.pos = box->GetComponent<Transform3D>()->position;
+
 
 			box->texture = Scene::scene->p_tex[4];
 		}
 		{
 			auto grass = CreateGrass(index_list, tex, vao);
+			//grass->GetComponent<Transform3D>()->position.y = -0.01;
 		}
 
 	}
@@ -113,11 +124,10 @@ GameObject* GameScene::CreateBox(int* index_list, GLuint* tex, GLuint* vao) // B
 	auto box = CreateEmpty();
 
 	box->AddComponent<Transform3D>();
+	box->AddComponent<Gravity>();
 	box->AddComponent<Collide>();
 	box->GetComponent<Collide>()->BoundBox = BoundBox[Cube];
 	box->GetComponent<Collide>()->BoundBox.pos = box->GetComponent<Transform3D>()->position;
-
-	box->AddComponent<Gravity>();
 
 	// render 부분
 	box->modelLocation = modelLocation;
@@ -139,8 +149,6 @@ GameObject* GameScene::CreateStar(int* index_list, GLuint* tex, GLuint* vao) // 
 
 	//std::cout << std::endl << std::endl << BoundBox[Star].maxX << " " << BoundBox[Star].maxY << std::endl;
 	//std::cout << BoundBox[Star].minX << " " << BoundBox[Star].minY << std::endl;
-
-	star->AddComponent<Gravity>();
 
 	// render 부분
 	star->modelLocation = modelLocation;
@@ -193,8 +201,8 @@ GameObject* GameScene::CreateCannon(int* index_list, GLuint* tex, GLuint* vao)
 	cannon->GetComponent<Transform3D>()->roll = -90.0f;
 
 	cannon->AddComponent<CannonShot>();
-	cannon->AddComponent<Collide>();
 	cannon->AddComponent<Gravity>();
+	cannon->AddComponent<Collide>();
 
 	// render 부분
 	cannon->modelLocation = modelLocation;

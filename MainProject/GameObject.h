@@ -3,6 +3,7 @@
 #include <gl/glew.h>
 #include "Scene.h"
 #include "Component.h"
+#include "Collide.h"
 
 enum E_LIFE_TYPE { E_LIFE_LIVE, E_LIFE_REMAIN, E_LIFE_DEAD };
 

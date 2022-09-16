@@ -442,6 +442,7 @@ void Mouse(int button, int state, int x, int y)
 			box->GetComponent<Transform3D>()->position = glm::vec3(msx * 8.0f, create_height, -msy * 8.0f);
 			box->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 1.0f, 1.0f);
 			box->GetComponent<Transform3D>()->direction = glm::vec3(0.0f, 1.0f, 0.0f);
+			box->GetComponent<Collide>()->BoundBox.pos = box->GetComponent<Transform3D>()->position;
 		}
 		else if (n_model == Star) {
 			/*auto star = CreateStar(index_list, tex, vao);

@@ -18,19 +18,16 @@ void Collide::start()
 void Collide::update()
 {
 	BoundBox.pos = gameObject->GetComponent<Transform3D>()->position;
+	if (gameObject == Scene::scene->p_player) {
+		sub_BoundBox.pos = gameObject->GetComponent<Transform3D>()->position;
+	}
 	for (auto obj : Scene::scene->gameObjects) {
 		if (obj->GetComponent<Collide>()&&(obj!=gameObject)) {
-			if (CheckBoxtoBox(BoundBox, obj->GetComponent<Collide>()->BoundBox)) {
-				if (gameObject == Scene::scene->p_player) {
-					if (gameObject->GetComponent<Transform3D>()->position.y + gameObject->GetComponent<Collide>()->BoundBox.minY
-					> obj->GetComponent<Transform3D>()->position.y + gameObject->GetComponent<Collide>()->BoundBox.maxY) {
-						gameObject->GetComponent<Transform3D>()->velocity.y = 0;
-					}
-					else if (obj->GetComponent<Transform3D>()->position.y + obj->GetComponent<Collide>()->BoundBox.minY
-					> gameObject->GetComponent<Transform3D>()->position.y + gameObject->GetComponent<Collide>()->BoundBox.maxY) {
-						obj->GetComponent<Transform3D>()->velocity.y = 0;
-					}
-
+			if (gameObject == Scene::scene->p_player) {
+				if (CheckBoxtoBox(sub_BoundBox, obj->GetComponent<Collide>()->BoundBox)) {
+					gameObject->GetComponent<Transform3D>()->velocity.y = 0.001;
+				}
+				else if (CheckBoxtoBox(BoundBox, obj->GetComponent<Collide>()->BoundBox)) {
 					if (key['a']) {						// 위로 이동
 						Scene::scene->p_player->GetComponent<Transform3D>()->position.x -= sin((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy)) * 0.015;
 						Scene::scene->p_player->GetComponent<Transform3D>()->position.z += cos((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy)) * 0.015;
@@ -47,9 +44,10 @@ void Collide::update()
 						Scene::scene->p_player->GetComponent<Transform3D>()->position.x -= cos((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy)) * 0.015;
 						Scene::scene->p_player->GetComponent<Transform3D>()->position.z -= sin((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy)) * 0.015;
 					}
-					
 				}
-				else {
+			}
+			else {
+				if (CheckBoxtoBox(BoundBox, obj->GetComponent<Collide>()->BoundBox)) {
 					if (gameObject->GetComponent<Transform3D>()->position.y + gameObject->GetComponent<Collide>()->BoundBox.minY
 					> obj->GetComponent<Transform3D>()->position.y + gameObject->GetComponent<Collide>()->BoundBox.minY) {
 						gameObject->GetComponent<Transform3D>()->velocity.y = 0;

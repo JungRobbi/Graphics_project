@@ -35,6 +35,8 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 
 	p_player->AddComponent<Collide>();
 	p_player->GetComponent<Collide>()->BoundBox = BoundBox[Cube] * 0.25;
+	p_player->GetComponent<Collide>()->sub_BoundBox = p_player->GetComponent<Collide>()->BoundBox * 0.75;
+	p_player->GetComponent<Collide>()->sub_BoundBox.minY = p_player->GetComponent<Collide>()->BoundBox.minY * 2;
 
 	p_player->AddComponent<Gravity>();
 	p_player->AddComponent<PlayerJump>();

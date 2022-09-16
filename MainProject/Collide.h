@@ -22,7 +22,7 @@ class Collide :
 
 public:
     BoundingBox BoundBox;
-
+    BoundingBox sub_BoundBox;
 public:
     void start();
     void update();

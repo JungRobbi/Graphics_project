@@ -7,3 +7,4 @@ enum ShapeTag { Cube, Star, Plane, Pickaxe, Grass, Shoes, Cannon, Ball, Book, Sp
 
 #include <chrono>
 #include <list>
+#include <algorithm>

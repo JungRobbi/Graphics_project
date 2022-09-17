@@ -2,6 +2,7 @@
 #include "Gravity.h"
 #include "Scene.h"
 #include "Camera.h"
+#include "DestroyEffect.h"
 #include <cmath>
 
 extern bool key[256];
@@ -33,6 +34,29 @@ void Collide::update()
 		if (gameObject == Scene::scene->p_player) {
 			if (CheckBoxtoBox(sub_BoundBox, obj->GetComponent<Collide>()->BoundBox)) {
 				gameObject->GetComponent<Transform3D>()->velocity.y = 0.001;
+				if (obj->VAO == Scene::scene->p_vao[Pickaxe]) {
+					gameObject->Item_bag.push_back(Pickaxe);
+					Scene::scene->PushDelete(obj);
+					break;
+				}
+				else if (obj->VAO == Scene::scene->p_vao[Shoes]) {
+					gameObject->Item_bag.push_back(Shoes);
+					Scene::scene->PushDelete(obj);
+					break;
+				}
+				else if (obj->VAO == Scene::scene->p_vao[Ball]) {
+					gameObject->Item_bag.push_back(Shoes);
+					Scene::scene->PushDelete(obj);
+					break;
+				}
+				else if (obj->VAO == Scene::scene->p_vao[Cube] && obj->GetComponent<DestroyEffect>()) {
+					auto p = find(gameObject->Item_bag.begin(), gameObject->Item_bag.end(), Pickaxe);
+					if (p != gameObject->Item_bag.end()) {
+						obj->GetComponent<DestroyEffect>()->destroy = true;
+						gameObject->Item_bag.erase(p);
+					}
+					break;
+				}
 			}
 			else if (CheckBoxtoBox(BoundBox, obj->GetComponent<Collide>()->BoundBox)) {
 				if (obj->VAO == Scene::scene->p_vao[Pickaxe]) {
@@ -40,9 +64,22 @@ void Collide::update()
 					Scene::scene->PushDelete(obj);
 					break;
 				}
-				if (obj->VAO == Scene::scene->p_vao[Shoes]) {
+				else if (obj->VAO == Scene::scene->p_vao[Shoes]) {
 					gameObject->Item_bag.push_back(Shoes);
 					Scene::scene->PushDelete(obj);
+					break;
+				}
+				else if (obj->VAO == Scene::scene->p_vao[Ball]) {
+					gameObject->Item_bag.push_back(Shoes);
+					Scene::scene->PushDelete(obj);
+					break;
+				}
+				else if (obj->VAO == Scene::scene->p_vao[Cube] && obj->GetComponent<DestroyEffect>()) {
+					auto p = find(gameObject->Item_bag.begin(), gameObject->Item_bag.end(), Pickaxe);
+					if (p != gameObject->Item_bag.end()) {
+						obj->GetComponent<DestroyEffect>()->destroy = true;
+						gameObject->Item_bag.erase(p);
+					}
 					break;
 				}
 

@@ -35,6 +35,17 @@ void Collide::update()
 				gameObject->GetComponent<Transform3D>()->velocity.y = 0.001;
 			}
 			else if (CheckBoxtoBox(BoundBox, obj->GetComponent<Collide>()->BoundBox)) {
+				if (obj->VAO == Scene::scene->p_vao[Pickaxe]) {
+					gameObject->Item_bag.push_back(Pickaxe);
+					Scene::scene->PushDelete(obj);
+					break;
+				}
+				if (obj->VAO == Scene::scene->p_vao[Shoes]) {
+					gameObject->Item_bag.push_back(Shoes);
+					Scene::scene->PushDelete(obj);
+					break;
+				}
+
 				if (key['a']) {						// 위로 이동
 					Scene::scene->p_player->GetComponent<Transform3D>()->position.x -= sin((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy)) * 0.015;
 					Scene::scene->p_player->GetComponent<Transform3D>()->position.z += cos((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy)) * 0.015;
@@ -65,7 +76,6 @@ void Collide::update()
 				}
 			}
 		}
-
 	}
 }
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include <gl/glew.h>
+#include <string>
 #include "Scene.h"
 #include "Component.h"
 #include "Collide.h"
@@ -20,6 +21,8 @@ public:
 
 	GLint VAO;
 	GLint texture;
+
+	std::list<int> Item_bag;
 
 public:
 	GameObject();

@@ -91,9 +91,8 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 			grass->GetComponent<Transform3D>()->position.y = -0.5;
 		}
 		{
-			//auto object = CreateItem_Pickaxe(index_list, tex, vao);
-			//object->GetComponent<Transform3D>()->position = glm::vec3(1.0f, 0.0f, 0.0f);
-			//object->GetComponent<Transform3D>()->scale = glm::vec3(0.1f, 0.1f, 0.1f);
+			auto object = CreateItem_Pickaxe(index_list, tex, vao);
+			object->GetComponent<Transform3D>()->position = glm::vec3(3.0f, 0.0f, 0.0f);
 		}
 		{
 			//auto object = CreateItem_Shoes(index_list, tex, vao);
@@ -102,7 +101,7 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 		}
 		{
 			auto object = CreateCannon(index_list, tex, vao);
-			object->GetComponent<Transform3D>()->position = glm::vec3(3.0f, 0.0f, 0.0f);
+			object->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 0.0f, 3.0f);
 		}
 		{
 			//auto object = CreateBook(index_list, tex, vao);
@@ -163,7 +162,7 @@ GameObject* GameScene::CreateItem_Pickaxe(int* index_list, GLuint* tex, GLuint* 
 	axe->AddComponent<Collide>();
 	axe->GetComponent<Collide>()->BoundBox = BoundBox[Pickaxe];
 	axe->GetComponent<Collide>()->BoundBox.pos = axe->GetComponent<Transform3D>()->position;
-	axe->AddComponent<ItemRotate>();
+	//axe->AddComponent<ItemRotate>();
 
 	// render ºÎºÐ
 	axe->modelLocation = modelLocation;

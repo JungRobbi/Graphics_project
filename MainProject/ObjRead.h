@@ -234,6 +234,25 @@ public:
 			outnormal.push_back(vertex);
 		}
 
+		float minx = minX;
+		float miny = minY;
+		float minz = minZ;
+
+		minX = 0;
+		minY = 0;
+		minZ = 0;
+
+		maxX = maxX - minx;
+		maxY = maxY - miny;
+		maxZ = maxZ - minz;
+
+		minX = ((minX * 2.0f) / scaleX) - 1.0f;
+		maxX = ((maxX * 2.0f) / scaleX) - 1.0f;
+		minY = ((minY * 2.0f) / scaleY) - 1.0f;
+		maxY = ((maxY * 2.0f) / scaleY) - 1.0f;
+		minZ = ((minZ * 2.0f) / scaleZ) - 1.0f;
+		maxZ = ((maxZ * 2.0f) / scaleZ) - 1.0f;
+
 		return outvertex.size();
 	}
 
@@ -358,6 +377,25 @@ public:
 			glm::vec3 vertex = temp_normals[normalIndex - 1];
 			outnormal.push_back(vertex);
 		}
+
+		float minx = minX;
+		float miny = minY;
+		float minz = minZ;
+
+		minX = 0;
+		minY = 0;
+		minZ = 0;
+
+		maxX = maxX - minx;
+		maxY = maxY - miny;
+		maxZ = maxZ - minz;
+
+		minX = ((minX * 2.0f) / scaleX) - 1.0f;
+		maxX = ((maxX * 2.0f) / scaleX) - 1.0f;
+		minY = ((minY * 2.0f) / scaleY) - 1.0f;
+		maxY = ((maxY * 2.0f) / scaleY) - 1.0f;
+		minZ = ((minZ * 2.0f) / scaleZ) - 1.0f;
+		maxZ = ((maxZ * 2.0f) / scaleZ) - 1.0f;
 
 		return outvertex.size();
 	}

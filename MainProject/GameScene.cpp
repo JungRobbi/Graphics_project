@@ -177,6 +177,7 @@ GameObject* GameScene::CreateItem_Shoes(int* index_list, GLuint* tex, GLuint* va
 	auto shoes = CreateEmpty();
 
 	shoes->AddComponent<Transform3D>();
+	shoes->GetComponent<Transform3D>()->scale = glm::vec3(0.5f, 0.5f, 0.5f);
 	shoes->AddComponent<Collide>();
 	shoes->GetComponent<Collide>()->BoundBox = BoundBox[Shoes];
 	shoes->GetComponent<Collide>()->BoundBox.pos = shoes->GetComponent<Transform3D>()->position;
@@ -252,7 +253,7 @@ GameObject* GameScene::CreateSpike(int* index_list, GLuint* tex, GLuint* vao)
 	auto spike = CreateEmpty();
 
 	spike->AddComponent<Transform3D>();
-	spike->GetComponent<Transform3D>()->scale = glm::vec3(5.0f, 5.0f, 0.5f);
+	spike->GetComponent<Transform3D>()->scale = glm::vec3(0.7f, 0.7f, 0.7f);
 	spike->AddComponent<Collide>();
 	spike->GetComponent<Collide>()->BoundBox = BoundBox[Spike];
 	spike->GetComponent<Collide>()->BoundBox.pos = spike->GetComponent<Transform3D>()->position;

@@ -158,10 +158,11 @@ GameObject* GameScene::CreateItem_Pickaxe(int* index_list, GLuint* tex, GLuint* 
 	auto axe = CreateEmpty();
 
 	axe->AddComponent<Transform3D>();
+	axe->GetComponent<Transform3D>()->scale = glm::vec3(0.3f, 0.3f, 0.3f);
 	axe->AddComponent<Collide>();
 	axe->GetComponent<Collide>()->BoundBox = BoundBox[Pickaxe];
 	axe->GetComponent<Collide>()->BoundBox.pos = axe->GetComponent<Transform3D>()->position;
-	//axe->AddComponent<ItemRotate>();
+	axe->AddComponent<ItemRotate>();
 
 	// render ºÎºÐ
 	axe->modelLocation = modelLocation;
@@ -177,7 +178,7 @@ GameObject* GameScene::CreateItem_Shoes(int* index_list, GLuint* tex, GLuint* va
 	auto shoes = CreateEmpty();
 
 	shoes->AddComponent<Transform3D>();
-	shoes->GetComponent<Transform3D>()->scale = glm::vec3(0.5f, 0.5f, 0.5f);
+	shoes->GetComponent<Transform3D>()->scale = glm::vec3(0.2f, 0.2f, 0.2f);
 	shoes->AddComponent<Collide>();
 	shoes->GetComponent<Collide>()->BoundBox = BoundBox[Shoes];
 	shoes->GetComponent<Collide>()->BoundBox.pos = shoes->GetComponent<Transform3D>()->position;
@@ -197,6 +198,7 @@ GameObject* GameScene::CreateCannon(int* index_list, GLuint* tex, GLuint* vao)
 	auto cannon = CreateEmpty();
 
 	cannon->AddComponent<Transform3D>();
+	cannon->GetComponent<Transform3D>()->scale = glm::vec3(2.0f, 2.0f, 2.0f);
 	cannon->AddComponent<CannonShot>();
 	cannon->AddComponent<Collide>();
 	cannon->GetComponent<Collide>()->BoundBox = BoundBox[Cannon];

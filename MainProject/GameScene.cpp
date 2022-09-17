@@ -95,9 +95,8 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 			object->GetComponent<Transform3D>()->position = glm::vec3(3.0f, 0.0f, 0.0f);
 		}
 		{
-			//auto object = CreateItem_Shoes(index_list, tex, vao);
-			//object->GetComponent<Transform3D>()->position = glm::vec3(1.0f, 0.0f, 0.0f);
-			//object->GetComponent<Transform3D>()->scale = glm::vec3(3.0f, 0.1f, 3.0f);
+			auto object = CreateItem_Shoes(index_list, tex, vao);
+			object->GetComponent<Transform3D>()->position = glm::vec3(4.0f, 0.0f, 4.0f);
 		}
 		{
 			auto object = CreateCannon(index_list, tex, vao);
@@ -105,11 +104,11 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 		}
 		{
 			//auto object = CreateBook(index_list, tex, vao);
-			//object->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 0.0f, 2.0f);
+			//object->GetComponent<Transform3D>()->position = glm::vec3(-3.0f, 0.0f, 0.0f);
 		}
 		{
-			//auto object = CreateSpike(index_list, tex, vao);
-			//object->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 0.0f, 3.0f);
+			auto object = CreateSpike(index_list, tex, vao);
+			object->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 0.0f, -3.0f);
 		}
 	}
 }

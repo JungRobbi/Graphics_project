@@ -16,7 +16,6 @@ void Camera::update()
 	if (state == FIRST_VIEW) {
 		c_pos3 = gameObject->GetComponent<Transform3D>()->position;
 		c_dir3 = gameObject->GetComponent<Transform3D>()->direction;
-		
 	}
 	else if (state == FIRST_TO_TOP) {
 		glm::vec3 to_top_pos = (top_pos - gameObject->GetComponent<Transform3D>()->position) / 50.0f;
@@ -28,7 +27,7 @@ void Camera::update()
 		c_up += to_top_up;
 
 		if (c_pos3.y >= 18.8f) {
-			//c_pos3 = top_pos;
+			c_pos3 = top_pos;
 			c_dir3 = top_dir;
 			c_up = top_up;
 			state = TOP_VIEW;
@@ -50,6 +49,11 @@ void Camera::update()
 			c_up = glm::vec3(0.0f, 1.0f, 0.0f);
 			state = FIRST_VIEW;
 		}
+	}
+	else {
+		c_pos3 = top_pos;
+		c_dir3 = top_dir;
+		c_up = top_up;
 	}
 
 	Vw = glm::lookAt(c_pos3, c_dir3, c_up);

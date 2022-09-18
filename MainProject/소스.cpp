@@ -376,7 +376,7 @@ void Display()
 		if (n_model == Cube) {
 			glBindVertexArray(VAO[Cube]);
 			TR = glm::mat4(1.0f);
-			TR = glm::translate(TR, glm::vec3(msx * 8.0f, create_height, -msy * 8.0f));
+			TR = glm::translate(TR, glm::vec3(msx * 15.0f, create_height, -msy * 15.0f));
 			TR = glm::scale(TR, glm::vec3(0.4f,0.4f,0.4f));
 			glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
 			glBindTexture(GL_TEXTURE_2D, texture[4]);
@@ -448,7 +448,7 @@ void Mouse(int button, int state, int x, int y)
 			auto box = Scene::scene->CreateBox(num_shape_list, texture, VAO);
 			box->AddComponent<DestroyEffect>();
 
-			box->GetComponent<Transform3D>()->position = glm::vec3(msx * 8.0f, create_height, -msy * 8.0f);
+			box->GetComponent<Transform3D>()->position = glm::vec3(msx * 15.0f, create_height, -msy * 15.0f);
 			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
 			box->GetComponent<Transform3D>()->direction = glm::vec3(0.0f, 1.0f, 0.0f);
 			box->GetComponent<Collide>()->BoundBox.pos = box->GetComponent<Transform3D>()->position;
@@ -587,21 +587,41 @@ void TimerFunction(int value) {
 
 	bool collide = false;
 
-	if (key['a'] == true) {						// 위로 이동
-		Scene::scene->p_player->GetComponent<Transform3D>()->position.x += sin((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy)) * 0.015;
-		Scene::scene->p_player->GetComponent<Transform3D>()->position.z -= cos((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy)) * 0.015;
+	if (Scene::scene->p_player->GetComponent<Camera>()->state == FIRST_VIEW) {
+		if (key['a']) {						// 위로 이동
+			Scene::scene->p_player->GetComponent<Transform3D>()->position.x += sin((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy)) * 0.015;
+			Scene::scene->p_player->GetComponent<Transform3D>()->position.z -= cos((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy)) * 0.015;
+		}
+		if (key['d']) {						// 아래로 이동
+			Scene::scene->p_player->GetComponent<Transform3D>()->position.x -= sin((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy)) * 0.015;
+			Scene::scene->p_player->GetComponent<Transform3D>()->position.z += cos((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy)) * 0.015;
+		}
+		if (key['s']) {						// 왼쪽으로 이동
+			Scene::scene->p_player->GetComponent<Transform3D>()->position.x -= cos((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy)) * 0.015;
+			Scene::scene->p_player->GetComponent<Transform3D>()->position.z -= sin((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy)) * 0.015;
+		}
+		if (key['w']) {						// 오른쪽으로 이동
+			Scene::scene->p_player->GetComponent<Transform3D>()->position.x += cos((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy)) * 0.015;
+			Scene::scene->p_player->GetComponent<Transform3D>()->position.z += sin((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy)) * 0.015;
+		}
 	}
-	if (key['d'] == true) {						// 아래로 이동
-		Scene::scene->p_player->GetComponent<Transform3D>()->position.x -= sin((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy)) * 0.015;
-		Scene::scene->p_player->GetComponent<Transform3D>()->position.z += cos((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy)) * 0.015;
-	}
-	if (key['s'] == true) {						// 왼쪽으로 이동
-		Scene::scene->p_player->GetComponent<Transform3D>()->position.x -= cos((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy)) * 0.015;
-		Scene::scene->p_player->GetComponent<Transform3D>()->position.z -= sin((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy)) * 0.015;
-	}
-	if (key['w'] == true) {						// 오른쪽으로 이동
-		Scene::scene->p_player->GetComponent<Transform3D>()->position.x += cos((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy)) * 0.015;
-		Scene::scene->p_player->GetComponent<Transform3D>()->position.z += sin((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy)) * 0.015;
+	else if (Scene::scene->p_player->GetComponent<Camera>()->state == TOP_VIEW) {
+		if (key['a']) {						// 위로 이동
+			Scene::scene->p_player->GetComponent<Camera>()->top_pos.x -= 0.1f;
+			Scene::scene->p_player->GetComponent<Camera>()->top_dir.x -= 0.1f;
+		}
+		if (key['d']) {						// 아래로 이동
+			Scene::scene->p_player->GetComponent<Camera>()->top_pos.x += 0.1f;
+			Scene::scene->p_player->GetComponent<Camera>()->top_dir.x += 0.1f;
+		}
+		if (key['s']) {						// 왼쪽으로 이동
+			Scene::scene->p_player->GetComponent<Camera>()->top_pos.z += 0.1f;
+			Scene::scene->p_player->GetComponent<Camera>()->top_dir.z += 0.1f;
+		}
+		if (key['w']) {						// 오른쪽으로 이동
+			Scene::scene->p_player->GetComponent<Camera>()->top_pos.z -= 0.1f;
+			Scene::scene->p_player->GetComponent<Camera>()->top_dir.z -= 0.1f;
+		}
 	}
 
 	glutPostRedisplay();

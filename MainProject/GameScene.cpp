@@ -50,7 +50,7 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 		}
 
 		{
-			auto box = CreateAirBox(index_list,tex,vao);
+			auto box = CreateAirBox(index_list, tex, vao);
 
 			box->GetComponent<Transform3D>()->position = glm::vec3(1.0f, 0.0f, 0.0f);
 			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);

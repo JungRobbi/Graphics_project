@@ -1,6 +1,7 @@
 #include "GameScene.h"
 #include <iostream>
 #include "CannonShot.h"
+#include "DestroyEffect.h"
 
 
 
@@ -50,7 +51,7 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 		}
 
 		{
-			auto box = CreateAirBox(index_list, tex, vao);
+			auto box = CreateAirBox(index_list,tex,vao);
 
 			box->GetComponent<Transform3D>()->position = glm::vec3(1.0f, 0.0f, 0.0f);
 			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
@@ -111,26 +112,6 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 			auto grass = CreateGrass(index_list, tex, vao);
 			grass->GetComponent<Transform3D>()->position.y = -0.5;
 		}
-		{
-			//auto object = CreateItem_Pickaxe(index_list, tex, vao);
-			//object->GetComponent<Transform3D>()->position = glm::vec3(3.0f, 0.0f, 0.0f);
-		}
-		{
-			//auto object = CreateItem_Shoes(index_list, tex, vao);
-			//object->GetComponent<Transform3D>()->position = glm::vec3(4.0f, 0.0f, 4.0f);
-		}
-		{
-			//auto object = CreateCannon(index_list, tex, vao);
-			//object->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 0.0f, 3.0f);
-		}
-		{
-			//auto object = CreateBook(index_list, tex, vao);
-			//object->GetComponent<Transform3D>()->position = glm::vec3(-3.0f, 0.0f, 0.0f);
-		}
-		{
-			//auto object = CreateSpike(index_list, tex, vao);
-			//object->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 0.0f, -3.0f);
-		}
 	}
 }
 
@@ -139,6 +120,7 @@ GameObject* GameScene::CreateBox(int* index_list, GLuint* tex, GLuint* vao) // B
 	auto box = CreateEmpty();
 
 	box->AddComponent<Transform3D>();
+	box->AddComponent<DestroyEffect>();
 	box->AddComponent<Gravity>();
 	box->AddComponent<Collide>();
 	box->GetComponent<Collide>()->BoundBox = BoundBox[Cube];
@@ -157,7 +139,10 @@ GameObject* GameScene::CreateAirBox(int* index_list, GLuint* tex, GLuint* vao) /
 {
 	auto box = CreateEmpty();
 
+
 	box->AddComponent<Transform3D>();
+	box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+	box->AddComponent<DestroyEffect>();
 	box->AddComponent<Collide>();
 	box->GetComponent<Collide>()->BoundBox = BoundBox[Cube];
 	box->GetComponent<Collide>()->BoundBox.pos = box->GetComponent<Transform3D>()->position;

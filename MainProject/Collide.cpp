@@ -35,10 +35,11 @@ void Collide::update()
 			if (CheckBoxtoBox(sub_BoundBox, obj->GetComponent<Collide>()->BoundBox)) {
 				gameObject->GetComponent<Transform3D>()->velocity.y = -gameObject->GetComponent<Gravity>()->graviti_acceleration.y;
 
-				if (sub_BoundBox.pos.y + sub_BoundBox.minY < obj->GetComponent<Collide>()->BoundBox.pos.y + obj->GetComponent<Collide>()->BoundBox.maxY) {
+				if (sub_BoundBox.pos.y + sub_BoundBox.minY < obj->GetComponent<Collide>()->BoundBox.pos.y + obj->GetComponent<Collide>()->BoundBox.maxY
+					&& BoundBox.pos.y + BoundBox.minY >= obj->GetComponent<Collide>()->BoundBox.pos.y + obj->GetComponent<Collide>()->BoundBox.maxY) {
 					auto y = obj->GetComponent<Collide>()->BoundBox.pos.y + obj->GetComponent<Collide>()->BoundBox.maxY
 						- (sub_BoundBox.pos.y + sub_BoundBox.minY);
-					gameObject->GetComponent<Transform3D>()->position.y += y - gameObject->GetComponent<Gravity>()->graviti_acceleration.y;
+					gameObject->GetComponent<Transform3D>()->position.y += y;
 				}
 
 				if (obj->VAO == Scene::scene->p_vao[Pickaxe]) {

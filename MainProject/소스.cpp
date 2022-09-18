@@ -118,9 +118,10 @@ bool key[256];
 float msx, msy = 0;
 bool start = false;
 
-std::vector<Scene*> sc;
+std::list<Scene*> sc;
 
 void SceneChange(int num_scene);
+void ResetChange();
 int main(int argc, char** argv)
 {
 	// create window using freeglut
@@ -618,4 +619,9 @@ void SceneChange(int num_scene)
 	else {
 		(*p)->scene = (*p);
 	}
+}
+
+void ResetChange()
+{
+	
 }

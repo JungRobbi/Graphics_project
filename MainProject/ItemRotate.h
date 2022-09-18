@@ -14,6 +14,8 @@ public:
         false, true, false
     };
 
+    int turn = 50;
+
     void start() {}
     void update()
     {
@@ -23,6 +25,15 @@ public:
             gameObject->GetComponent<Transform3D>()->yaw += rotating_speedy;
         if (rotating_axis[2])
             gameObject->GetComponent<Transform3D>()->roll += rotating_speedz;
+
+        --turn;
+        if (turn > 0)
+            gameObject->GetComponent<Transform3D>()->position.y += 0.004;
+        else
+            gameObject->GetComponent<Transform3D>()->position.y -= 0.004;
+
+        if (turn == -49)
+            turn = 50;
     }
 };
 

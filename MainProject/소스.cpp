@@ -542,6 +542,9 @@ void keyboard(unsigned char key2, int x, int y) {
 				n_model = n_max_model - 1;
 		}
 		break;
+	case 'r':
+		ResetChange();
+		break;
 	case 'c': // юс╫ц clear е╟
 		/*if (f_Light_ambients[0] < 0.3f) {
 			for (int i{}; i < 3; ++i)
@@ -623,5 +626,8 @@ void SceneChange(int num_scene)
 
 void ResetChange()
 {
+	sc.emplace_back(new GameScene(Scene::scene->n_scene, num_shape_list, texture, VAO, s_program));
 	
+	auto p = find(sc.begin(), sc.end(), Scene::scene);
+	sc.erase(p);
 }

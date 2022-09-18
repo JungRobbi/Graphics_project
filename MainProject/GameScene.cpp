@@ -48,39 +48,60 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 		{
 			CreateSkyBox(index_list, tex, vao);
 		}
-		{
-			//auto temp = CreateCannon(index_list, tex, vao);
-		}
-		{
-		/*	auto star = CreateStar(index_list,tex,vao);
 
-			star->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 5.5f, 0.0f);
-			star->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 0.3f, 1.0f);
-			star->GetComponent<Transform3D>()->direction = glm::vec3(0.0f, 1.0f, 0.0f);
-			star->GetComponent<Transform3D>()->roll = 90.0f;*/
-		}
 		{
-			/*auto box = CreateBox(index_list, tex, vao);
+			auto box = CreateAirBox(index_list,tex,vao);
 
-			box->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 5.5f, 2.0f);
-			box->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 1.0f, 1.0f);
-			box->GetComponent<Transform3D>()->direction = glm::vec3(0.0f, 1.0f, 0.0f);*/
-		}
-		{
-			/*auto axe = CreateItem_Pickaxe(index_list, tex, vao);
-			axe->GetComponent<Transform3D>()->position = glm::vec3(1.0f, 0.0f, 0.0f);
-			axe->GetComponent<Transform3D>()->scale = glm::vec3(0.1f, 0.1f, 0.05f);
-			axe->GetComponent<Transform3D>()->direction = glm::vec3(0.0f, 1.0f, 0.0f);*/
+			box->GetComponent<Transform3D>()->position = glm::vec3(1.0f, 0.0f, 0.0f);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+
+			auto box2 = CreateAirBox(index_list, tex, vao);
+
+			box2->GetComponent<Transform3D>()->position = glm::vec3(1.8f, 0.8f, 0.0f);
+			box2->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+
+			auto box3 = CreateAirBox(index_list, tex, vao);
+
+			box3->GetComponent<Transform3D>()->position = glm::vec3(2.6f, 1.6f, 0.0f);
+			box3->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+
+			auto box4 = CreateAirBox(index_list, tex, vao);
+
+			box4->GetComponent<Transform3D>()->position = glm::vec3(3.4f, 2.4f, 0.0f);
+			box4->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+
+			auto box5 = CreateAirBox(index_list, tex, vao);
+
+			box5->GetComponent<Transform3D>()->position = glm::vec3(4.2f, 3.2f, 0.0f);
+			box5->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+
+			auto box6 = CreateAirBox(index_list, tex, vao);
+
+			box6->GetComponent<Transform3D>()->position = glm::vec3(3.4f, 4.0f, 0.0f);
+			box6->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+
+			auto axe = CreateItem_Pickaxe(index_list, tex, vao);
+
+			axe->GetComponent<Transform3D>()->position = glm::vec3(1.8f, 1.6f, 0.0f);
+			axe->GetComponent<Transform3D>()->scale = glm::vec3(0.1f, 0.2f, 0.3f);
+
+			auto box7 = CreateAirBox(index_list, tex, vao);
+
+			box7->GetComponent<Transform3D>()->position = glm::vec3(5.8f, 4.8f, 0.0f);
+			box7->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+
+			auto box8 = CreateAirBox(index_list, tex, vao);
+
+			box8->GetComponent<Transform3D>()->position = glm::vec3(6.6f, 5.6f, 0.0f);
+			box8->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+
+			auto box9 = CreateAirBox(index_list, tex, vao);
+
+			box9->GetComponent<Transform3D>()->position = glm::vec3(7.4f, 5.6f, 0.0f);
+			box9->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
 
 		}
-		{
-			/*auto shoes = CreateItem_Shoes(index_list, tex, vao);
-			shoes->GetComponent<Transform3D>()->roll = -90.0f;
-			shoes->GetComponent<Transform3D>()->position = glm::vec3(1.0f, 0.0f, 0.2f);
-			shoes->GetComponent<Transform3D>()->scale = glm::vec3(0.1f, 0.1f, 0.05f);
-			shoes->GetComponent<Transform3D>()->direction = glm::vec3(0.0f, 1.0f, 0.0f);*/
-
-		}
+	
 	}
 	else if (num_scene == 2) {
 		{
@@ -132,6 +153,24 @@ GameObject* GameScene::CreateBox(int* index_list, GLuint* tex, GLuint* vao) // B
 	return box;
 }
 
+GameObject* GameScene::CreateAirBox(int* index_list, GLuint* tex, GLuint* vao) // Box 자동 생성
+{
+	auto box = CreateEmpty();
+
+	box->AddComponent<Transform3D>();
+	box->AddComponent<Collide>();
+	box->GetComponent<Collide>()->BoundBox = BoundBox[Cube];
+	box->GetComponent<Collide>()->BoundBox.pos = box->GetComponent<Transform3D>()->position;
+
+	// render 부분
+	box->modelLocation = modelLocation;
+	box->num_index = index_list[0]; // load() 첫 번째
+	box->VAO = vao[0]; // 사각형 메쉬
+	box->texture = tex[4]; // 1번 텍스쳐
+
+	return box;
+}
+
 GameObject* GameScene::CreateStar(int* index_list, GLuint* tex, GLuint* vao) // Star 자동 생성
 {
 	auto star = CreateEmpty();
@@ -158,7 +197,7 @@ GameObject* GameScene::CreateItem_Pickaxe(int* index_list, GLuint* tex, GLuint* 
 	auto axe = CreateEmpty();
 
 	axe->AddComponent<Transform3D>();
-	axe->GetComponent<Transform3D>()->scale = glm::vec3(0.3f, 0.3f, 0.3f);
+	axe->GetComponent<Transform3D>()->scale = glm::vec3(0.05f, 0.05f, 0.05f);
 	axe->AddComponent<Collide>();
 	axe->GetComponent<Collide>()->BoundBox = BoundBox[Pickaxe];
 	axe->GetComponent<Collide>()->BoundBox.pos = axe->GetComponent<Transform3D>()->position;

@@ -91,24 +91,24 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 			grass->GetComponent<Transform3D>()->position.y = -0.5;
 		}
 		{
-			auto object = CreateItem_Pickaxe(index_list, tex, vao);
-			object->GetComponent<Transform3D>()->position = glm::vec3(3.0f, 0.0f, 0.0f);
+			//auto object = CreateItem_Pickaxe(index_list, tex, vao);
+			//object->GetComponent<Transform3D>()->position = glm::vec3(3.0f, 0.0f, 0.0f);
 		}
 		{
-			auto object = CreateItem_Shoes(index_list, tex, vao);
-			object->GetComponent<Transform3D>()->position = glm::vec3(4.0f, 0.0f, 4.0f);
+			//auto object = CreateItem_Shoes(index_list, tex, vao);
+			//object->GetComponent<Transform3D>()->position = glm::vec3(4.0f, 0.0f, 4.0f);
 		}
 		{
-			auto object = CreateCannon(index_list, tex, vao);
-			object->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 0.0f, 3.0f);
+			//auto object = CreateCannon(index_list, tex, vao);
+			//object->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 0.0f, 3.0f);
 		}
 		{
 			//auto object = CreateBook(index_list, tex, vao);
 			//object->GetComponent<Transform3D>()->position = glm::vec3(-3.0f, 0.0f, 0.0f);
 		}
 		{
-			auto object = CreateSpike(index_list, tex, vao);
-			object->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 0.0f, -3.0f);
+			//auto object = CreateSpike(index_list, tex, vao);
+			//object->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 0.0f, -3.0f);
 		}
 	}
 }

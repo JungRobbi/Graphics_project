@@ -565,7 +565,7 @@ void keyboard(unsigned char key2, int x, int y) {
 	case VK_SPACE:
 		if (Scene::scene->p_player->GetComponent<PlayerJump>() && 
 			Scene::scene->p_player->GetComponent<Transform3D>()->velocity.y <= 0.002f && Scene::scene->p_player->GetComponent<Transform3D>()->velocity.y >= -0.002f)
-			Scene::scene->p_player->GetComponent<Transform3D>()->velocity += Scene::scene->p_player->GetComponent<PlayerJump>()->jump_acceleration;
+			Scene::scene->p_player->GetComponent<Transform3D>()->velocity = Scene::scene->p_player->GetComponent<PlayerJump>()->jump_acceleration;
 		else {
 			auto p = find(Scene::scene->p_player->Item_bag.begin(), Scene::scene->p_player->Item_bag.end(), Shoes);
 			if (p != Scene::scene->p_player->Item_bag.end()) {

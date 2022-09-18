@@ -379,7 +379,7 @@ void Display()
 			TR = glm::translate(TR, glm::vec3(msx * 15.0f, create_height, -msy * 15.0f));
 			TR = glm::scale(TR, glm::vec3(0.4f,0.4f,0.4f));
 			glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
-			glBindTexture(GL_TEXTURE_2D, texture[4]);
+			glBindTexture(GL_TEXTURE_2D, texture[3]);
 			glDrawArrays(GL_TRIANGLES, 0, num_shape_list[Cube]);
 		}
 	}

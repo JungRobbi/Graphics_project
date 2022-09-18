@@ -83,7 +83,7 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 
 			auto axe = CreateItem_Pickaxe(index_list, tex, vao);
 
-			axe->GetComponent<Transform3D>()->position = glm::vec3(2.6f, 3.5f, 0.0f);
+			axe->GetComponent<Transform3D>()->position = glm::vec3(2.6f, 2.4f, 0.0f);
 			axe->GetComponent<Transform3D>()->scale = glm::vec3(0.1f, 0.2f, 0.3f);
 
 			auto box7 = CreateAirHardBox(index_list, tex, vao);
@@ -100,6 +100,17 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 
 			box9->GetComponent<Transform3D>()->position = glm::vec3(7.4f, 5.6f, 0.0f);
 			box9->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+
+			auto shoe = CreateItem_Shoes(index_list, tex, vao);
+
+			shoe->GetComponent<Transform3D>()->position = glm::vec3(4.2f, 4.0f, 0.0f);
+			shoe->GetComponent<Transform3D>()->scale = glm::vec3(0.2f, 0.2f, 0.2f);
+
+			auto star = CreateStar(index_list, tex, vao);
+
+			star->GetComponent<Transform3D>()->position = glm::vec3(7.4f, 8.5f, 0.0f);
+			star->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+			star->AddComponent<Transform3D>()->roll = 90.0f;
 
 		}
 	
@@ -130,7 +141,7 @@ GameObject* GameScene::CreateBox(int* index_list, GLuint* tex, GLuint* vao) // B
 	box->modelLocation = modelLocation;
 	box->num_index = index_list[0]; // load() 첫 번째
 	box->VAO = vao[0]; // 사각형 메쉬
-	box->texture = tex[4]; // 1번 텍스쳐
+	box->texture = tex[3]; // 1번 텍스쳐
 
 	return box;
 }
@@ -151,7 +162,7 @@ GameObject* GameScene::CreateAirBox(int* index_list, GLuint* tex, GLuint* vao) /
 	box->modelLocation = modelLocation;
 	box->num_index = index_list[0]; // load() 첫 번째
 	box->VAO = vao[0]; // 사각형 메쉬
-	box->texture = tex[4]; // 1번 텍스쳐
+	box->texture = tex[3]; // 1번 텍스쳐
 
 	return box;
 }
@@ -184,6 +195,8 @@ GameObject* GameScene::CreateStar(int* index_list, GLuint* tex, GLuint* vao) // 
 	star->AddComponent<Collide>();
 	star->GetComponent<Collide>()->BoundBox = BoundBox[Star];
 	star->GetComponent<Collide>()->BoundBox.pos = star->GetComponent<Transform3D>()->position;
+	star->AddComponent<Transform3D>()->pitch = 90.0f;
+	star->AddComponent<ItemRotate>();
 
 	//std::cout << std::endl << std::endl << BoundBox[Star].maxX << " " << BoundBox[Star].maxY << std::endl;
 	//std::cout << BoundBox[Star].minX << " " << BoundBox[Star].minY << std::endl;

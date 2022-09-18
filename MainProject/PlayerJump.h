@@ -7,7 +7,7 @@ class PlayerJump :
     public Component
 {
 public:
-    glm::vec3 jump_acceleration = glm::vec3(0.0f, 0.063f, 0.0f);
+    glm::vec3 jump_acceleration = glm::vec3(0.0f, 0.06f, 0.0f);
 
 public:
     

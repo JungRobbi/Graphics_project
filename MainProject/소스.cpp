@@ -376,17 +376,10 @@ void Display()
 			glBindVertexArray(VAO[Cube]);
 			TR = glm::mat4(1.0f);
 			TR = glm::translate(TR, glm::vec3(msx * 8.0f, create_height, -msy * 8.0f));
+			TR = glm::scale(TR, glm::vec3(0.4f,0.4f,0.4f));
 			glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
-			glBindTexture(GL_TEXTURE_2D, texture[1]);
+			glBindTexture(GL_TEXTURE_2D, texture[4]);
 			glDrawArrays(GL_TRIANGLES, 0, num_shape_list[Cube]);
-		}
-		else if (n_model == Star) {
-			glBindVertexArray(VAO[Star]);
-			TR = glm::mat4(1.0f);
-			TR = glm::translate(TR, glm::vec3(msx * 8.0f, create_height, -msy * 8.0f));
-			glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
-			glBindTexture(GL_TEXTURE_2D, texture[1]);
-			glDrawArrays(GL_TRIANGLES, 0, num_shape_list[Star]);
 		}
 	}
 

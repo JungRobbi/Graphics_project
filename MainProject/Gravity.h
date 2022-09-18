@@ -8,7 +8,7 @@ class Gravity :
     public Component
 {
 public:
-    glm::vec3 graviti_acceleration = glm::vec3(0.0f, -0.001f, 0.0f);
+    glm::vec3 graviti_acceleration = glm::vec3(0.0f, -0.002f, 0.0f);
 
     float floor = 0.0f;
 

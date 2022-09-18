@@ -566,8 +566,8 @@ void keyboard(unsigned char key2, int x, int y) {
 
 		break;
 	case VK_SPACE:
-		//if (Scene::scene->p_player->GetComponent<PlayerJump>() && Scene::scene->p_player->GetComponent<Transform3D>()->velocity.y == 0.0f)
-			//Scene::scene->p_player->GetComponent<Transform3D>()->velocity += Scene::scene->p_player->GetComponent<PlayerJump>()->jump_acceleration;
+		if (Scene::scene->p_player->GetComponent<PlayerJump>() && Scene::scene->p_player->GetComponent<Transform3D>()->velocity.y <= 0.001f)
+			Scene::scene->p_player->GetComponent<Transform3D>()->velocity += Scene::scene->p_player->GetComponent<PlayerJump>()->jump_acceleration;
 		break;
 	}
 
@@ -597,9 +597,6 @@ void TimerFunction(int value) {
 	if (key['w'] == true) {						// 오른쪽으로 이동
 		Scene::scene->p_player->GetComponent<Transform3D>()->position.x += cos((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy)) * 0.015;
 		Scene::scene->p_player->GetComponent<Transform3D>()->position.z += sin((float)glm::radians(Scene::scene->p_player->GetComponent<Camera>()->fpsy)) * 0.015;
-	}
-	if (key[VK_SPACE]) {
-		Scene::scene->p_player->GetComponent<Transform3D>()->velocity.y = 0.015;
 	}
 
 	glutPostRedisplay();

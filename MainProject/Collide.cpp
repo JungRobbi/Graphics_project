@@ -33,7 +33,7 @@ void Collide::update()
 
 		if (gameObject == Scene::scene->p_player) {
 			if (CheckBoxtoBox(sub_BoundBox, obj->GetComponent<Collide>()->BoundBox)) {
-				gameObject->GetComponent<Transform3D>()->velocity.y = 0.001;
+				gameObject->GetComponent<Transform3D>()->velocity.y = -gameObject->GetComponent<Gravity>()->graviti_acceleration.y;
 				if (obj->VAO == Scene::scene->p_vao[Pickaxe]) {
 					gameObject->Item_bag.push_back(Pickaxe);
 					Scene::scene->PushDelete(obj);

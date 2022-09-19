@@ -49,6 +49,8 @@ public:
 
 	virtual GameObject* CreateBox(int* index_list, GLuint* tex, GLuint* vao) { return nullptr; }
 	virtual GameObject* CreateStar(int* index_list, GLuint* tex, GLuint* vao) { return nullptr; }
+	virtual GameObject* CreateAirBox(int* index_list, GLuint* tex, GLuint* vao) { return nullptr; }
+	virtual GameObject* CreateAirHardBox(int* index_list, GLuint* tex, GLuint* vao) { return nullptr; }
 	virtual void CreateSkyBox(int* index_list, GLuint* tex, GLuint* vao) {};
 
 	friend GameObject;

@@ -92,8 +92,8 @@ void Collide::update()
 					if (p != gameObject->Item_bag.end()) {
 						obj->GetComponent<DestroyEffect>()->destroy = true;
 						gameObject->Item_bag.erase(p);
+						break;
 					}
-					break;
 				}
 				else if (obj->VAO == Scene::scene->p_vao[Star]) {
 					gameObject->Item_bag.push_back(Star);

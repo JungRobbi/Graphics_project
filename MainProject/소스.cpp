@@ -105,7 +105,7 @@ int intmpy = 0;
 float mousex = 0;				// 마우스 x
 float mousey = 0;				// 마우스 y
 
-float create_height = 5.0f;
+float create_height = 8.0f;
 
 float f_Light_ambients[3];
 
@@ -446,13 +446,9 @@ void Mouse(int button, int state, int x, int y)
 {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && Scene::scene->p_player->GetComponent<Camera>()->state == TOP_VIEW) {
 		if (n_model == Cube) {
-			auto box = Scene::scene->CreateBox(num_shape_list, texture, VAO);
-			box->AddComponent<DestroyEffect>();
-
+			auto box = Scene::scene->CreateAirBox(num_shape_list, texture, VAO);
+			box->AddComponent<Gravity>();
 			box->GetComponent<Transform3D>()->position = glm::vec3(msx * 15.0f, create_height, -msy * 15.0f);
-			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
-			box->GetComponent<Transform3D>()->direction = glm::vec3(0.0f, 1.0f, 0.0f);
-			box->GetComponent<Collide>()->BoundBox.pos = box->GetComponent<Transform3D>()->position;
 		}
 		else if (n_model == Star) {
 			/*auto star = CreateStar(index_list, tex, vao);

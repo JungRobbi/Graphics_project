@@ -192,36 +192,24 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 			box->GetComponent<Transform3D>()->scale = glm::vec3(0.8f, 0.8f, 0.8f);
 		}
 		{
-			auto plane = CreateEmpty();
-
-			plane->AddComponent<Transform3D>();
-			plane->GetComponent<Transform3D>()->position = glm::vec3(0.0f, -0.5f, 0.0f);
-			plane->GetComponent<Transform3D>()->scale = glm::vec3(20.0f, 20.0f, 20.0f);
-			plane->GetComponent<Transform3D>()->yaw = -90.0f;
-			plane->GetComponent<Transform3D>()->roll = -90.0f;
-
-			// render 부분
-			plane->modelLocation = modelLocation;
-			plane->num_index = index_list[2]; // load() 첫 번째
-			plane->VAO = vao[2]; // 사각형 메쉬
-			plane->texture = tex[13]; // bottom
-		}
-
-		{
-		/*	auto grass = CreateGrass(index_list, tex, vao);
-			grass->GetComponent<Transform3D>()->position.y = -0.5;
-			grass->texture = tex[17];*/
+			CreateSkyBox(index_list, tex, vao);
+			auto grass = CreateGrass(index_list, tex, vao);
+			grass->GetComponent<Transform3D>()->position.y = -0.8;
+			grass->GetComponent<Transform3D>()->scale = glm::vec3(9.0f, 9.0f, 1.0f);
+			grass->texture = tex[5];
 		}
 
 		{
 			auto box = CreateAirHardBox(index_list, tex, vao);
 			box->GetComponent<Transform3D>()->position = glm::vec3(-1.0f, 0.0f, 0.0f);
 			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 2.0f, 1.2f);
+			//box->texture = tex[21];
 		}
 		{
 			auto box = CreateAirHardBox(index_list, tex, vao);
 			box->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 0.0f, -1.0f);
 			box->GetComponent<Transform3D>()->scale = glm::vec3(1.2f, 2.0f, 0.4f);
+			//box->texture = tex[21];
 		}
 		{
 			auto box = CreateAirHardBox(index_list, tex, vao);

@@ -2,6 +2,7 @@
 #include <iostream>
 #include "CannonShot.h"
 #include "DestroyEffect.h"
+#include "LavaMove.h"
 
 
 
@@ -48,6 +49,9 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 	if (num_scene == 1) {
 		{
 			CreateSkyBox(index_list, tex, vao);
+			auto grass = CreateGrass(index_list, tex, vao);
+			grass->GetComponent<Transform3D>()->position.y = -0.5;
+			grass->texture = tex[5];
 		}
 
 		{
@@ -108,7 +112,7 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 
 			auto star = CreateStar(index_list, tex, vao);
 
-			star->GetComponent<Transform3D>()->position = glm::vec3(7.4f, 8.5f, 0.0f);
+			star->GetComponent<Transform3D>()->position = glm::vec3(7.4f, 9.0f, 0.0f);
 			star->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
 			star->AddComponent<Transform3D>()->roll = 90.0f;
 
@@ -116,22 +120,53 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 	
 	}
 	else if (num_scene == 2) {
+		p_player->GetComponent<Transform3D>()->position.y = 3.0f;
+		for (int i = 0; i < 49; ++i) {
+			p_player->Item_bag.push_back(Pickaxe);
+		}
 		{
 			CreateSkyBox(index_list, tex, vao);
 		}
 		{
 			auto hot = CreateHot(index_list, tex, vao);
-			hot->GetComponent<Transform3D>()->position.y = -1.2;
+			hot->GetComponent<Transform3D>()->position.y = 0.0;
 			hot->GetComponent<Transform3D>()->scale = glm::vec3(15.0f, 15.0f, 1.0f);
 		}
 		{
-			for (int i = 0; i < 6; ++i) {
-				for (int j = 0; j < 6; ++j) {
-					auto box = CreateAirBox(index_list, tex, vao);
+			for (int i = -3; i < 4; ++i) {
+				for (int j = 0; j < 7; ++j) {
+					if ((i == 0 && j == 0) || (i == 0 && j == 1) || (i == 0 && j == 2) ||
+						(i == 1 && j == 2) || (i == 2 && j == 2) || (i == 2 && j == 3) ||
+						(i == 2 && j == 4) || (i == 1 && j == 4) || (i == 0 && j == 4) ||
+						(i == -1 && j == 4) || (i == -2 && j == 4) || (i == -2 && j == 5)
+						|| (i == -2 && j == 6)) {
+						auto box = CreateAirHardBox(index_list, tex, vao);
 
-					box->GetComponent<Transform3D>()->position = glm::vec3(2.0*i, -1.0f, 2.0*j);
-					box->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 1.0f, 1.0f);
+						box->GetComponent<Transform3D>()->position = glm::vec3(2.0 * i, 1.0f, 2.0 * j);
+						box->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 1.0f, 1.0f);
+						box->texture = tex[1]; // 1번 텍스쳐
+					}
+					else {
+						auto box = CreateAirBox(index_list, tex, vao);
+
+						box->GetComponent<Transform3D>()->position = glm::vec3(2.0 * i, 1.0f, 2.0 * j);
+						box->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 1.0f, 1.0f);
+						box->texture = tex[1]; // 1번 텍스쳐
+					}
 				}
+			}
+			{
+				auto box = CreateAirHardBox(index_list, tex, vao);
+
+				box->GetComponent<Transform3D>()->position = glm::vec3(-4.0, 1.0f, 14.0);
+				box->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 1.0f, 1.0f);
+			}
+			{
+				auto star = CreateStar(index_list, tex, vao);
+
+				star->GetComponent<Transform3D>()->position = glm::vec3(-4.0, 3.0f, 14.0);
+				star->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+				star->AddComponent<Transform3D>()->roll = 90.0f;
 			}
 		}
 		
@@ -268,6 +303,36 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 			box->GetComponent<Transform3D>()->scale = glm::vec3(8.8f, 2.0f, 0.4f);
 		}
 	}
+
+	else if (num_scene == 4) {
+		{
+			CreateSkyBox(index_list, tex, vao);
+		}
+		{
+			auto grass = CreateGrass(index_list, tex, vao);
+			grass->GetComponent<Transform3D>()->position.y = -0.5;
+			grass->texture = tex[7];
+		}
+		{
+			auto shoe = CreateItem_Shoes(index_list, tex, vao);
+
+			shoe->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 1.0f, 2.0f);
+			shoe->GetComponent<Transform3D>()->scale = glm::vec3(0.2f, 0.2f, 0.2f);
+		}
+		{
+			auto shoe = CreateItem_Shoes(index_list, tex, vao);
+
+			shoe->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 1.5f, 3.0f);
+			shoe->GetComponent<Transform3D>()->scale = glm::vec3(0.2f, 0.2f, 0.2f);
+		}
+		{
+			auto shoe = CreateItem_Shoes(index_list, tex, vao);
+
+			shoe->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 2.0f, 3.0f);
+			shoe->GetComponent<Transform3D>()->scale = glm::vec3(0.2f, 0.2f, 0.2f);
+		}
+
+	}
 }
 
 GameObject* GameScene::CreateBox(int* index_list, GLuint* tex, GLuint* vao) // Box 자동 생성
@@ -349,7 +414,7 @@ GameObject* GameScene::CreateStar(int* index_list, GLuint* tex, GLuint* vao) // 
 	star->modelLocation = modelLocation;
 	star->num_index = index_list[1]; // load() 첫 번째
 	star->VAO = vao[1]; // 사각형 메쉬
-	star->texture = tex[1]; // 1번 텍스쳐
+	star->texture = tex[2]; // 1번 텍스쳐
 
 	return star;
 }
@@ -438,6 +503,7 @@ GameObject* GameScene::CreateHot(int* index_list, GLuint* tex, GLuint* vao)
 	hot->AddComponent<Transform3D>();
 	hot->GetComponent<Transform3D>()->roll = -90.0f;
 	hot->GetComponent<Transform3D>()->scale = glm::vec3(5.0f, 5.0f, 0.5f);
+	hot->AddComponent<LavaMove>();
 
 	// render 부분
 	hot->modelLocation = modelLocation;

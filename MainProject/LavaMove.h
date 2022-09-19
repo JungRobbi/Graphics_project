@@ -8,7 +8,9 @@ class LavaMove :
     public Component
 {
 public:
-
+    float MoveSpeed = 0.01f;
+    int count = 0;
+    bool updown = true;
 
 public:
 

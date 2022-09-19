@@ -2,6 +2,7 @@
 #include <iostream>
 #include "CannonShot.h"
 #include "DestroyEffect.h"
+#include "LavaMove.h"
 
 
 
@@ -327,6 +328,7 @@ GameObject* GameScene::CreateHot(int* index_list, GLuint* tex, GLuint* vao)
 	hot->AddComponent<Transform3D>();
 	hot->GetComponent<Transform3D>()->roll = -90.0f;
 	hot->GetComponent<Transform3D>()->scale = glm::vec3(5.0f, 5.0f, 0.5f);
+	hot->AddComponent<LavaMove>();
 
 	// render ºÎºÐ
 	hot->modelLocation = modelLocation;

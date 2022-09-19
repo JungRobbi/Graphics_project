@@ -117,22 +117,51 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 	
 	}
 	else if (num_scene == 2) {
+		p_player->GetComponent<Transform3D>()->position.y = 3.0f;
+		for (int i = 0; i < 49; ++i) {
+			p_player->Item_bag.push_back(Pickaxe);
+		}
 		{
 			CreateSkyBox(index_list, tex, vao);
 		}
 		{
 			auto hot = CreateHot(index_list, tex, vao);
-			hot->GetComponent<Transform3D>()->position.y = -1.2;
+			hot->GetComponent<Transform3D>()->position.y = 0.0;
 			hot->GetComponent<Transform3D>()->scale = glm::vec3(15.0f, 15.0f, 1.0f);
 		}
 		{
-			for (int i = 0; i < 6; ++i) {
-				for (int j = 0; j < 6; ++j) {
-					auto box = CreateAirBox(index_list, tex, vao);
+			for (int i = -3; i < 4; ++i) {
+				for (int j = 0; j < 7; ++j) {
+					if ((i == 0 && j == 0) || (i == 0 && j == 1) || (i == 0 && j == 2) ||
+						(i == 1 && j == 2) || (i == 2 && j == 2) || (i == 2 && j == 3) ||
+						(i == 2 && j == 4) || (i == 1 && j == 4) || (i == 0 && j == 4) ||
+						(i == -1 && j == 4) || (i == -2 && j == 4) || (i == -2 && j == 5)
+						|| (i == -2 && j == 6)) {
+						auto box = CreateAirHardBox(index_list, tex, vao);
 
-					box->GetComponent<Transform3D>()->position = glm::vec3(2.0*i, -1.0f, 2.0*j);
-					box->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 1.0f, 1.0f);
+						box->GetComponent<Transform3D>()->position = glm::vec3(2.0 * i, 1.0f, 2.0 * j);
+						box->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 1.0f, 1.0f);
+					}
+					else {
+						auto box = CreateAirBox(index_list, tex, vao);
+
+						box->GetComponent<Transform3D>()->position = glm::vec3(2.0 * i, 1.0f, 2.0 * j);
+						box->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 1.0f, 1.0f);
+					}
 				}
+			}
+			{
+				auto box = CreateAirHardBox(index_list, tex, vao);
+
+				box->GetComponent<Transform3D>()->position = glm::vec3(-4.0, 1.0f, 14.0);
+				box->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 1.0f, 1.0f);
+			}
+			{
+				auto star = CreateStar(index_list, tex, vao);
+
+				star->GetComponent<Transform3D>()->position = glm::vec3(-4.0, 3.0f, 14.0);
+				star->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+				star->AddComponent<Transform3D>()->roll = 90.0f;
 			}
 		}
 		

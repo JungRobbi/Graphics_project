@@ -6,6 +6,7 @@
 #include "Component.h"
 #include "Vector3.h"
 #include "GameObject.h"
+#include "Camera.h"
 
 #include "Collide.h"
 class Transform3D : public Component
@@ -38,6 +39,8 @@ public:
 	void update() 
 	{
 		position += velocity;
+		direction.y += velocity.y;
+		
 
 		mat_Transform = glm::mat4(1.0f);
 

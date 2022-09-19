@@ -124,6 +124,22 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 			grass->GetComponent<Transform3D>()->position.y = -0.5;
 		}
 	}
+	else if (num_scene == 3) {
+		{
+			CreateSkyBox(index_list, tex, vao);
+		}
+		{
+		/*	auto grass = CreateGrass(index_list, tex, vao);
+			grass->GetComponent<Transform3D>()->position.y = -0.5;
+			grass->texture = tex[17];*/
+		}
+		{
+			auto grass = CreateBall(index_list, tex, vao);
+			grass->GetComponent<Transform3D>()->position.y = -1.5;
+			grass->GetComponent<Transform3D>()->scale = glm::vec3(10.0f, 10.0f, 10.0f);
+			grass->texture = tex[17];
+		}
+	}
 }
 
 GameObject* GameScene::CreateBox(int* index_list, GLuint* tex, GLuint* vao) // Box 자동 생성
@@ -324,6 +340,18 @@ GameObject* GameScene::CreateSpike(int* index_list, GLuint* tex, GLuint* vao)
 	spike->texture = tex[2]; // 
 
 	return spike;
+}
+
+GameObject* GameScene::CreateBall(int* index_list, GLuint* tex, GLuint* vao)
+{
+	auto ball = CreateAirBox(index_list, tex, vao);
+
+	ball->modelLocation = modelLocation;
+	ball->num_index = index_list[Ball]; // load() 첫 번째
+	ball->VAO = vao[Ball]; // 사각형 메쉬
+	ball->texture = tex[14]; // 
+
+	return ball;
 }
 
 

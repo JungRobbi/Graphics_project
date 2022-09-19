@@ -310,7 +310,7 @@ void InitTexture()
 	BITMAPINFO* bmp;
 	string map[30] = { "Resource/main.png","Resource/B.png","Resource/gold.png","Resource/123.png","Resource/321.png","Resource/grass.png",
 		"Resource/face.png","Resource/gun_tex.png", "Resource/skybox2_top.png", "Resource/skybox2_left.png", "Resource/skybox2_front.png", "Resource/skybox2_right.png",
-		"Resource/skybox2_back.png", "Resource/skybox2_bottom.png", "Resource/vinus.png", "Resource/mars.png", "Resource/jupiter.png"};
+		"Resource/skybox2_back.png", "Resource/skybox2_bottom.png", "Resource/vinus.png", "Resource/mars.png", "Resource/jupiter.png", "Resource/magma2.png", "Resource/sun.png"  };
 																							// ↑ 여기가 14
 	glGenTextures(30, texture); //--- 텍스처 생성
 

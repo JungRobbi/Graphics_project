@@ -452,6 +452,7 @@ void Mouse(int button, int state, int x, int y)
 			box->AddComponent<Gravity>();
 			box->GetComponent<Transform3D>()->position = glm::vec3(msx * 15.0f, create_height, -msy * 15.0f);
 			box->texture = texture[4];
+			std::cout << " -- " << msx * 15.0f << ", " << -msy * 15.0f << std::endl;
 		}
 		else if (n_model == Star) {
 			/*auto star = CreateStar(index_list, tex, vao);

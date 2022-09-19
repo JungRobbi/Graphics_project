@@ -49,6 +49,9 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 	if (num_scene == 1) {
 		{
 			CreateSkyBox(index_list, tex, vao);
+			auto grass = CreateGrass(index_list, tex, vao);
+			grass->GetComponent<Transform3D>()->position.y = -0.5;
+			grass->texture = tex[5];
 		}
 
 		{
@@ -109,7 +112,7 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 
 			auto star = CreateStar(index_list, tex, vao);
 
-			star->GetComponent<Transform3D>()->position = glm::vec3(7.4f, 8.5f, 0.0f);
+			star->GetComponent<Transform3D>()->position = glm::vec3(7.4f, 9.0f, 0.0f);
 			star->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
 			star->AddComponent<Transform3D>()->roll = 90.0f;
 
@@ -196,6 +199,36 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 			auto box = CreateAirHardBox(index_list, tex, vao);
 			box->GetComponent<Transform3D>()->position = glm::vec3(2.8f, 0.0f, 0.0f);
 			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 1.0f, 2.4f);
+		}
+
+	}
+
+	else if (num_scene == 4) {
+		{
+			CreateSkyBox(index_list, tex, vao);
+		}
+		{
+			auto grass = CreateGrass(index_list, tex, vao);
+			grass->GetComponent<Transform3D>()->position.y = -0.5;
+			grass->texture = tex[7];
+		}
+		{
+			auto shoe = CreateItem_Shoes(index_list, tex, vao);
+
+			shoe->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 1.0f, 2.0f);
+			shoe->GetComponent<Transform3D>()->scale = glm::vec3(0.2f, 0.2f, 0.2f);
+		}
+		{
+			auto shoe = CreateItem_Shoes(index_list, tex, vao);
+
+			shoe->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 1.5f, 3.0f);
+			shoe->GetComponent<Transform3D>()->scale = glm::vec3(0.2f, 0.2f, 0.2f);
+		}
+		{
+			auto shoe = CreateItem_Shoes(index_list, tex, vao);
+
+			shoe->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 2.0f, 3.0f);
+			shoe->GetComponent<Transform3D>()->scale = glm::vec3(0.2f, 0.2f, 0.2f);
 		}
 
 	}

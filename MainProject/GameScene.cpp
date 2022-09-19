@@ -141,12 +141,14 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 
 						box->GetComponent<Transform3D>()->position = glm::vec3(2.0 * i, 1.0f, 2.0 * j);
 						box->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 1.0f, 1.0f);
+						box->texture = tex[1]; // 1번 텍스쳐
 					}
 					else {
 						auto box = CreateAirBox(index_list, tex, vao);
 
 						box->GetComponent<Transform3D>()->position = glm::vec3(2.0 * i, 1.0f, 2.0 * j);
 						box->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 1.0f, 1.0f);
+						box->texture = tex[1]; // 1번 텍스쳐
 					}
 				}
 			}
@@ -278,7 +280,7 @@ GameObject* GameScene::CreateStar(int* index_list, GLuint* tex, GLuint* vao) // 
 	star->modelLocation = modelLocation;
 	star->num_index = index_list[1]; // load() 첫 번째
 	star->VAO = vao[1]; // 사각형 메쉬
-	star->texture = tex[1]; // 1번 텍스쳐
+	star->texture = tex[2]; // 1번 텍스쳐
 
 	return star;
 }

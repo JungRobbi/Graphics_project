@@ -65,6 +65,11 @@ void Collide::update()
 					}
 					break;
 				}
+				else if (obj->VAO == Scene::scene->p_vao[Star]) {
+					gameObject->Item_bag.push_back(Star);
+					Scene::scene->PushDelete(obj);
+					break;
+				}
 			}
 			else if (CheckBoxtoBox(BoundBox, obj->GetComponent<Collide>()->BoundBox)) {
 				if (obj->VAO == Scene::scene->p_vao[Pickaxe]) {
@@ -88,6 +93,11 @@ void Collide::update()
 						obj->GetComponent<DestroyEffect>()->destroy = true;
 						gameObject->Item_bag.erase(p);
 					}
+					break;
+				}
+				else if (obj->VAO == Scene::scene->p_vao[Star]) {
+					gameObject->Item_bag.push_back(Star);
+					Scene::scene->PushDelete(obj);
 					break;
 				}
 

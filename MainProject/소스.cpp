@@ -122,6 +122,7 @@ std::list<Scene*> sc;
 
 void SceneChange(int num_scene);
 void ResetChange();
+void NestSceneChange();
 int main(int argc, char** argv)
 {
 	// create window using freeglut
@@ -646,8 +647,14 @@ void SceneChange(int num_scene)
 
 void ResetChange()
 {
-	sc.emplace_back(new GameScene(Scene::scene->n_scene, num_shape_list, texture, VAO, s_program));
-	
 	auto p = find(sc.begin(), sc.end(), Scene::scene);
+	sc.emplace_back(new GameScene(Scene::scene->n_scene, num_shape_list, texture, VAO, s_program));
+	sc.erase(p);
+}
+
+void NestSceneChange()
+{
+	auto p = find(sc.begin(), sc.end(), Scene::scene);
+	sc.emplace_back(new GameScene(Scene::scene->n_scene + 1, num_shape_list, texture, VAO, s_program));
 	sc.erase(p);
 }

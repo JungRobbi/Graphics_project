@@ -310,7 +310,7 @@ void InitTexture()
 	BITMAPINFO* bmp;
 	string map[30] = { "Resource/main.png","Resource/B.png","Resource/gold.png","Resource/123.png","Resource/321.png","Resource/grass.png",
 		"Resource/face.png","Resource/gun_tex.png", "Resource/skybox2_top.png", "Resource/skybox2_left.png", "Resource/skybox2_front.png", "Resource/skybox2_right.png",
-		"Resource/skybox2_back.png", "Resource/skybox2_bottom.png", "Resource/vinus.png", "Resource/mars.png", "Resource/jupiter.png", "Resource/magma2.png", "Resource/sun.png"  };
+		"Resource/skybox2_back.png", "Resource/skybox2_bottom.png", "Resource/vinus.png", "Resource/mars.png", "Resource/jupiter.png", "Resource/magma2.png", "Resource/sun.png","Resource/xxx.png"   };
 																							// ↑ 여기가 14
 	glGenTextures(30, texture); //--- 텍스처 생성
 
@@ -449,6 +449,7 @@ void Mouse(int button, int state, int x, int y)
 			auto box = Scene::scene->CreateAirBox(num_shape_list, texture, VAO);
 			box->AddComponent<Gravity>();
 			box->GetComponent<Transform3D>()->position = glm::vec3(msx * 15.0f, create_height, -msy * 15.0f);
+			box->texture = texture[19];
 		}
 		else if (n_model == Star) {
 			/*auto star = CreateStar(index_list, tex, vao);

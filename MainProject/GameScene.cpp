@@ -123,6 +123,15 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 			auto grass = CreateGrass(index_list, tex, vao);
 			grass->GetComponent<Transform3D>()->position.y = -0.5;
 		}
+		{
+			auto ball = CreateAirHardBox(index_list, tex, vao);
+			ball->GetComponent<Transform3D>()->position = glm::vec3(0.0f, -5.0f, 0.0f);
+			ball->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+
+			ball->num_index = index_list[Ball]; // load() 첫 번째
+			ball->VAO = vao[Ball]; // 사각형 메쉬
+			ball->texture = tex[18];
+		}
 	}
 	else if (num_scene == 3) {
 		{
@@ -134,10 +143,14 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 			grass->texture = tex[17];*/
 		}
 		{
-			auto grass = CreateBall(index_list, tex, vao);
-			grass->GetComponent<Transform3D>()->position.y = -1.5;
-			grass->GetComponent<Transform3D>()->scale = glm::vec3(10.0f, 10.0f, 10.0f);
-			grass->texture = tex[17];
+			auto ball = CreateAirHardBox(index_list, tex, vao);
+			ball->GetComponent<Transform3D>()->position = glm::vec3(0.0f, -5.0f, 0.0f);
+			ball->GetComponent<Transform3D>()->scale = glm::vec3(10.0f, 10.0f, 3.0f);
+			ball->GetComponent<Transform3D>()->roll = -90.0f;
+
+			ball->num_index = index_list[Ball]; // load() 첫 번째
+			ball->VAO = vao[Ball]; // 사각형 메쉬
+			ball->texture = tex[18];
 		}
 	}
 }

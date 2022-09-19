@@ -120,18 +120,21 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 			CreateSkyBox(index_list, tex, vao);
 		}
 		{
-			auto grass = CreateGrass(index_list, tex, vao);
-			grass->GetComponent<Transform3D>()->position.y = -0.5;
+			auto hot = CreateHot(index_list, tex, vao);
+			hot->GetComponent<Transform3D>()->position.y = -1.2;
+			hot->GetComponent<Transform3D>()->scale = glm::vec3(15.0f, 15.0f, 1.0f);
 		}
 		{
-			auto ball = CreateAirHardBox(index_list, tex, vao);
-			ball->GetComponent<Transform3D>()->position = glm::vec3(0.0f, -5.0f, 0.0f);
-			ball->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+			for (int i = 0; i < 6; ++i) {
+				for (int j = 0; j < 6; ++j) {
+					auto box = CreateAirBox(index_list, tex, vao);
 
-			ball->num_index = index_list[Ball]; // load() 첫 번째
-			ball->VAO = vao[Ball]; // 사각형 메쉬
-			ball->texture = tex[18];
+					box->GetComponent<Transform3D>()->position = glm::vec3(2.0*i, -1.0f, 2.0*j);
+					box->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 1.0f, 1.0f);
+				}
+			}
 		}
+		
 	}
 	else if (num_scene == 3) {
 		{
@@ -325,6 +328,23 @@ GameObject* GameScene::CreateGrass(int* index_list, GLuint* tex, GLuint* vao)
 	grass->texture = tex[5]; // 
 
 	return grass;
+}
+
+GameObject* GameScene::CreateHot(int* index_list, GLuint* tex, GLuint* vao)
+{
+	auto hot = CreateEmpty();
+
+	hot->AddComponent<Transform3D>();
+	hot->GetComponent<Transform3D>()->roll = -90.0f;
+	hot->GetComponent<Transform3D>()->scale = glm::vec3(5.0f, 5.0f, 0.5f);
+
+	// render 부분
+	hot->modelLocation = modelLocation;
+	hot->num_index = index_list[Grass]; //
+	hot->VAO = vao[Grass]; //
+	hot->texture = tex[17]; // 
+
+	return hot;
 }
 
 GameObject* GameScene::CreateBook(int* index_list, GLuint* tex, GLuint* vao)

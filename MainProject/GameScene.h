@@ -42,6 +42,7 @@ public:
 	GameObject* CreateItem_Shoes(int* index_list, GLuint* tex, GLuint* vao);
 	GameObject* CreateCannon(int* index_list, GLuint* tex, GLuint* vao);
 	GameObject* CreateGrass(int* index_list, GLuint* tex, GLuint* vao);
+	GameObject* CreateHot(int* index_list, GLuint* tex, GLuint* vao);
 	GameObject* CreateBook(int* index_list, GLuint* tex, GLuint* vao);
 	GameObject* CreateSpike(int* index_list, GLuint* tex, GLuint* vao);
 	GameObject* CreateBall(int* index_list, GLuint* tex, GLuint* vao);

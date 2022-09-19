@@ -143,15 +143,16 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 			grass->texture = tex[17];*/
 		}
 		{
-			auto ball = CreateAirHardBox(index_list, tex, vao);
-			ball->GetComponent<Transform3D>()->position = glm::vec3(0.0f, -5.0f, 0.0f);
-			ball->GetComponent<Transform3D>()->scale = glm::vec3(10.0f, 10.0f, 3.0f);
-			ball->GetComponent<Transform3D>()->roll = -90.0f;
-
-			ball->num_index = index_list[Ball]; // load() 첫 번째
-			ball->VAO = vao[Ball]; // 사각형 메쉬
-			ball->texture = tex[18];
+			auto box = CreateAirHardBox(index_list, tex, vao);
+			box->GetComponent<Transform3D>()->position = glm::vec3(-1.0f, 0.0f, 0.0f);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 1.0f, 1.2f);
 		}
+		{
+			auto box = CreateAirHardBox(index_list, tex, vao);
+			box->GetComponent<Transform3D>()->position = glm::vec3(-1.0f, 0.0f, 0.0f);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 1.0f, 1.2f);
+		}
+
 	}
 }
 

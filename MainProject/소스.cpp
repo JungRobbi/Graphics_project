@@ -367,6 +367,8 @@ void Display()
 	glUseProgram(s_program[0]);
 
 	glViewport(0, 0, WINDOWX, WINDOWY);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	if (!sc.empty()) {
 		Scene::scene->update();
@@ -449,7 +451,7 @@ void Mouse(int button, int state, int x, int y)
 			auto box = Scene::scene->CreateAirBox(num_shape_list, texture, VAO);
 			box->AddComponent<Gravity>();
 			box->GetComponent<Transform3D>()->position = glm::vec3(msx * 15.0f, create_height, -msy * 15.0f);
-			box->texture = texture[19];
+			box->texture = texture[4];
 		}
 		else if (n_model == Star) {
 			/*auto star = CreateStar(index_list, tex, vao);

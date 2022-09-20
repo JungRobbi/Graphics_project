@@ -63,6 +63,7 @@ void Motion2(int x, int y);
 void TimerFunction(int value);
 void Display();
 void Display_Sub1();
+
 void Reshape(int w, int h);
 void InitBuffer();
 void InitTexture();
@@ -436,11 +437,11 @@ void Display_Sub1()
 	glUniform3f(lightColorLocation, 1.0, 1.0, 1.0);
 	//*************************************************************************
 	// 그리기 부분
-	glViewport(WINDOWX / 4, WINDOWY / 4, WINDOWX / 2, WINDOWY / 2);
+	glViewport(WINDOWX * 9 / 10, 0, WINDOWX / 10, WINDOWY / 10);
 
 	glBindVertexArray(VAO[Plane]);
 	TR = glm::mat4(1.0f);
-	TR = glm::translate(TR, glm::vec3(0.0f, 0.0f, -4.0f));
+	TR = glm::translate(TR, glm::vec3(0.0f, 0.0f, -1.0f));
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
 	glBindTexture(GL_TEXTURE_2D, texture[0]);
 	glDrawArrays(GL_TRIANGLES, 0, num_shape_list[Plane]);
@@ -557,21 +558,14 @@ void keyboard(unsigned char key2, int x, int y) {
 		ResetChange();
 		break;
 	case 'c': // 임시 clear 키
-		/*if (f_Light_ambients[0] < 0.3f) {
+		if (f_Light_ambients[0] < 0.3f) {
 			for (int i{}; i < 3; ++i)
 				f_Light_ambients[i] = 0.3f;
 		}
 		else {
 			for (int i{}; i < 3; ++i)
 				f_Light_ambients[i] = 0.29f;
-		}*/
-		for (auto& gameobject : Scene::scene->gameObjects) {
-			if (gameobject->VAO == VAO[Cube] && gameobject->GetComponent<DestroyEffect>()) {
-				gameobject->GetComponent<DestroyEffect>()->destroy = true;
-				break;
-			}
 		}
-
 		break;
 	case VK_SPACE:
 		if (Scene::scene->p_player->GetComponent<PlayerJump>() && 

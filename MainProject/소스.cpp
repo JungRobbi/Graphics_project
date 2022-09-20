@@ -407,7 +407,7 @@ void Display()
 	glDrawArrays(GL_TRIANGLES, 0, num_shape_list[3]);*/
 
 
-	if (f_Light_ambients[0] < 0.3f) { 
+	if (f_Light_ambients[0] < 0.3f || Scene::scene->n_scene == 7) {
 		Display_Sub1();
 	}
 
@@ -455,7 +455,7 @@ void Display_Sub1()
 	TR = glm::mat4(1.0f);
 	TR = glm::translate(TR, glm::vec3(0.0f, 0.0f, -3.0f));
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
-	if (Scene::scene->n_scene == 6) {
+	if (Scene::scene->n_scene == 7) {
 		glBindTexture(GL_TEXTURE_2D, texture[29]);
 	}
 	else {
@@ -571,15 +571,19 @@ void keyboard(unsigned char key2, int x, int y) {
 	case 'r':
 		ResetChange();
 		break;
-	case 'q': // юс╫ц clear е╟
+	case 'q': 
 		if (f_Light_ambients[0] < 0.3f) {
 			for (int i{}; i < 3; ++i)
 				f_Light_ambients[i] = 0.3f;
 		}
 		else {
 			for (int i{}; i < 3; ++i)
-				f_Light_ambients[i] = 0.20f;
+				f_Light_ambients[i] = 0.1f;
 		}
+		break;
+	case 'p':
+		sc.clear();
+		sc.emplace_back(new GameScene(1, num_shape_list, texture, VAO, s_program));
 		break;
 	case VK_SPACE:
 		if (Scene::scene->n_scene == 3)
@@ -705,6 +709,10 @@ void ResetChange()
 void NestSceneChange()
 {
 	auto p = find(sc.begin(), sc.end(), Scene::scene);
+	if (Scene::scene->n_scene == 6) {
+		Scene::scene->n_scene++;
+		return;
+	}
 	sc.emplace_back(new GameScene(Scene::scene->n_scene + 1, num_shape_list, texture, VAO, s_program));
 	sc.erase(p);
 }

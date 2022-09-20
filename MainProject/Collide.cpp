@@ -25,9 +25,7 @@ void Collide::update()
 
 
 	for (auto obj : Scene::scene->gameObjects) {
-		if (!(obj->GetComponent<Collide>())) 
-			continue;
-		if (obj == gameObject)
+		if (!(obj->GetComponent<Collide>() && (obj != gameObject))) 
 			continue;
 
 		if (gameObject == Scene::scene->p_player) {
@@ -47,17 +45,17 @@ void Collide::update()
 				if (obj->VAO == Scene::scene->p_vao[Pickaxe]) {
 					gameObject->Item_bag.push_back(Pickaxe);
 					Scene::scene->PushDelete(obj);
-					break;
+					continue;
 				}
 				else if (obj->VAO == Scene::scene->p_vao[Shoes]) {
 					gameObject->Item_bag.push_back(Shoes);
 					Scene::scene->PushDelete(obj);
-					break;
+					continue;
 				}
 				else if (obj->VAO == Scene::scene->p_vao[Ball]) {
 					gameObject->Item_bag.push_back(Shoes);
 					Scene::scene->PushDelete(obj);
-					break;
+					continue;
 				}
 				else if (obj->VAO == Scene::scene->p_vao[Cube] && obj->GetComponent<DestroyEffect>()) {
 					auto p = find(gameObject->Item_bag.begin(), gameObject->Item_bag.end(), Pickaxe);
@@ -65,42 +63,42 @@ void Collide::update()
 						obj->GetComponent<DestroyEffect>()->destroy = true;
 						gameObject->Item_bag.erase(p);
 					}
-					break;
+					continue;
 				}
 				else if (obj->VAO == Scene::scene->p_vao[Star]) {
 					gameObject->Item_bag.push_back(Star);
 					Scene::scene->PushDelete(obj);
-					break;
+					continue;
 				}
 			}
 			else if (CheckBoxtoBox(BoundBox, obj->GetComponent<Collide>()->BoundBox)) {
 				if (obj->VAO == Scene::scene->p_vao[Pickaxe]) {
 					gameObject->Item_bag.push_back(Pickaxe);
 					Scene::scene->PushDelete(obj);
-					break;
+					continue;
 				}
 				else if (obj->VAO == Scene::scene->p_vao[Shoes]) {
 					gameObject->Item_bag.push_back(Shoes);
 					Scene::scene->PushDelete(obj);
-					break;
+					continue;
 				}
 				else if (obj->VAO == Scene::scene->p_vao[Ball]) {
 					gameObject->Item_bag.push_back(Shoes);
 					Scene::scene->PushDelete(obj);
-					break;
+					continue;
 				}
 				else if (obj->VAO == Scene::scene->p_vao[Cube] && obj->GetComponent<DestroyEffect>()) {
 					auto p = find(gameObject->Item_bag.begin(), gameObject->Item_bag.end(), Pickaxe);
 					if (p != gameObject->Item_bag.end()) {
 						obj->GetComponent<DestroyEffect>()->destroy = true;
 						gameObject->Item_bag.erase(p);
-						break;
+						continue;
 					}
 				}
 				else if (obj->VAO == Scene::scene->p_vao[Star]) {
 					gameObject->Item_bag.push_back(Star);
 					Scene::scene->PushDelete(obj);
-					break;
+					continue;
 				}
 
 				if (key['a']) {						// 위로 이동
@@ -123,9 +121,9 @@ void Collide::update()
 		}
 		else {
 			if (gameObject->VAO == Scene::scene->p_vao[Star] || gameObject->VAO == Scene::scene->p_vao[Pickaxe] || gameObject->VAO == Scene::scene->p_vao[Shoes])
-				break;
+				continue;
 			else if (obj->VAO == Scene::scene->p_vao[Star] || obj->VAO == Scene::scene->p_vao[Pickaxe] || obj->VAO == Scene::scene->p_vao[Shoes])
-				break;
+				continue;
 
 			if (CheckBoxtoBox(BoundBox, obj->GetComponent<Collide>()->BoundBox)) {
 				if (gameObject->GetComponent<Transform3D>()->position.y + gameObject->GetComponent<Collide>()->BoundBox.minY

@@ -459,7 +459,7 @@ void Mouse(int button, int state, int x, int y)
 {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && Scene::scene->p_player->GetComponent<Camera>()->state == TOP_VIEW) {
 		if (n_model == Cube) {
-			auto box = Scene::scene->CreateAirBox(num_shape_list, texture, VAO);
+			auto box = Scene::scene->CreateAirHardBox(num_shape_list, texture, VAO);
 			box->AddComponent<Gravity>();
 			box->GetComponent<Transform3D>()->position = glm::vec3(msx * 15.0f, create_height, -msy * 15.0f);
 			box->texture = texture[4];

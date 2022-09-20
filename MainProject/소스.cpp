@@ -664,6 +664,12 @@ void TimerFunction(int value) {
 			ResetChange();
 		}
 	}
+	{
+		auto p = find(Scene::scene->p_player->Item_bag.begin(), Scene::scene->p_player->Item_bag.end(), Ball);
+		if (p != Scene::scene->p_player->Item_bag.end()) {
+			ResetChange();
+		}
+	}
 
 
 	glutPostRedisplay();

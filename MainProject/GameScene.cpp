@@ -535,6 +535,9 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 		}
 
 	}
+	else if (num_scene == 6) {
+	
+	}
 }
 
 GameObject* GameScene::CreateBox(int* index_list, GLuint* tex, GLuint* vao) // Box 자동 생성

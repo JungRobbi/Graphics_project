@@ -728,30 +728,18 @@ void keyboard(unsigned char key2, int x, int y) {
 	}
 
 	switch (key2) {
-	case '1':
+	case 'r':
 		if (Scene::scene->p_player->GetComponent<Camera>()->state == FIRST_TO_TOP ||
 			Scene::scene->p_player->GetComponent<Camera>()->state == FIRST_VIEW)
 			Scene::scene->p_player->GetComponent<Camera>()->state = FIRST_TO_TOP;
 		else
 			Scene::scene->p_player->GetComponent<Camera>()->state = TOP_TO_FIRST;
 		break;
-	case '2':
-		if (Scene::scene->p_player->GetComponent<Camera>()->state == FIRST_TO_TOP || 
-			Scene::scene->p_player->GetComponent<Camera>()->state == FIRST_VIEW)
-			Scene::scene->p_player->GetComponent<Camera>()->state = FIRST_TO_TOP;
-		else 
-			Scene::scene->p_player->GetComponent<Camera>()->state = TOP_TO_FIRST;
-		break;
+
 	case '3':
 		NestSceneChange();
 		break;
-	case 'e':
-		if (Scene::scene->p_player->GetComponent<Camera>()->state == TOP_VIEW) {
-			if (++n_model == n_max_model)
-				n_model = n_max_model - 1;
-		}
-		break;
-	case 'r':
+	case '.':
 		ResetChange();
 		break;
 	case 'q': 

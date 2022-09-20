@@ -314,7 +314,7 @@ void InitTexture()
 		"Resource/face.png","Resource/sand.png", "Resource/skybox2_top.png", "Resource/skybox2_left.png", "Resource/skybox2_front.png", "Resource/skybox2_right.png",
 		"Resource/skybox2_back.png", "Resource/skybox2_bottom.png", "Resource/vinus.png", "Resource/mars.png", "Resource/jupiter.png", "Resource/magma2.png", "Resource/sun.png","Resource/xxx.png",
 		"Resource/green.png", "Resource/yellow.png","Resource/skybox3_top.png", "Resource/skybox3_left.png", "Resource/skybox3_front.png", "Resource/skybox3_right.png",
-		"Resource/skybox3_back.png", "Resource/skybox3_bottom.png", };
+		"Resource/skybox3_back.png", "Resource/skybox3_bottom.png", "Resource/Item.png","Resource/GameClear.png" };
 		//20																				// ↑ 여기가 14
 	glGenTextures(40, texture); //--- 텍스처 생성
 
@@ -449,14 +449,22 @@ void Display_Sub1()
 	glUniform3f(lightColorLocation, 1.0, 1.0, 1.0);
 	//*************************************************************************
 	// 그리기 부분
-	glViewport(WINDOWX * 9 / 10, 0, WINDOWX / 10, WINDOWY / 10);
+	glViewport(100, 400, 600, 300);
 
 	glBindVertexArray(VAO[Plane]);
 	TR = glm::mat4(1.0f);
-	TR = glm::translate(TR, glm::vec3(0.0f, 0.0f, -1.0f));
+	TR = glm::translate(TR, glm::vec3(0.0f, 0.0f, -3.0f));
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
-	glBindTexture(GL_TEXTURE_2D, texture[0]);
+	if (Scene::scene->n_scene == 6) {
+		glBindTexture(GL_TEXTURE_2D, texture[29]);
+	}
+	else {
+		glBindTexture(GL_TEXTURE_2D, texture[28]);
+	}
 	glDrawArrays(GL_TRIANGLES, 0, num_shape_list[Plane]);
+
+	
+
 }
 
 
@@ -554,12 +562,6 @@ void keyboard(unsigned char key2, int x, int y) {
 	case '3':
 		NestSceneChange();
 		break;
-	case 'q':
-		if (Scene::scene->p_player->GetComponent<Camera>()->state == TOP_VIEW) {
-			if (--n_model < 0)
-				n_model = 0;
-		}
-		break;
 	case 'e':
 		if (Scene::scene->p_player->GetComponent<Camera>()->state == TOP_VIEW) {
 			if (++n_model == n_max_model)
@@ -569,14 +571,14 @@ void keyboard(unsigned char key2, int x, int y) {
 	case 'r':
 		ResetChange();
 		break;
-	case 'c': // 임시 clear 키
+	case 'q': // 임시 clear 키
 		if (f_Light_ambients[0] < 0.3f) {
 			for (int i{}; i < 3; ++i)
 				f_Light_ambients[i] = 0.3f;
 		}
 		else {
 			for (int i{}; i < 3; ++i)
-				f_Light_ambients[i] = 0.29f;
+				f_Light_ambients[i] = 0.20f;
 		}
 		break;
 	case VK_SPACE:

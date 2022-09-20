@@ -3,6 +3,7 @@
 #include "Scene.h"
 #include "Camera.h"
 #include "DestroyEffect.h"
+#include "PlayerJump.h"
 #include <cmath>
 
 extern bool key[256];
@@ -18,9 +19,13 @@ void Collide::start()
 
 void Collide::update()
 {
+	
 	BoundBox.pos = gameObject->GetComponent<Transform3D>()->position;
 	if (gameObject == Scene::scene->p_player) {
 		sub_BoundBox.pos = gameObject->GetComponent<Transform3D>()->position;
+		if (gameObject->GetComponent<Transform3D>()->position.y==0.75) {
+			gameObject->GetComponent<PlayerJump>()->jumping = false;
+		}
 	}
 
 	if (gameObject->VAO == Scene::scene->p_vao[Ball]) 
@@ -38,6 +43,7 @@ void Collide::update()
 				continue;
 
 			if (CheckBoxtoBox(sub_BoundBox, obj->GetComponent<Collide>()->BoundBox)) {
+				
 				if (obj->VAO == Scene::scene->p_vao[Pickaxe]) {
 					gameObject->Item_bag.push_back(Pickaxe);
 					Scene::scene->PushDelete(obj);
@@ -71,7 +77,7 @@ void Collide::update()
 					Scene::scene->PushDelete(obj);
 					continue;
 				}
-
+				gameObject->GetComponent<PlayerJump>()->jumping = false;
 				gameObject->GetComponent<Transform3D>()->velocity.y = -gameObject->GetComponent<Gravity>()->graviti_acceleration.y;
 				if (sub_BoundBox.pos.y + sub_BoundBox.minY < obj->GetComponent<Collide>()->BoundBox.pos.y + obj->GetComponent<Collide>()->BoundBox.maxY
 					&& BoundBox.pos.y + BoundBox.minY >= obj->GetComponent<Collide>()->BoundBox.pos.y + obj->GetComponent<Collide>()->BoundBox.maxY) {

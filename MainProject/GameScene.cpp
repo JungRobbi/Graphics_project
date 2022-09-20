@@ -528,13 +528,22 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 
 	}
 	else if (num_scene == 6) {
+		p_player->GetComponent<Transform3D>()->position = glm::vec3(-4.0f, 0.0f, 0.0f);
 		{
 			CreateSkyBox(index_list, tex, vao);
 		}
 		{
 			auto grass = CreateGrass(index_list, tex, vao);
-			grass->GetComponent<Transform3D>()->position.y = -0.5;
+			grass->GetComponent<Transform3D>()->position = glm::vec3(3.0f, -0.5f, 0.0f);
+			grass->GetComponent<Transform3D>()->scale = glm::vec3(10.0f, 5.0f, 0.5f);
 			grass->texture = tex[7];
+		}
+		for (int i{}; i < 7; ++i) {
+			auto cannon = CreateCannon(index_list, tex, vao);
+			cannon->GetComponent<Transform3D>()->position = glm::vec3(i * 1.0f, 0.0f, -5.0f);
+			cannon->GetComponent<Transform3D>()->scale = glm::vec3(0.8f, 0.8f, 0.8f);
+			cannon->GetComponent<Transform3D>()->yaw = -90.0f;
+			cannon->texture = tex[1];
 		}
 	}
 }
@@ -670,9 +679,9 @@ GameObject* GameScene::CreateCannon(int* index_list, GLuint* tex, GLuint* vao)
 	cannon->AddComponent<Transform3D>();
 	cannon->GetComponent<Transform3D>()->scale = glm::vec3(2.0f, 2.0f, 2.0f);
 	cannon->AddComponent<CannonShot>();
-	cannon->AddComponent<Collide>();
-	cannon->GetComponent<Collide>()->BoundBox = BoundBox[Cannon];
-	cannon->GetComponent<Collide>()->BoundBox.pos = cannon->GetComponent<Transform3D>()->position;
+	//cannon->AddComponent<Collide>();
+	//cannon->GetComponent<Collide>()->BoundBox = BoundBox[Cannon];
+	//cannon->GetComponent<Collide>()->BoundBox.pos = cannon->GetComponent<Transform3D>()->position;
 
 	// render 부분
 	cannon->modelLocation = modelLocation;
@@ -800,6 +809,9 @@ void GameScene::CreateSkyBox(int* index_list, GLuint* tex, GLuint* vao) // SkyBo
 		plane->num_index = index_list[2]; // load() 첫 번째
 		plane->VAO = vao[2]; // 사각형 메쉬
 		plane->texture = tex[8]; // top
+		if (n_scene == 5 || n_scene == 6) {
+			plane->texture = tex[22];
+		}
 	}
 	{
 		auto plane = CreateEmpty();
@@ -813,6 +825,9 @@ void GameScene::CreateSkyBox(int* index_list, GLuint* tex, GLuint* vao) // SkyBo
 		plane->num_index = index_list[2]; // load() 첫 번째
 		plane->VAO = vao[2]; // 사각형 메쉬
 		plane->texture = tex[9]; // left
+		if (n_scene == 5 || n_scene == 6) {
+			plane->texture = tex[23];
+		}
 	}
 	{
 		auto plane = CreateEmpty();
@@ -827,6 +842,9 @@ void GameScene::CreateSkyBox(int* index_list, GLuint* tex, GLuint* vao) // SkyBo
 		plane->num_index = index_list[2]; // load() 첫 번째
 		plane->VAO = vao[2]; // 사각형 메쉬
 		plane->texture = tex[10]; // front
+		if (n_scene == 5 || n_scene == 6) {
+			plane->texture = tex[24];
+		}
 	}
 	{
 		auto plane = CreateEmpty();
@@ -841,6 +859,9 @@ void GameScene::CreateSkyBox(int* index_list, GLuint* tex, GLuint* vao) // SkyBo
 		plane->num_index = index_list[2]; // load() 첫 번째
 		plane->VAO = vao[2]; // 사각형 메쉬
 		plane->texture = tex[11]; // right
+		if (n_scene == 5 || n_scene == 6) {
+			plane->texture = tex[25];
+		}
 	}
 	{
 		auto plane = CreateEmpty();
@@ -855,6 +876,9 @@ void GameScene::CreateSkyBox(int* index_list, GLuint* tex, GLuint* vao) // SkyBo
 		plane->num_index = index_list[2]; // load() 첫 번째
 		plane->VAO = vao[2]; // 사각형 메쉬
 		plane->texture = tex[12]; // back
+		if (n_scene == 5 || n_scene == 6) {
+			plane->texture = tex[26];
+		}
 	}
 	{
 		auto plane = CreateEmpty();
@@ -871,6 +895,9 @@ void GameScene::CreateSkyBox(int* index_list, GLuint* tex, GLuint* vao) // SkyBo
 		plane->num_index = index_list[2]; // load() 첫 번째
 		plane->VAO = vao[2]; // 사각형 메쉬
 		plane->texture = tex[13]; // bottom
+		if (n_scene == 5 || n_scene == 6) {
+			plane->texture = tex[27];
+		}
 	}
 }
 

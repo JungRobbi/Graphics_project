@@ -25,13 +25,15 @@ void Collide::update()
 
 
 	for (auto obj : Scene::scene->gameObjects) {
-		if (!(obj->GetComponent<Collide>() && (obj != gameObject))) 
+		if (!(obj->GetComponent<Collide>())) 
 			continue;
-
-		if (glm::distance(obj->GetComponent<Transform3D>()->position, gameObject->GetComponent<Transform3D>()->position) > 5.0f)
+		if (obj == gameObject)
 			continue;
 
 		if (gameObject == Scene::scene->p_player) {
+			if (glm::distance(obj->GetComponent<Transform3D>()->position, gameObject->GetComponent<Transform3D>()->position) > 5.0f)
+				continue;
+
 			if (CheckBoxtoBox(sub_BoundBox, obj->GetComponent<Collide>()->BoundBox)) {
 				gameObject->GetComponent<Transform3D>()->velocity.y = -gameObject->GetComponent<Gravity>()->graviti_acceleration.y;
 

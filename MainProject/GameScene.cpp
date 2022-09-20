@@ -338,7 +338,7 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 		{
 			auto star = CreateStar(index_list, tex, vao);
 
-			star->GetComponent<Transform3D>()->position = glm::vec3(x * 5, y*6, z * 5);
+			star->GetComponent<Transform3D>()->position = glm::vec3(x * 4, y * 7.5, z * 7);
 			star->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
 			star->AddComponent<Transform3D>()->roll = 90.0f;
 		}
@@ -348,39 +348,14 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 			axe->GetComponent<Transform3D>()->position = glm::vec3(-x * 3, 0, 0);
 			axe->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
 		}
-
-
 		{
-			auto box = CreateAirHardBox(index_list, tex, vao);
+			auto box = CreateAirBox(index_list, tex, vao);
 
-			box->GetComponent<Transform3D>()->position = glm::vec3(x*5, 0.0f, z);
+			box->GetComponent<Transform3D>()->position = glm::vec3(x * 4, y * 4, -z * 7);
 			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
 		}
-		{
-			auto box = CreateAirHardBox(index_list, tex, vao);
 
-			box->GetComponent<Transform3D>()->position = glm::vec3(x*5, 0.0f, z*2);
-			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
-		}
-		{
-			auto box = CreateAirHardBox(index_list, tex, vao);
-
-			box->GetComponent<Transform3D>()->position = glm::vec3(x*5, y, z*2);
-			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
-		}
-		{
-			auto box = CreateAirHardBox(index_list, tex, vao);
-
-			box->GetComponent<Transform3D>()->position = glm::vec3(x * 5, 0.0f, z * 3);
-			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
-		}
-		{
-			auto box = CreateAirHardBox(index_list, tex, vao);
-
-			box->GetComponent<Transform3D>()->position = glm::vec3(x * 5, y, z * 3);
-			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
-		}
-		//
+		// À§
 		{
 			auto box = CreateAirHardBox(index_list, tex, vao);
 
@@ -402,31 +377,87 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 		{
 			auto box = CreateAirHardBox(index_list, tex, vao);
 
+			box->GetComponent<Transform3D>()->position = glm::vec3(-x * 6, 0, -z * 4);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+		}
+		{
+			auto box = CreateAirHardBox(index_list, tex, vao);
+
 			box->GetComponent<Transform3D>()->position = glm::vec3(-x * 6, y, -z*4);
 			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
 		}
+		for (int i{}; i < 3; ++i) {
+			auto box = CreateAirHardBox(index_list, tex, vao);
+
+			box->GetComponent<Transform3D>()->position = glm::vec3(-x * 6, y*i, -z * 7);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+		}
+		for (int i{}; i < 4; ++i) {
+			auto box = CreateAirHardBox(index_list, tex, vao);
+
+			box->GetComponent<Transform3D>()->position = glm::vec3(-x * 3, y * i, -z * 7);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+		}
+		for (int i{}; i < 4; ++i) {
+			auto box = CreateAirHardBox(index_list, tex, vao);
+
+			box->GetComponent<Transform3D>()->position = glm::vec3(x * 3, y * i, -z * 7);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+		}
+		for (int i{}; i < 4; ++i) {
+			auto box = CreateAirHardBox(index_list, tex, vao);
+
+			box->GetComponent<Transform3D>()->position = glm::vec3(x * 4, y * i, -z * 7);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+		}
+
+		// ¾Æ·¡
 		{
 			auto box = CreateAirHardBox(index_list, tex, vao);
 
-			box->GetComponent<Transform3D>()->position = glm::vec3(-x * 6, 0, -z * 7);
+			box->GetComponent<Transform3D>()->position = glm::vec3(-x * 6, 0, z);
 			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
 		}
 		{
 			auto box = CreateAirHardBox(index_list, tex, vao);
 
-			box->GetComponent<Transform3D>()->position = glm::vec3(-x * 6, y, -z * 7);
+			box->GetComponent<Transform3D>()->position = glm::vec3(-x * 6, y, z);
 			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
 		}
 		{
 			auto box = CreateAirHardBox(index_list, tex, vao);
 
-			box->GetComponent<Transform3D>()->position = glm::vec3(-x * 6, y*2, -z * 7);
+			box->GetComponent<Transform3D>()->position = glm::vec3(-x * 6, 0, z * 4);
 			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
 		}
 		{
 			auto box = CreateAirHardBox(index_list, tex, vao);
 
-			box->GetComponent<Transform3D>()->position = glm::vec3(-x * 3, y * 3, -z * 7);
+			box->GetComponent<Transform3D>()->position = glm::vec3(-x * 6, y, z * 4);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+		}
+		for (int i{}; i < 3; ++i) {
+			auto box = CreateAirHardBox(index_list, tex, vao);
+
+			box->GetComponent<Transform3D>()->position = glm::vec3(-x * 6, y * i, z * 7);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+		}
+		for (int i{}; i < 4; ++i) {
+			auto box = CreateAirHardBox(index_list, tex, vao);
+
+			box->GetComponent<Transform3D>()->position = glm::vec3(-x * 3, y * i, z * 7);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+		}
+		for (int i{}; i < 4; ++i) {
+			auto box = CreateAirHardBox(index_list, tex, vao);
+
+			box->GetComponent<Transform3D>()->position = glm::vec3(x * 3, y * i, z * 7);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+		}
+		for (int i{}; i < 4; ++i) {
+			auto box = CreateAirHardBox(index_list, tex, vao);
+
+			box->GetComponent<Transform3D>()->position = glm::vec3(x * 4, y * i, z * 7);
 			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
 		}
 

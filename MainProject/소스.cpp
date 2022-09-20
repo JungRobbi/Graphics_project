@@ -177,7 +177,7 @@ int main(int argc, char** argv)
 
 		glEnable(GL_DEPTH_TEST);
 		mciOpen.lpstrElementName = "Resource/bgm.mp3";
-		mciOpen.lpstrDeviceType = "Resource/mpegvideo";
+		mciOpen.lpstrDeviceType = "mpegvideo";
 
 		mciSendCommand(NULL, MCI_OPEN, MCI_OPEN_ELEMENT | MCI_OPEN_TYPE,
 			(DWORD)(LPVOID)&mciOpen);

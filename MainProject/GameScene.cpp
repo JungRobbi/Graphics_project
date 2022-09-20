@@ -536,7 +536,14 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 
 	}
 	else if (num_scene == 6) {
-	
+		{
+			CreateSkyBox(index_list, tex, vao);
+		}
+		{
+			auto grass = CreateGrass(index_list, tex, vao);
+			grass->GetComponent<Transform3D>()->position.y = -0.5;
+			grass->texture = tex[7];
+		}
 	}
 }
 

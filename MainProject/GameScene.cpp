@@ -294,32 +294,24 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 	}
 
 	else if (num_scene == 4) {
+		p_player->GetComponent<Transform3D>()->position.y = 3.0f;
 		{
 			CreateSkyBox(index_list, tex, vao);
 		}
-		{
-			auto grass = CreateGrass(index_list, tex, vao);
-			grass->GetComponent<Transform3D>()->position.y = -0.5;
-			grass->texture = tex[7];
-		}
-		{
-			auto shoe = CreateItem_Shoes(index_list, tex, vao);
+		auto hot = CreateGrass(index_list, tex, vao);
+		hot->GetComponent<Transform3D>()->position.y = 0.0;
+		hot->GetComponent<Transform3D>()->scale = glm::vec3(25.0f, 25.0f, 0.7f);
+		for (int i = -5; i < 6; ++i) {
+			for (int j = 0; j < 11; ++j) {
+				auto box = CreateAirBox(index_list, tex, vao);
 
-			shoe->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 1.0f, 2.0f);
-			shoe->GetComponent<Transform3D>()->scale = glm::vec3(0.2f, 0.2f, 0.2f);
-		}
-		{
-			auto shoe = CreateItem_Shoes(index_list, tex, vao);
+				box->GetComponent<Transform3D>()->position = glm::vec3(2.0 * i, 1.0f, 2.0 * j);
+				box->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 0.5f, 1.0f);
+				box->texture = tex[1]; // 1번 텍스쳐
 
-			shoe->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 1.5f, 3.0f);
-			shoe->GetComponent<Transform3D>()->scale = glm::vec3(0.2f, 0.2f, 0.2f);
+			}
 		}
-		{
-			auto shoe = CreateItem_Shoes(index_list, tex, vao);
-
-			shoe->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 2.0f, 3.0f);
-			shoe->GetComponent<Transform3D>()->scale = glm::vec3(0.2f, 0.2f, 0.2f);
-		}
+		
 
 	}
 

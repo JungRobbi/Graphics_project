@@ -607,7 +607,7 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 		}
 		for (int i{}; i < 7; ++i) {
 			auto cannon = CreateCannon(index_list, tex, vao);
-			cannon->GetComponent<Transform3D>()->position = glm::vec3(i * 1.0f, 0.0f, -5.0f);
+			cannon->GetComponent<Transform3D>()->position = glm::vec3(i * 1.0f, 0.0f, -4.5f);
 			cannon->GetComponent<Transform3D>()->scale = glm::vec3(0.8f, 0.8f, 0.8f);
 			cannon->GetComponent<Transform3D>()->yaw = -90.0f;
 			cannon->texture = tex[1];

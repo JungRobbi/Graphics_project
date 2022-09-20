@@ -27,7 +27,7 @@ void CannonShot::update()
         auto ball = Scene::scene->CreateEmpty();
 
         ball ->AddComponent<Transform3D>();
-        ball->AddComponent<Collide>();
+        //ball->AddComponent<Collide>();
         ball->AddComponent<Gravity>();
         ball->AddComponent<CannonShot>();
 

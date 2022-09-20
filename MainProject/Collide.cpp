@@ -38,6 +38,10 @@ void Collide::update()
 		if (obj->VAO == Scene::scene->p_vao[Ball]) 
 			continue;
 
+		if (obj->GetComponent<CannonShot>()) {
+			continue;
+		}
+
 		if (gameObject == Scene::scene->p_player) {
 			if (glm::distance(obj->GetComponent<Transform3D>()->position, gameObject->GetComponent<Transform3D>()->position) > 5.0f)
 				continue;
@@ -80,7 +84,8 @@ void Collide::update()
 				gameObject->GetComponent<PlayerJump>()->jumping = false;
 				gameObject->GetComponent<Transform3D>()->velocity.y = -gameObject->GetComponent<Gravity>()->graviti_acceleration.y;
 				if (sub_BoundBox.pos.y + sub_BoundBox.minY < obj->GetComponent<Collide>()->BoundBox.pos.y + obj->GetComponent<Collide>()->BoundBox.maxY
-					&& BoundBox.pos.y + BoundBox.minY >= obj->GetComponent<Collide>()->BoundBox.pos.y + obj->GetComponent<Collide>()->BoundBox.maxY) {
+					&& BoundBox.pos.y + BoundBox.minY >= obj->GetComponent<Collide>()->BoundBox.pos.y + obj->GetComponent<Collide>()->BoundBox.maxY
+					&& !obj->GetComponent<CannonShot>()) {
 					auto y = obj->GetComponent<Collide>()->BoundBox.pos.y + obj->GetComponent<Collide>()->BoundBox.maxY
 						- (sub_BoundBox.pos.y + sub_BoundBox.minY);
 					gameObject->GetComponent<Transform3D>()->position.y += y;

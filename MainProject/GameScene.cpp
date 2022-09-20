@@ -631,6 +631,17 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 			box->GetComponent<Transform3D>()->position = glm::vec3(-8.4, 0, -6.4f + 2.4*i);
 			box->GetComponent<Transform3D>()->scale = glm::vec3(1.2f, 1.2f, 1.2f);
 		}
+		for (int i{}; i < 3; ++i) {
+			auto axe = CreateItem_Pickaxe(index_list, tex, vao);
+
+			axe->GetComponent<Transform3D>()->position = glm::vec3(-1.0f, 0, -1.0f + i);
+			axe->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+		}
+		for (int i{}; i < 3; ++i) {
+			auto box = CreateAirBox(index_list, tex, vao);
+			box->GetComponent<Transform3D>()->position = glm::vec3(-2.0, 0, -1.0f + i);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+		}
 
 	}
 }

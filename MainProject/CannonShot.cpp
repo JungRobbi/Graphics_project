@@ -17,6 +17,7 @@ void CannonShot::update()
 {
 	if (subObject) {
 		--destroy_frame_time;
+        printf("%d\n", gameObject->GetComponent<Transform3D>()->position.y);
         if (destroy_frame_time <= 0)
             Scene::scene->PushDelete(gameObject);
 		return;
@@ -27,7 +28,7 @@ void CannonShot::update()
         auto ball = Scene::scene->CreateEmpty();
 
         ball ->AddComponent<Transform3D>();
-   //   ball->AddComponent<Collide>();
+        ball->AddComponent<Collide>();
         ball->AddComponent<Gravity>();
         ball->AddComponent<CannonShot>();
 

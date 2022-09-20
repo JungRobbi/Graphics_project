@@ -395,7 +395,7 @@ void Display()
 				TR = glm::translate(TR, glm::vec3(msx * 15.0f, create_height, -msy * 15.0f));
 				TR = glm::scale(TR, glm::vec3(0.4f, 0.4f, 0.4f));
 				glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
-				glBindTexture(GL_TEXTURE_2D, texture[3]);
+				glBindTexture(GL_TEXTURE_2D, texture[4]);
 				glDrawArrays(GL_TRIANGLES, 0, num_shape_list[Cube]);
 			}
 		}
@@ -670,7 +670,7 @@ void Mouse(int button, int state, int x, int y)
 				auto box = Scene::scene->CreateAirHardBox(num_shape_list, texture, VAO);
 				box->AddComponent<Gravity>();
 				box->GetComponent<Transform3D>()->position = glm::vec3(msx * 15.0f, create_height, -msy * 15.0f);
-				box->texture = texture[3];
+				box->texture = texture[4];
 				Scene::scene->p_player->Item_bag.erase(p);
 			}
 			std::cout << " -- " << msx * 15.0f << ", " << -msy * 15.0f << std::endl;

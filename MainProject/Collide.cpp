@@ -69,8 +69,8 @@ void Collide::update()
 						obj->GetComponent<DestroyEffect>()->destroy = true;
 						gameObject->Item_bag.push_back(Cube);
 						gameObject->Item_bag.erase(p);
+						continue;
 					}
-					continue;
 				}
 				else if (obj->VAO == Scene::scene->p_vao[Star]) {
 					gameObject->Item_bag.push_back(Star);
@@ -114,8 +114,8 @@ void Collide::update()
 						obj->GetComponent<DestroyEffect>()->destroy = true;
 						gameObject->Item_bag.push_back(Cube);
 						gameObject->Item_bag.erase(p);
+						continue;
 					}
-					continue;
 				}
 				else if (obj->VAO == Scene::scene->p_vao[Star]) {
 					gameObject->Item_bag.push_back(Star);

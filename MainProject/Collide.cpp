@@ -61,6 +61,11 @@ void Collide::update()
 					Scene::scene->PushDelete(obj);
 					continue;
 				}
+				else if (obj->VAO == Scene::scene->p_vao[Spike]) {
+					gameObject->Item_bag.push_back(Spike);
+					Scene::scene->PushDelete(obj);
+					continue;
+				}
 
 				gameObject->GetComponent<Transform3D>()->velocity.y = -gameObject->GetComponent<Gravity>()->graviti_acceleration.y;
 				if (sub_BoundBox.pos.y + sub_BoundBox.minY < obj->GetComponent<Collide>()->BoundBox.pos.y + obj->GetComponent<Collide>()->BoundBox.maxY
@@ -96,6 +101,11 @@ void Collide::update()
 				}
 				else if (obj->VAO == Scene::scene->p_vao[Star]) {
 					gameObject->Item_bag.push_back(Star);
+					Scene::scene->PushDelete(obj);
+					continue;
+				}
+				else if (obj->VAO == Scene::scene->p_vao[Spike]) {
+					gameObject->Item_bag.push_back(Spike);
 					Scene::scene->PushDelete(obj);
 					continue;
 				}

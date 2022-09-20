@@ -355,6 +355,66 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 			box->GetComponent<Transform3D>()->position = glm::vec3(x * 4, y * 4, -z * 7);
 			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
 		}
+		{
+			auto spike = CreateSpike(index_list, tex, vao);
+
+			spike->GetComponent<Transform3D>()->position = glm::vec3(x * 2.5, 0, z * 2.5);
+		}
+		{
+			auto spike = CreateSpike(index_list, tex, vao);
+
+			spike->GetComponent<Transform3D>()->position = glm::vec3(-x * 2.5, 0, z * 2.5);
+		}
+		{
+			auto spike = CreateSpike(index_list, tex, vao);
+
+			spike->GetComponent<Transform3D>()->position = glm::vec3(x * 2.5, 0, -z * 2.5);
+		}
+		{
+			auto spike = CreateSpike(index_list, tex, vao);
+
+			spike->GetComponent<Transform3D>()->position = glm::vec3(-x * 2.5, 0, -z * 2.5);
+		}
+		{
+			auto spike = CreateSpike(index_list, tex, vao);
+
+			spike->GetComponent<Transform3D>()->position = glm::vec3(-x * 6, 0, -z * 7);
+		}
+		{
+			auto spike = CreateSpike(index_list, tex, vao);
+
+			spike->GetComponent<Transform3D>()->position = glm::vec3(-x * 3, 0, -z * 7);
+		}
+		{
+			auto spike = CreateSpike(index_list, tex, vao);
+
+			spike->GetComponent<Transform3D>()->position = glm::vec3(x * 3, 0, -z * 7);
+		}
+		{
+			auto spike = CreateSpike(index_list, tex, vao);
+
+			spike->GetComponent<Transform3D>()->position = glm::vec3(x * 4, 0, -z * 7);
+		}
+		{
+			auto spike = CreateSpike(index_list, tex, vao);
+
+			spike->GetComponent<Transform3D>()->position = glm::vec3(-x * 6, 0, z * 7);
+		}
+		{
+			auto spike = CreateSpike(index_list, tex, vao);
+
+			spike->GetComponent<Transform3D>()->position = glm::vec3(-x * 3, 0, z * 7);
+		}
+		{
+			auto spike = CreateSpike(index_list, tex, vao);
+
+			spike->GetComponent<Transform3D>()->position = glm::vec3(x * 3, 0, z * 7);
+		}
+		{
+			auto spike = CreateSpike(index_list, tex, vao);
+
+			spike->GetComponent<Transform3D>()->position = glm::vec3(x * 4, 0, z * 7);
+		}
 
 		// À§
 		{

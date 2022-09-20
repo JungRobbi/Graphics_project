@@ -44,8 +44,8 @@ void Collide::update()
 					continue;
 				}
 				else if (obj->VAO == Scene::scene->p_vao[Ball]) {
-					gameObject->Item_bag.push_back(Shoes);
-					Scene::scene->PushDelete(obj);
+					gameObject->Item_bag.push_back(Ball);
+					//Scene::scene->PushDelete(obj);
 					continue;
 				}
 				else if (obj->VAO == Scene::scene->p_vao[Cube] && obj->GetComponent<DestroyEffect>()) {
@@ -87,8 +87,8 @@ void Collide::update()
 					continue;
 				}
 				else if (obj->VAO == Scene::scene->p_vao[Ball]) {
-					gameObject->Item_bag.push_back(Shoes);
-					Scene::scene->PushDelete(obj);
+					gameObject->Item_bag.push_back(Ball);
+					//Scene::scene->PushDelete(obj);
 					continue;
 				}
 				else if (obj->VAO == Scene::scene->p_vao[Cube] && obj->GetComponent<DestroyEffect>()) {

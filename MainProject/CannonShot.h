@@ -1,6 +1,7 @@
 #pragma once
 #include <cmath>
 #include <random>
+#include "Collide.h"
 #include "Component.h"
 #include "GameObject.h"
 #include "Scene.h"

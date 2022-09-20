@@ -841,7 +841,7 @@ void TimerFunction(int value) {
 
 	{
 		auto p = find(Scene::scene->p_player->Item_bag.begin(), Scene::scene->p_player->Item_bag.end(), Star);
-		if (p != Scene::scene->p_player->Item_bag.end()) {
+		if (p != Scene::scene->p_player->Item_bag.end() && Scene::scene->n_scene != 6) {
 			NestSceneChange();
 		}
 	}

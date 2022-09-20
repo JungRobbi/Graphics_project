@@ -20,9 +20,6 @@ void Collide::start()
 
 void Collide::update()
 {
-	if (gameObject->GetComponent<CannonShot>())
-		return;
-	
 	BoundBox.pos = gameObject->GetComponent<Transform3D>()->position;
 	if (gameObject == Scene::scene->p_player) {
 		sub_BoundBox.pos = gameObject->GetComponent<Transform3D>()->position;
@@ -34,13 +31,6 @@ void Collide::update()
 	for (auto obj : Scene::scene->gameObjects) {
 		if (!(obj->GetComponent<Collide>() && (obj != gameObject))) 
 			continue;
-
-		if (obj->VAO == Scene::scene->p_vao[Ball]) 
-			continue;
-
-		if (obj->GetComponent<CannonShot>()) {
-			continue;
-		}
 
 		if (gameObject == Scene::scene->p_player) {
 			if (glm::distance(obj->GetComponent<Transform3D>()->position, gameObject->GetComponent<Transform3D>()->position) > 5.0f)
@@ -155,12 +145,23 @@ void Collide::update()
 			}
 		}
 		else {
-			if (gameObject->VAO == Scene::scene->p_vao[Star] || gameObject->VAO == Scene::scene->p_vao[Pickaxe] || gameObject->VAO == Scene::scene->p_vao[Shoes] || obj->VAO == Scene::scene->p_vao[Ball])
+			if (gameObject->VAO == Scene::scene->p_vao[Star] || gameObject->VAO == Scene::scene->p_vao[Pickaxe] || gameObject->VAO == Scene::scene->p_vao[Shoes])
 				continue;
-			else if (obj->VAO == Scene::scene->p_vao[Star] || obj->VAO == Scene::scene->p_vao[Pickaxe] || obj->VAO == Scene::scene->p_vao[Shoes] || obj->VAO == Scene::scene->p_vao[Ball])
+			else if (obj->VAO == Scene::scene->p_vao[Star] || obj->VAO == Scene::scene->p_vao[Pickaxe] || obj->VAO == Scene::scene->p_vao[Shoes])
 				continue;
 
+	
+
 			if (CheckBoxtoBox(BoundBox, obj->GetComponent<Collide>()->BoundBox)) {
+				if (gameObject->VAO == Scene::scene->p_vao[Ball]) {
+					Scene::scene->PushDelete(gameObject);
+					continue;
+				}
+				else if (obj->VAO == Scene::scene->p_vao[Ball]) {
+					Scene::scene->PushDelete(obj);
+					continue;
+				}
+
 				if (gameObject->GetComponent<Transform3D>()->position.y + gameObject->GetComponent<Collide>()->BoundBox.minY
 					> obj->GetComponent<Transform3D>()->position.y + gameObject->GetComponent<Collide>()->BoundBox.minY) {
 					gameObject->GetComponent<Transform3D>()->velocity.y = 0;

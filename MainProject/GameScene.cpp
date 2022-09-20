@@ -321,6 +321,61 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 		}
 
 	}
+
+	else if (num_scene == 5) {
+		float x = 0.8f;
+		float y = 0.8f;
+		float z = 0.8f;
+		{
+			CreateSkyBox(index_list, tex, vao);
+		}
+		{
+			auto grass = CreateGrass(index_list, tex, vao);
+			grass->GetComponent<Transform3D>()->position.y = -0.5;
+			grass->GetComponent<Transform3D>()->scale = glm::vec3(9.0f, 9.0f, 1.0f);
+			grass->texture = tex[7];
+		}
+		{
+			auto star = CreateStar(index_list, tex, vao);
+
+			star->GetComponent<Transform3D>()->position = glm::vec3(x * 5, y*6, z * 5);
+			star->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+			star->AddComponent<Transform3D>()->roll = 90.0f;
+		}
+
+		{
+			auto box = CreateAirHardBox(index_list, tex, vao);
+
+			box->GetComponent<Transform3D>()->position = glm::vec3(x*5, 0.0f, z);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+		}
+		{
+			auto box = CreateAirHardBox(index_list, tex, vao);
+
+			box->GetComponent<Transform3D>()->position = glm::vec3(x*5, 0.0f, z*2);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+		}
+		{
+			auto box = CreateAirHardBox(index_list, tex, vao);
+
+			box->GetComponent<Transform3D>()->position = glm::vec3(x*5, y, z*2);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+		}
+		{
+			auto box = CreateAirHardBox(index_list, tex, vao);
+
+			box->GetComponent<Transform3D>()->position = glm::vec3(x * 5, 0.0f, z * 3);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+		}
+		{
+			auto box = CreateAirHardBox(index_list, tex, vao);
+
+			box->GetComponent<Transform3D>()->position = glm::vec3(x * 5, y, z * 3);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+		}
+
+
+	}
 }
 
 GameObject* GameScene::CreateBox(int* index_list, GLuint* tex, GLuint* vao) // Box 자동 생성

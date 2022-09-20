@@ -120,15 +120,20 @@ void Collide::update()
 			}
 		}
 		else {
+			if (gameObject->VAO == Scene::scene->p_vao[Star])
+				break;
+			else if (obj->VAO == Scene::scene->p_vao[Star]) 
+				break;
+
 			if (CheckBoxtoBox(BoundBox, obj->GetComponent<Collide>()->BoundBox)) {
 				if (gameObject->GetComponent<Transform3D>()->position.y + gameObject->GetComponent<Collide>()->BoundBox.minY
 					> obj->GetComponent<Transform3D>()->position.y + gameObject->GetComponent<Collide>()->BoundBox.minY) {
 					gameObject->GetComponent<Transform3D>()->velocity.y = 0;
 				}
-				/*else if (obj->GetComponent<Transform3D>()->position.y + obj->GetComponent<Collide>()->BoundBox.minY
+				else if (obj->GetComponent<Transform3D>()->position.y + obj->GetComponent<Collide>()->BoundBox.minY
 					> gameObject->GetComponent<Transform3D>()->position.y + gameObject->GetComponent<Collide>()->BoundBox.minY) {
 					obj->GetComponent<Transform3D>()->velocity.y = 0;
-				}*/
+				}
 			}
 		}
 	}

@@ -306,7 +306,7 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 				auto box = CreateAirBox(index_list, tex, vao);
 
 				box->GetComponent<Transform3D>()->position = glm::vec3(2.0 * i, 1.0f, 2.0 * j);
-				box->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 0.5f, 1.0f);
+				box->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 1.0f, 1.0f);
 				box->texture = tex[1]; // 1번 텍스쳐
 
 			}

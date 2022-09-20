@@ -90,7 +90,7 @@ ObjRoad obj;
 // 텍스쳐 변수
 
 int img = 7;
-GLuint texture[30];
+GLuint texture[40];
 int n_model = 0;
 int n_max_model = 4;
 int widthImage, heightImage, numberOfChannel = 0;
@@ -256,7 +256,8 @@ void InitBuffer_bind(const int street) {
 		bb = &BoundBox[Ball];
 	}
 	else if (street == 8) {
-		num_shape_list[Book] = obj.loadObj_normalize_center_4f("Resource/Book.obj");
+		return;
+		num_shape_list[Book] = obj.loadObj_normalize_center_4f("Resource/cube.obj");
 		bb = &BoundBox[Book];
 	}
 	else if (street == 9) {
@@ -309,14 +310,14 @@ void InitBuffer_bind(const int street) {
 void InitTexture()
 {	
 	BITMAPINFO* bmp;
-	string map[30] = { "Resource/main.png","Resource/B.png","Resource/gold.png","Resource/123.png","Resource/321.png","Resource/grass.png",
+	string map[40] = { "Resource/main.png","Resource/B.png","Resource/gold.png","Resource/123.png","Resource/321.png","Resource/grass.png",
 		"Resource/face.png","Resource/sand.png", "Resource/skybox2_top.png", "Resource/skybox2_left.png", "Resource/skybox2_front.png", "Resource/skybox2_right.png",
 		"Resource/skybox2_back.png", "Resource/skybox2_bottom.png", "Resource/vinus.png", "Resource/mars.png", "Resource/jupiter.png", "Resource/magma2.png", "Resource/sun.png","Resource/xxx.png",
 		"Resource/green.png", "Resource/yellow.png", };
 		//20																				// ↑ 여기가 14
-	glGenTextures(30, texture); //--- 텍스처 생성
+	glGenTextures(40, texture); //--- 텍스처 생성
 
-	for (int i = 0; i < 30; ++i) {
+	for (int i = 0; i < 40; ++i) {
 		glBindTexture(GL_TEXTURE_2D, texture[i]); //--- 텍스처 바인딩
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT); //--- 현재 바인딩된 텍스처의 파라미터 설정하기
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
@@ -408,6 +409,12 @@ void Display()
 	if (f_Light_ambients[0] < 0.3f) { 
 		Display_Sub1();
 	}
+
+	if (Scene::scene->p_player->GetComponent<Transform3D>()->position.y <= -0.5) {
+		ResetChange();
+	}
+
+
 
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_BLEND); // 블렌딩 해제

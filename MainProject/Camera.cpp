@@ -26,7 +26,7 @@ void Camera::update()
 		c_dir3 += to_top_dir;
 		c_up += to_top_up;
 
-		if (c_pos3.y >= 18.8f) {
+		if (c_pos3.y >= top_pos.y) {
 			c_pos3 = top_pos;
 			c_dir3 = top_dir;
 			c_up = top_up;
@@ -43,7 +43,7 @@ void Camera::update()
 		c_up += to_first_up;
 
 
-		if (c_pos3.y <= 0.0f) {
+		if (c_pos3.y <= gameObject->GetComponent<Transform3D>()->position.y) {
 			c_pos3 = gameObject->GetComponent<Transform3D>()->position;
 			c_dir3 = gameObject->GetComponent<Transform3D>()->direction;
 			c_up = glm::vec3(0.0f, 1.0f, 0.0f);

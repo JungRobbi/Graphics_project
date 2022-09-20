@@ -579,6 +579,9 @@ void keyboard(unsigned char key2, int x, int y) {
 		}
 		break;
 	case VK_SPACE:
+		if (Scene::scene->n_scene == 3)
+			break;
+
 		if (Scene::scene->p_player->GetComponent<PlayerJump>() && 
 			Scene::scene->p_player->GetComponent<Transform3D>()->velocity.y <= 0.002f && Scene::scene->p_player->GetComponent<Transform3D>()->velocity.y >= -0.002f)
 			Scene::scene->p_player->GetComponent<Transform3D>()->velocity = Scene::scene->p_player->GetComponent<PlayerJump>()->jump_acceleration;

@@ -398,6 +398,12 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 			box->GetComponent<Transform3D>()->position = glm::vec3(-x * 3, y * i, -z * 7);
 			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
 		}
+		{
+			auto shoes = CreateItem_Shoes(index_list, tex, vao);
+
+			shoes->GetComponent<Transform3D>()->position = glm::vec3(0, y * 4, -z * 7);
+			shoes->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+		}
 		for (int i{}; i < 4; ++i) {
 			auto box = CreateAirHardBox(index_list, tex, vao);
 
@@ -447,6 +453,12 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 
 			box->GetComponent<Transform3D>()->position = glm::vec3(-x * 3, y * i, z * 7);
 			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+		}
+		{
+			auto shoes = CreateItem_Shoes(index_list, tex, vao);
+
+			shoes->GetComponent<Transform3D>()->position = glm::vec3(0, y * 4, z * 7);
+			shoes->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
 		}
 		for (int i{}; i < 4; ++i) {
 			auto box = CreateAirHardBox(index_list, tex, vao);

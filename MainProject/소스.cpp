@@ -574,7 +574,7 @@ void keyboard(unsigned char key2, int x, int y) {
 		else {
 			auto p = find(Scene::scene->p_player->Item_bag.begin(), Scene::scene->p_player->Item_bag.end(), Shoes);
 			if (p != Scene::scene->p_player->Item_bag.end()) {
-				Scene::scene->p_player->GetComponent<Transform3D>()->velocity += Scene::scene->p_player->GetComponent<PlayerJump>()->jump_acceleration;
+				Scene::scene->p_player->GetComponent<Transform3D>()->velocity = Scene::scene->p_player->GetComponent<PlayerJump>()->jump_acceleration;
 				Scene::scene->p_player->Item_bag.erase(p);
 			}
 		}

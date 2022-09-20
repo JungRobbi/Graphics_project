@@ -33,15 +33,6 @@ void Collide::update()
 				continue;
 
 			if (CheckBoxtoBox(sub_BoundBox, obj->GetComponent<Collide>()->BoundBox)) {
-				gameObject->GetComponent<Transform3D>()->velocity.y = -gameObject->GetComponent<Gravity>()->graviti_acceleration.y;
-
-				if (sub_BoundBox.pos.y + sub_BoundBox.minY < obj->GetComponent<Collide>()->BoundBox.pos.y + obj->GetComponent<Collide>()->BoundBox.maxY
-					&& BoundBox.pos.y + BoundBox.minY >= obj->GetComponent<Collide>()->BoundBox.pos.y + obj->GetComponent<Collide>()->BoundBox.maxY) {
-					auto y = obj->GetComponent<Collide>()->BoundBox.pos.y + obj->GetComponent<Collide>()->BoundBox.maxY
-						- (sub_BoundBox.pos.y + sub_BoundBox.minY);
-					gameObject->GetComponent<Transform3D>()->position.y += y;
-				}
-
 				if (obj->VAO == Scene::scene->p_vao[Pickaxe]) {
 					gameObject->Item_bag.push_back(Pickaxe);
 					Scene::scene->PushDelete(obj);
@@ -69,6 +60,14 @@ void Collide::update()
 					gameObject->Item_bag.push_back(Star);
 					Scene::scene->PushDelete(obj);
 					continue;
+				}
+
+				gameObject->GetComponent<Transform3D>()->velocity.y = -gameObject->GetComponent<Gravity>()->graviti_acceleration.y;
+				if (sub_BoundBox.pos.y + sub_BoundBox.minY < obj->GetComponent<Collide>()->BoundBox.pos.y + obj->GetComponent<Collide>()->BoundBox.maxY
+					&& BoundBox.pos.y + BoundBox.minY >= obj->GetComponent<Collide>()->BoundBox.pos.y + obj->GetComponent<Collide>()->BoundBox.maxY) {
+					auto y = obj->GetComponent<Collide>()->BoundBox.pos.y + obj->GetComponent<Collide>()->BoundBox.maxY
+						- (sub_BoundBox.pos.y + sub_BoundBox.minY);
+					gameObject->GetComponent<Transform3D>()->position.y += y;
 				}
 			}
 			else if (CheckBoxtoBox(BoundBox, obj->GetComponent<Collide>()->BoundBox)) {

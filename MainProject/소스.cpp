@@ -370,6 +370,7 @@ void Display()
 	glViewport(0, 0, WINDOWX, WINDOWY);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_CULL_FACE);
 
 	if (!sc.empty()) {
 		Scene::scene->update();
@@ -386,6 +387,14 @@ void Display()
 			glBindTexture(GL_TEXTURE_2D, texture[3]);
 			glDrawArrays(GL_TRIANGLES, 0, num_shape_list[Cube]);
 		}
+
+		glBindVertexArray(VAO[Cube]);
+		TR = glm::mat4(1.0f);
+		TR = glm::translate(TR, Scene::scene->p_player->GetComponent<Transform3D>()->position);
+		TR = glm::scale(TR, glm::vec3(0.4f, 0.4f, 0.4f));
+		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
+		glBindTexture(GL_TEXTURE_2D, texture[20]);
+		glDrawArrays(GL_TRIANGLES, 0, num_shape_list[Cube]);
 	}
 
 	/*glBindVertexArray(VAO[3]);

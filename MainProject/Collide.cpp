@@ -145,23 +145,16 @@ void Collide::update()
 			}
 		}
 		else {
-			if (gameObject->VAO == Scene::scene->p_vao[Star] || gameObject->VAO == Scene::scene->p_vao[Pickaxe] || gameObject->VAO == Scene::scene->p_vao[Shoes])
+			if (gameObject->VAO == Scene::scene->p_vao[Star] || gameObject->VAO == Scene::scene->p_vao[Pickaxe] || gameObject->VAO == Scene::scene->p_vao[Shoes] || gameObject->VAO == Scene::scene->p_vao[Ball])
 				continue;
-			else if (obj->VAO == Scene::scene->p_vao[Star] || obj->VAO == Scene::scene->p_vao[Pickaxe] || obj->VAO == Scene::scene->p_vao[Shoes])
+			else if (obj->VAO == Scene::scene->p_vao[Star] || obj->VAO == Scene::scene->p_vao[Pickaxe] || obj->VAO == Scene::scene->p_vao[Shoes] || obj->VAO == Scene::scene->p_vao[Ball])
 				continue;
 
 	
 
-			if (CheckBoxtoBox(BoundBox, obj->GetComponent<Collide>()->BoundBox)) {
-				if (gameObject->VAO == Scene::scene->p_vao[Ball]) {
-					Scene::scene->PushDelete(gameObject);
-					continue;
-				}
-				else if (obj->VAO == Scene::scene->p_vao[Ball]) {
-					Scene::scene->PushDelete(obj);
-					continue;
-				}
 
+			if (CheckBoxtoBox(BoundBox, obj->GetComponent<Collide>()->BoundBox)) {
+			
 				if (gameObject->GetComponent<Transform3D>()->position.y + gameObject->GetComponent<Collide>()->BoundBox.minY
 					> obj->GetComponent<Transform3D>()->position.y + gameObject->GetComponent<Collide>()->BoundBox.minY) {
 					gameObject->GetComponent<Transform3D>()->velocity.y = 0;

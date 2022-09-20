@@ -343,7 +343,7 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 		{
 			auto box = CreateAirBox(index_list, tex, vao);
 
-			box->GetComponent<Transform3D>()->position = glm::vec3(-6.0f, 5.0f, 6.0);
+			box->GetComponent<Transform3D>()->position = glm::vec3(-5.0f, 5.0f, 6.0);
 			box->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 1.0f, 1.0f);
 
 		}
@@ -565,14 +565,7 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 
 	}
 	else if (num_scene == 6) {
-		{
-			CreateSkyBox(index_list, tex, vao);
-		}
-		{
-			auto grass = CreateGrass(index_list, tex, vao);
-			grass->GetComponent<Transform3D>()->position.y = -0.5;
-			grass->texture = tex[7];
-		}
+	
 	}
 }
 

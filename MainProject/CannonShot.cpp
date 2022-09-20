@@ -18,7 +18,7 @@ void CannonShot::update()
 	if (subObject) {
 		--destroy_frame_time;
         if (destroy_frame_time <= 0)
-            gameObject->GetComponent<DestroyEffect>()->destroy = true;
+            Scene::scene->PushDelete(gameObject);
 		return;
 	}
 
@@ -30,12 +30,13 @@ void CannonShot::update()
         ball->AddComponent<Collide>();
         ball->AddComponent<Gravity>();
         ball->AddComponent<CannonShot>();
-        ball->AddComponent<DestroyEffect>();
 
         ball->GetComponent<CannonShot>()->subObject = true;
 
         ball->GetComponent<Transform3D>()->position = gameObject->GetComponent<Transform3D>()->position + glm::vec3(0.0f, 0.6f, 0.8f);
         ball->GetComponent<Transform3D>()->scale = glm::vec3(0.2f, 0.2f, 0.2f);
+
+        
         ball->GetComponent<Transform3D>()->velocity = glm::vec3(0, 0.03f, 0.15f);
 
         // render ºÎºÐ

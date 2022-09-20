@@ -23,9 +23,14 @@ void Collide::update()
 		sub_BoundBox.pos = gameObject->GetComponent<Transform3D>()->position;
 	}
 
+	if (gameObject->VAO == Scene::scene->p_vao[Ball]) 
+		return;
 
 	for (auto obj : Scene::scene->gameObjects) {
 		if (!(obj->GetComponent<Collide>() && (obj != gameObject))) 
+			continue;
+
+		if (obj->VAO == Scene::scene->p_vao[Ball]) 
 			continue;
 
 		if (gameObject == Scene::scene->p_player) {
@@ -45,7 +50,7 @@ void Collide::update()
 				}
 				else if (obj->VAO == Scene::scene->p_vao[Ball]) {
 					gameObject->Item_bag.push_back(Ball);
-					//Scene::scene->PushDelete(obj);
+					Scene::scene->PushDelete(obj);
 					continue;
 				}
 				else if (obj->VAO == Scene::scene->p_vao[Cube] && obj->GetComponent<DestroyEffect>()) {
@@ -88,7 +93,7 @@ void Collide::update()
 				}
 				else if (obj->VAO == Scene::scene->p_vao[Ball]) {
 					gameObject->Item_bag.push_back(Ball);
-					//Scene::scene->PushDelete(obj);
+					Scene::scene->PushDelete(obj);
 					continue;
 				}
 				else if (obj->VAO == Scene::scene->p_vao[Cube] && obj->GetComponent<DestroyEffect>()) {
@@ -147,7 +152,7 @@ void Collide::update()
 					> obj->GetComponent<Transform3D>()->position.y + gameObject->GetComponent<Collide>()->BoundBox.minY) {
 					gameObject->GetComponent<Transform3D>()->velocity.y = 0;
 				}
-				else if (obj->GetComponent<Transform3D>()->position.y + obj->GetComponent<Collide>()->BoundBox.minY
+				else if (obj != Scene::scene->p_player && obj->GetComponent<Transform3D>()->position.y + obj->GetComponent<Collide>()->BoundBox.minY
 					> gameObject->GetComponent<Transform3D>()->position.y + gameObject->GetComponent<Collide>()->BoundBox.minY) {
 					obj->GetComponent<Transform3D>()->velocity.y = 0;
 				}

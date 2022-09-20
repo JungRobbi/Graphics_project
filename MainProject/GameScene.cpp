@@ -605,13 +605,39 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 			grass->GetComponent<Transform3D>()->scale = glm::vec3(10.0f, 5.0f, 0.5f);
 			grass->texture = tex[7];
 		}
-		for (int i{}; i < 7; ++i) {
+		{
+			auto star = CreateStar(index_list, tex, vao);
+
+			star->GetComponent<Transform3D>()->position = glm::vec3(12.0f, 1.0f, 0);
+			star->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+			star->AddComponent<Transform3D>()->roll = 90.0f;
+		}
+		for (int i{}; i < 6; ++i) {
 			auto cannon = CreateCannon(index_list, tex, vao);
 			cannon->GetComponent<Transform3D>()->position = glm::vec3(i * 1.0f, 0.0f, -4.5f);
 			cannon->GetComponent<Transform3D>()->scale = glm::vec3(0.8f, 0.8f, 0.8f);
 			cannon->GetComponent<Transform3D>()->yaw = -90.0f;
 			cannon->texture = tex[1];
 		}
+		for (int i{}; i < 8; ++i) {
+			auto box = CreateAirHardBox(index_list, tex, vao);
+
+			box->GetComponent<Transform3D>()->position = glm::vec3(2.4*i -6.0, 0, -6.4f);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(1.2f, 1.2f, 1.2f);
+		}
+		for (int i{}; i < 8; ++i) {
+			auto box = CreateAirHardBox(index_list, tex, vao);
+
+			box->GetComponent<Transform3D>()->position = glm::vec3(2.4 * i - 6.0, 0, 6.4f);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(1.2f, 1.2f, 1.2f);
+		}
+		for (int i{}; i < 6; ++i) {
+			auto box = CreateAirHardBox(index_list, tex, vao);
+
+			box->GetComponent<Transform3D>()->position = glm::vec3(-8.4, 0, -6.4f + 2.4*i);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(1.2f, 1.2f, 1.2f);
+		}
+
 	}
 }
 

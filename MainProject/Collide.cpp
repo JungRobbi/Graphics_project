@@ -5,6 +5,7 @@
 #include "DestroyEffect.h"
 #include "PlayerJump.h"
 #include <cmath>
+#include "CannonShot.h"
 
 extern bool key[256];
 
@@ -19,6 +20,8 @@ void Collide::start()
 
 void Collide::update()
 {
+	if (gameObject->GetComponent<CannonShot>())
+		return;
 	
 	BoundBox.pos = gameObject->GetComponent<Transform3D>()->position;
 	if (gameObject == Scene::scene->p_player) {
@@ -27,9 +30,6 @@ void Collide::update()
 			gameObject->GetComponent<PlayerJump>()->jumping = false;
 		}
 	}
-
-	if (gameObject->VAO == Scene::scene->p_vao[Ball]) 
-		return;
 
 	for (auto obj : Scene::scene->gameObjects) {
 		if (!(obj->GetComponent<Collide>() && (obj != gameObject))) 

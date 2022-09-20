@@ -152,7 +152,7 @@ void Collide::update()
 					> obj->GetComponent<Transform3D>()->position.y + gameObject->GetComponent<Collide>()->BoundBox.minY) {
 					gameObject->GetComponent<Transform3D>()->velocity.y = 0;
 				}
-				else if (obj->GetComponent<Transform3D>()->position.y + obj->GetComponent<Collide>()->BoundBox.minY
+				else if (obj != Scene::scene->p_player && obj->GetComponent<Transform3D>()->position.y + obj->GetComponent<Collide>()->BoundBox.minY
 					> gameObject->GetComponent<Transform3D>()->position.y + gameObject->GetComponent<Collide>()->BoundBox.minY) {
 					obj->GetComponent<Transform3D>()->velocity.y = 0;
 				}

@@ -301,21 +301,21 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 		//auto hot = CreateGrass(index_list, tex, vao);
 		//hot->GetComponent<Transform3D>()->position.y = 0.0;
 		//hot->GetComponent<Transform3D>()->scale = glm::vec3(15.0f, 15.0f, 0.7f);
-		for (int i = -5; i < 6; ++i) {
-			for (int j = 0; j < 11; ++j) {
-				if (j == 3 || j == 4||j==7||j==8) {
+		for (int i = -4; i < 5; ++i) {
+			for (int j = 0; j < 20; ++j) {
+				if (j == 4 || j == 5||j==6 || j == 7 || j == 8 || j == 12 ||j==13|| j == 14 || j == 15 || j == 16) {
 					auto spike = CreateSpike(index_list, tex, vao);
 
-					spike->GetComponent<Transform3D>()->position = glm::vec3(2.0 * i, 1.0f, 2.0 * j);
-					spike->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 1.0f, 1.0f);
+					spike->GetComponent<Transform3D>()->position = glm::vec3(0.8 * i, 1.0f, 0.8 * j);
+					spike->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
 					spike->texture = tex[6]; // 1번 텍스쳐
 				}
 				else {
 
 					auto box = CreateAirHardBox(index_list, tex, vao);
 
-					box->GetComponent<Transform3D>()->position = glm::vec3(2.0 * i, 1.0f, 2.0 * j);
-					box->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 1.0f, 1.0f);
+					box->GetComponent<Transform3D>()->position = glm::vec3(0.8 * i, 1.0f, 0.8 * j);
+					box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
 
 				}
 
@@ -324,27 +324,57 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 		{
 			auto box = CreateAirBox(index_list, tex, vao);
 
-			box->GetComponent<Transform3D>()->position = glm::vec3(5.0f, 3.0f, 3.0f);
-			box->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 1.0f, 1.0f);
+			box->GetComponent<Transform3D>()->position = glm::vec3(3.0f, 1.8f, 2.0f);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+
+		}
+		{
+			auto box = CreateAirBox(index_list, tex, vao);
+
+			box->GetComponent<Transform3D>()->position = glm::vec3(3.0f, 1.8f, 2.0f);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
+
+		}
+		{
+			auto star = CreateStar(index_list, tex, vao);
+			star->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 1.8f, 15.0f);
+			star->GetComponent<Transform3D>()->scale = glm::vec3(0.5f, 0.5f, 0.5f);
+			star->AddComponent<Transform3D>()->roll = 90.0f;
+		}
+		auto shoe = CreateItem_Shoes(index_list, tex, vao);
+
+		shoe->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 4.0f, 9.0f);
+		shoe->GetComponent<Transform3D>()->scale = glm::vec3(0.2f, 0.2f, 0.2f);
+		{
+			auto axe = CreateItem_Pickaxe(index_list, tex, vao);
+
+			axe->GetComponent<Transform3D>()->position = glm::vec3(-2.0f, 1.8f, 8.0f);
+			axe->GetComponent<Transform3D>()->scale = glm::vec3(0.1f, 0.2f, 0.3f);
+		}
+		{
+			auto box = CreateAirBox(index_list, tex, vao);
+
+			box->GetComponent<Transform3D>()->position = glm::vec3(4.0f, 1.8f, 8.0f);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
 
 		}
 		{
 			auto axe = CreateItem_Pickaxe(index_list, tex, vao);
 
-			axe->GetComponent<Transform3D>()->position = glm::vec3(-8.0f, 3.0f, 3.0f);
+			axe->GetComponent<Transform3D>()->position = glm::vec3(-3.0f, 1.8f, 2.0f);
 			axe->GetComponent<Transform3D>()->scale = glm::vec3(0.1f, 0.2f, 0.3f);
 		}
 		{
-			auto box = CreateItem_Pickaxe(index_list, tex, vao);
+			auto axe = CreateItem_Pickaxe(index_list, tex, vao);
 
-			box->GetComponent<Transform3D>()->position = glm::vec3(-4.0f, 5.0f, 6.0);
-			box->GetComponent<Transform3D>()->scale = glm::vec3(0.1f, 0.2f, 0.3f);
+			axe->GetComponent<Transform3D>()->position = glm::vec3(-2.0f, 3.0f, 3.2);
+			axe->GetComponent<Transform3D>()->scale = glm::vec3(0.1f, 0.2f, 0.3f);
 		}
 		{
 			auto box = CreateAirBox(index_list, tex, vao);
 
-			box->GetComponent<Transform3D>()->position = glm::vec3(-5.0f, 5.0f, 6.0);
-			box->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 1.0f, 1.0f);
+			box->GetComponent<Transform3D>()->position = glm::vec3(-2.8f, 3.0f, 3.2);
+			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
 
 		}
 

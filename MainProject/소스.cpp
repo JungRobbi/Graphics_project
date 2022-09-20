@@ -14,6 +14,7 @@
 #include <glm/ext.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <random>
+#include <algorithm>
 
 #include "stdafx.h"
 
@@ -63,6 +64,11 @@ void Motion2(int x, int y);
 void TimerFunction(int value);
 void Display();
 void Display_Sub1();
+void Display_Sub_Axe1();
+void Display_Sub_Axe2();
+void Display_Sub_Axe3();
+void Display_Sub_Shoe1();
+void Display_Sub_Shoe2();
 
 void Reshape(int w, int h);
 void InitBuffer();
@@ -314,7 +320,7 @@ void InitTexture()
 		"Resource/face.png","Resource/sand.png", "Resource/skybox2_top.png", "Resource/skybox2_left.png", "Resource/skybox2_front.png", "Resource/skybox2_right.png",
 		"Resource/skybox2_back.png", "Resource/skybox2_bottom.png", "Resource/vinus.png", "Resource/mars.png", "Resource/jupiter.png", "Resource/magma2.png", "Resource/sun.png","Resource/xxx.png",
 		"Resource/green.png", "Resource/yellow.png","Resource/skybox3_top.png", "Resource/skybox3_left.png", "Resource/skybox3_front.png", "Resource/skybox3_right.png",
-		"Resource/skybox3_back.png", "Resource/skybox3_bottom.png", "Resource/Item.png","Resource/GameClear.png" };
+		"Resource/skybox3_back.png", "Resource/skybox3_bottom.png", "Resource/Item.png","Resource/GameClear.png","Resource/axe.png","Resource/shoe.png" };
 		//20																				// ↑ 여기가 14
 	glGenTextures(40, texture); //--- 텍스처 생성
 
@@ -410,7 +416,23 @@ void Display()
 	if (f_Light_ambients[0] < 0.3f || Scene::scene->n_scene == 7) {
 		Display_Sub1();
 	}
-
+	auto p = count(Scene::scene->p_player->Item_bag.begin(), Scene::scene->p_player->Item_bag.end(), Pickaxe);
+	if (p > 0) {
+		Display_Sub_Axe1();
+	}
+	if (p > 1) {
+		Display_Sub_Axe2();
+	}
+	if (p > 2) {
+		Display_Sub_Axe3();
+	}
+	auto o = count(Scene::scene->p_player->Item_bag.begin(), Scene::scene->p_player->Item_bag.end(), Shoes);
+	if (o > 0) {
+		Display_Sub_Shoe1();
+	}
+	if (o > 1) {
+		Display_Sub_Shoe2();
+	}
 	if (Scene::scene->n_scene == 2) {
 		if (Scene::scene->p_player->GetComponent<Transform3D>()->position.y <= 0.8) {
 			Scene::scene->p_player->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 3.0f, 0.0f);
@@ -437,7 +459,7 @@ void Display_Sub1()
 	glm::mat4 Vw = glm::mat4(1.0f);
 	glm::mat4 Pj = glm::mat4(1.0f);
 	Vw = glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-	Pj = glm::perspective(glm::radians(45.0f), (float)WINDOWX / (float)WINDOWY, 0.0005f, 100.0f);
+	Pj = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, 0.1f, 100.00f);
 	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &Vw[0][0]);
 	glUniformMatrix4fv(projLocation, 1, GL_FALSE, &Pj[0][0]);
 
@@ -464,6 +486,167 @@ void Display_Sub1()
 	glDrawArrays(GL_TRIANGLES, 0, num_shape_list[Plane]);
 
 	
+
+}
+void Display_Sub_Axe1()
+{
+	// 카메라 설정
+	unsigned int modelLocation = glGetUniformLocation(s_program[0], "model");
+	unsigned int viewLocation = glGetUniformLocation(s_program[0], "view");
+	unsigned int projLocation = glGetUniformLocation(s_program[0], "projection");
+
+	glm::mat4 Vw = glm::mat4(1.0f);
+	glm::mat4 Pj = glm::mat4(1.0f);
+	Vw = glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	Pj = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, 0.1f, 100.00f);
+	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &Vw[0][0]);
+	glUniformMatrix4fv(projLocation, 1, GL_FALSE, &Pj[0][0]);
+
+	//*************************************************************************
+	// 조명 설정
+	int lightPosLocation = glGetUniformLocation(s_program[0], "lightPos"); //--- lightPos 값 전달: (0.0, 0.0, 5.0);
+	glUniform3f(lightPosLocation, 0.0, 0.0, 0.0);
+	int lightColorLocation = glGetUniformLocation(s_program[0], "lightColor"); //--- lightColor 값 전달: (1.0, 1.0, 1.0) 백색
+	glUniform3f(lightColorLocation, 1.0, 1.0, 1.0);
+	//*************************************************************************
+	// 그리기 부분
+	glViewport(720, 720, 80, 80);
+	glBindTexture(GL_TEXTURE_2D, texture[30]);
+	glBindVertexArray(VAO[Plane]);
+	TR = glm::mat4(1.0f);
+	TR = glm::translate(TR, glm::vec3(0.0f, 0.0f, -3.0f));
+	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
+	glDrawArrays(GL_TRIANGLES, 0, num_shape_list[Plane]);
+
+
+}
+
+void Display_Sub_Axe2()
+{
+	// 카메라 설정
+	unsigned int modelLocation = glGetUniformLocation(s_program[0], "model");
+	unsigned int viewLocation = glGetUniformLocation(s_program[0], "view");
+	unsigned int projLocation = glGetUniformLocation(s_program[0], "projection");
+
+	glm::mat4 Vw = glm::mat4(1.0f);
+	glm::mat4 Pj = glm::mat4(1.0f);
+	Vw = glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	Pj = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, 0.1f, 100.00f);
+	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &Vw[0][0]);
+	glUniformMatrix4fv(projLocation, 1, GL_FALSE, &Pj[0][0]);
+
+	//*************************************************************************
+	// 조명 설정
+	int lightPosLocation = glGetUniformLocation(s_program[0], "lightPos"); //--- lightPos 값 전달: (0.0, 0.0, 5.0);
+	glUniform3f(lightPosLocation, 0.0, 0.0, 0.0);
+	int lightColorLocation = glGetUniformLocation(s_program[0], "lightColor"); //--- lightColor 값 전달: (1.0, 1.0, 1.0) 백색
+	glUniform3f(lightColorLocation, 1.0, 1.0, 1.0);
+	//*************************************************************************
+	// 그리기 부분
+	glViewport(640, 720, 80, 80);
+	glBindTexture(GL_TEXTURE_2D, texture[30]);
+	glBindVertexArray(VAO[Plane]);
+	TR = glm::mat4(1.0f);
+	TR = glm::translate(TR, glm::vec3(0.0f, 0.0f, -3.0f));
+	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
+	glDrawArrays(GL_TRIANGLES, 0, num_shape_list[Plane]);
+
+
+}
+void Display_Sub_Axe3()
+{
+	// 카메라 설정
+	unsigned int modelLocation = glGetUniformLocation(s_program[0], "model");
+	unsigned int viewLocation = glGetUniformLocation(s_program[0], "view");
+	unsigned int projLocation = glGetUniformLocation(s_program[0], "projection");
+
+	glm::mat4 Vw = glm::mat4(1.0f);
+	glm::mat4 Pj = glm::mat4(1.0f);
+	Vw = glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	Pj = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, 0.1f, 100.00f);
+	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &Vw[0][0]);
+	glUniformMatrix4fv(projLocation, 1, GL_FALSE, &Pj[0][0]);
+
+	//*************************************************************************
+	// 조명 설정
+	int lightPosLocation = glGetUniformLocation(s_program[0], "lightPos"); //--- lightPos 값 전달: (0.0, 0.0, 5.0);
+	glUniform3f(lightPosLocation, 0.0, 0.0, 0.0);
+	int lightColorLocation = glGetUniformLocation(s_program[0], "lightColor"); //--- lightColor 값 전달: (1.0, 1.0, 1.0) 백색
+	glUniform3f(lightColorLocation, 1.0, 1.0, 1.0);
+	//*************************************************************************
+	// 그리기 부분
+	glViewport(560, 720, 80, 80);
+	glBindTexture(GL_TEXTURE_2D, texture[30]);
+	glBindVertexArray(VAO[Plane]);
+	TR = glm::mat4(1.0f);
+	TR = glm::translate(TR, glm::vec3(0.0f, 0.0f, -3.0f));
+	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
+	glDrawArrays(GL_TRIANGLES, 0, num_shape_list[Plane]);
+
+
+}
+void Display_Sub_Shoe1()
+{
+	// 카메라 설정
+	unsigned int modelLocation = glGetUniformLocation(s_program[0], "model");
+	unsigned int viewLocation = glGetUniformLocation(s_program[0], "view");
+	unsigned int projLocation = glGetUniformLocation(s_program[0], "projection");
+
+	glm::mat4 Vw = glm::mat4(1.0f);
+	glm::mat4 Pj = glm::mat4(1.0f);
+	Vw = glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	Pj = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, 0.1f, 100.00f);
+	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &Vw[0][0]);
+	glUniformMatrix4fv(projLocation, 1, GL_FALSE, &Pj[0][0]);
+
+	//*************************************************************************
+	// 조명 설정
+	int lightPosLocation = glGetUniformLocation(s_program[0], "lightPos"); //--- lightPos 값 전달: (0.0, 0.0, 5.0);
+	glUniform3f(lightPosLocation, 0.0, 0.0, 0.0);
+	int lightColorLocation = glGetUniformLocation(s_program[0], "lightColor"); //--- lightColor 값 전달: (1.0, 1.0, 1.0) 백색
+	glUniform3f(lightColorLocation, 1.0, 1.0, 1.0);
+	//*************************************************************************
+	// 그리기 부분
+	glViewport(720, 640, 80, 80);
+	glBindTexture(GL_TEXTURE_2D, texture[31]);
+	glBindVertexArray(VAO[Plane]);
+	TR = glm::mat4(1.0f);
+	TR = glm::translate(TR, glm::vec3(0.0f, 0.0f, -3.0f));
+	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
+	glDrawArrays(GL_TRIANGLES, 0, num_shape_list[Plane]);
+
+
+}
+void Display_Sub_Shoe2()
+{
+	// 카메라 설정
+	unsigned int modelLocation = glGetUniformLocation(s_program[0], "model");
+	unsigned int viewLocation = glGetUniformLocation(s_program[0], "view");
+	unsigned int projLocation = glGetUniformLocation(s_program[0], "projection");
+
+	glm::mat4 Vw = glm::mat4(1.0f);
+	glm::mat4 Pj = glm::mat4(1.0f);
+	Vw = glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	Pj = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, 0.1f, 100.00f);
+	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &Vw[0][0]);
+	glUniformMatrix4fv(projLocation, 1, GL_FALSE, &Pj[0][0]);
+
+	//*************************************************************************
+	// 조명 설정
+	int lightPosLocation = glGetUniformLocation(s_program[0], "lightPos"); //--- lightPos 값 전달: (0.0, 0.0, 5.0);
+	glUniform3f(lightPosLocation, 0.0, 0.0, 0.0);
+	int lightColorLocation = glGetUniformLocation(s_program[0], "lightColor"); //--- lightColor 값 전달: (1.0, 1.0, 1.0) 백색
+	glUniform3f(lightColorLocation, 1.0, 1.0, 1.0);
+	//*************************************************************************
+	// 그리기 부분
+	glViewport(640, 640, 80, 80);
+	glBindTexture(GL_TEXTURE_2D, texture[31]);
+	glBindVertexArray(VAO[Plane]);
+	TR = glm::mat4(1.0f);
+	TR = glm::translate(TR, glm::vec3(0.0f, 0.0f, -3.0f));
+	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
+	glDrawArrays(GL_TRIANGLES, 0, num_shape_list[Plane]);
+
 
 }
 

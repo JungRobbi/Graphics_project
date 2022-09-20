@@ -301,7 +301,7 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 		//auto hot = CreateGrass(index_list, tex, vao);
 		//hot->GetComponent<Transform3D>()->position.y = 0.0;
 		//hot->GetComponent<Transform3D>()->scale = glm::vec3(15.0f, 15.0f, 0.7f);
-		for (int i = -4; i < 5; ++i) {
+		for (int i = -3; i < 4; ++i) {
 			for (int j = 0; j < 20; ++j) {
 				if (j == 4 || j == 5||j==6 || j == 7 || j == 8 || j == 12 ||j==13|| j == 14 || j == 15 || j == 16) {
 					auto spike = CreateSpike(index_list, tex, vao);
@@ -324,17 +324,11 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 		{
 			auto box = CreateAirBox(index_list, tex, vao);
 
-			box->GetComponent<Transform3D>()->position = glm::vec3(3.0f, 1.8f, 2.0f);
+			box->GetComponent<Transform3D>()->position = glm::vec3(2.4f, 1.8f, 2.0f);
 			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
 
 		}
-		{
-			auto box = CreateAirBox(index_list, tex, vao);
 
-			box->GetComponent<Transform3D>()->position = glm::vec3(3.0f, 1.8f, 2.0f);
-			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
-
-		}
 		{
 			auto star = CreateStar(index_list, tex, vao);
 			star->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 1.8f, 15.0f);
@@ -354,26 +348,26 @@ GameScene::GameScene(int num_scene, int* index_list, GLuint* tex, GLuint* vao, G
 		{
 			auto box = CreateAirBox(index_list, tex, vao);
 
-			box->GetComponent<Transform3D>()->position = glm::vec3(4.0f, 1.8f, 8.0f);
+			box->GetComponent<Transform3D>()->position = glm::vec3(2.4f, 1.8f, 8.0f);
 			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
 
 		}
 		{
 			auto axe = CreateItem_Pickaxe(index_list, tex, vao);
 
-			axe->GetComponent<Transform3D>()->position = glm::vec3(-3.0f, 1.8f, 2.0f);
+			axe->GetComponent<Transform3D>()->position = glm::vec3(-2.4f, 1.8f, 2.0f);
 			axe->GetComponent<Transform3D>()->scale = glm::vec3(0.1f, 0.2f, 0.3f);
 		}
 		{
 			auto axe = CreateItem_Pickaxe(index_list, tex, vao);
 
-			axe->GetComponent<Transform3D>()->position = glm::vec3(-2.0f, 3.0f, 3.2);
+			axe->GetComponent<Transform3D>()->position = glm::vec3(-1.6f, 4.0f, 3.2);
 			axe->GetComponent<Transform3D>()->scale = glm::vec3(0.1f, 0.2f, 0.3f);
 		}
 		{
 			auto box = CreateAirBox(index_list, tex, vao);
 
-			box->GetComponent<Transform3D>()->position = glm::vec3(-2.8f, 3.0f, 3.2);
+			box->GetComponent<Transform3D>()->position = glm::vec3(-2.4f, 4.0f, 3.2);
 			box->GetComponent<Transform3D>()->scale = glm::vec3(0.4f, 0.4f, 0.4f);
 
 		}

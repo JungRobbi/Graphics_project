@@ -410,8 +410,12 @@ void Display()
 		Display_Sub1();
 	}
 
-	if (Scene::scene->p_player->GetComponent<Transform3D>()->position.y <= -0.5) {
-		ResetChange();
+	if (Scene::scene->n_scene == 2) {
+		if (Scene::scene->p_player->GetComponent<Transform3D>()->position.y <= 0.8) {
+			Scene::scene->p_player->GetComponent<Transform3D>()->position = glm::vec3(0.0f, 3.0f, 0.0f);
+			Scene::scene->p_player->GetComponent<Transform3D>()->scale = glm::vec3(1.0f, 1.0f, 1.0f);
+			Scene::scene->p_player->GetComponent<Transform3D>()->direction = glm::vec3(0.0f, 0.0f, -1.0f);
+		}
 	}
 
 
@@ -547,7 +551,7 @@ void keyboard(unsigned char key2, int x, int y) {
 			Scene::scene->p_player->GetComponent<Camera>()->state = TOP_TO_FIRST;
 		break;
 	case '3':
-		SceneChange(sc.size() + 1);
+		NestSceneChange();
 		break;
 	case 'q':
 		if (Scene::scene->p_player->GetComponent<Camera>()->state == TOP_VIEW) {

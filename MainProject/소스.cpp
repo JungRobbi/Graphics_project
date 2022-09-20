@@ -313,7 +313,8 @@ void InitTexture()
 	string map[40] = { "Resource/main.png","Resource/B.png","Resource/gold.png","Resource/123.png","Resource/321.png","Resource/grass.png",
 		"Resource/face.png","Resource/sand.png", "Resource/skybox2_top.png", "Resource/skybox2_left.png", "Resource/skybox2_front.png", "Resource/skybox2_right.png",
 		"Resource/skybox2_back.png", "Resource/skybox2_bottom.png", "Resource/vinus.png", "Resource/mars.png", "Resource/jupiter.png", "Resource/magma2.png", "Resource/sun.png","Resource/xxx.png",
-		"Resource/green.png", "Resource/yellow.png", };
+		"Resource/green.png", "Resource/yellow.png","Resource/skybox3_top.png", "Resource/skybox3_left.png", "Resource/skybox3_front.png", "Resource/skybox3_right.png",
+		"Resource/skybox3_back.png", "Resource/skybox3_bottom.png", };
 		//20																				// ↑ 여기가 14
 	glGenTextures(40, texture); //--- 텍스처 생성
 

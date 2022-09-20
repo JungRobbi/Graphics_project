@@ -1,5 +1,6 @@
 #pragma once
 #include <cmath>
+#include <random>
 #include "Component.h"
 #include "GameObject.h"
 #include "Scene.h"
@@ -11,7 +12,7 @@ public:
     int destroy_frame_time = 100;
     int Shot_delay = 100;
 
-    void start() {}
+    void start();
     void update();
 };
 

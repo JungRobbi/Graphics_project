@@ -3,6 +3,15 @@
 #include "Gravity.h"
 #include "ItemRotate.h"
 
+std::random_device rd;
+std::default_random_engine dre(rd());
+std::uniform_int_distribution<int> uidi(50, 150);
+
+void CannonShot::start()
+{
+    Shot_delay = uidi(dre);
+}
+
 void CannonShot::update()
 {
 	if (subObject) {
@@ -17,16 +26,17 @@ void CannonShot::update()
         auto ball = Scene::scene->CreateEmpty();
 
         ball ->AddComponent<Transform3D>();
-    //  ball->AddComponent<Collide>();
+        ball->AddComponent<Collide>();
         ball->AddComponent<Gravity>();
         ball->AddComponent<CannonShot>();
         ball->GetComponent<CannonShot>()->subObject = true;
 
-        ball->GetComponent<Transform3D>()->position = gameObject->GetComponent<Transform3D>()->position;
+        ball->GetComponent<Transform3D>()->position = gameObject->GetComponent<Transform3D>()->position + glm::vec3(0.0f, 0.6f, 0.8f);
+        ball->GetComponent<Transform3D>()->scale = glm::vec3(0.2f, 0.2f, 0.2f);
 
         auto theta = gameObject->GetComponent<Transform3D>()->yaw;
         
-        ball->GetComponent<Transform3D>()->velocity = glm::vec3(0.001f , 0.05f, 0.0f);
+        ball->GetComponent<Transform3D>()->velocity = glm::vec3(0, 0.03f, 0.15f);
 
         // render 부분
         ball->modelLocation = gameObject->modelLocation;
@@ -34,6 +44,6 @@ void CannonShot::update()
         ball->VAO = Scene::scene->p_vao[Ball]; // 사각형 메쉬
         ball->texture = Scene::scene->p_tex[14]; // 
 
-        Shot_delay = 100;
+        Shot_delay = uidi(dre);
 	}
 }

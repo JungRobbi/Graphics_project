@@ -120,9 +120,9 @@ void Collide::update()
 			}
 		}
 		else {
-			if (gameObject->VAO == Scene::scene->p_vao[Star])
+			if (gameObject->VAO == Scene::scene->p_vao[Star] || gameObject->VAO == Scene::scene->p_vao[Pickaxe] || gameObject->VAO == Scene::scene->p_vao[Shoes])
 				break;
-			else if (obj->VAO == Scene::scene->p_vao[Star]) 
+			else if (obj->VAO == Scene::scene->p_vao[Star] || obj->VAO == Scene::scene->p_vao[Pickaxe] || obj->VAO == Scene::scene->p_vao[Shoes])
 				break;
 
 			if (CheckBoxtoBox(BoundBox, obj->GetComponent<Collide>()->BoundBox)) {

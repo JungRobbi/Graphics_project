@@ -67,6 +67,7 @@ void Collide::update()
 					auto p = find(gameObject->Item_bag.begin(), gameObject->Item_bag.end(), Pickaxe);
 					if (p != gameObject->Item_bag.end()) {
 						obj->GetComponent<DestroyEffect>()->destroy = true;
+						gameObject->Item_bag.push_back(Cube);
 						gameObject->Item_bag.erase(p);
 					}
 					continue;
@@ -111,9 +112,10 @@ void Collide::update()
 					auto p = find(gameObject->Item_bag.begin(), gameObject->Item_bag.end(), Pickaxe);
 					if (p != gameObject->Item_bag.end()) {
 						obj->GetComponent<DestroyEffect>()->destroy = true;
+						gameObject->Item_bag.push_back(Cube);
 						gameObject->Item_bag.erase(p);
-						continue;
 					}
+					continue;
 				}
 				else if (obj->VAO == Scene::scene->p_vao[Star]) {
 					gameObject->Item_bag.push_back(Star);

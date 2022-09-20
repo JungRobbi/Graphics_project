@@ -387,14 +387,17 @@ void Display()
 	}
 
 	if (Scene::scene->p_player->GetComponent<Camera>()->state == TOP_VIEW) {
-		if (n_model == Cube) {
-			glBindVertexArray(VAO[Cube]);
-			TR = glm::mat4(1.0f);
-			TR = glm::translate(TR, glm::vec3(msx * 15.0f, create_height, -msy * 15.0f));
-			TR = glm::scale(TR, glm::vec3(0.4f,0.4f,0.4f));
-			glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
-			glBindTexture(GL_TEXTURE_2D, texture[3]);
-			glDrawArrays(GL_TRIANGLES, 0, num_shape_list[Cube]);
+		auto p = find(Scene::scene->p_player->Item_bag.begin(), Scene::scene->p_player->Item_bag.end(), Cube);
+		if (p != Scene::scene->p_player->Item_bag.end()) {
+			if (n_model == Cube) {
+				glBindVertexArray(VAO[Cube]);
+				TR = glm::mat4(1.0f);
+				TR = glm::translate(TR, glm::vec3(msx * 15.0f, create_height, -msy * 15.0f));
+				TR = glm::scale(TR, glm::vec3(0.4f, 0.4f, 0.4f));
+				glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
+				glBindTexture(GL_TEXTURE_2D, texture[3]);
+				glDrawArrays(GL_TRIANGLES, 0, num_shape_list[Cube]);
+			}
 		}
 
 		glBindVertexArray(VAO[Cube]);
@@ -662,10 +665,14 @@ void Mouse(int button, int state, int x, int y)
 {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && Scene::scene->p_player->GetComponent<Camera>()->state == TOP_VIEW) {
 		if (n_model == Cube) {
-			auto box = Scene::scene->CreateAirHardBox(num_shape_list, texture, VAO);
-			box->AddComponent<Gravity>();
-			box->GetComponent<Transform3D>()->position = glm::vec3(msx * 15.0f, create_height, -msy * 15.0f);
-			box->texture = texture[4];
+			auto p = find(Scene::scene->p_player->Item_bag.begin(), Scene::scene->p_player->Item_bag.end(), Cube);
+			if (p != Scene::scene->p_player->Item_bag.end()) {
+				auto box = Scene::scene->CreateAirHardBox(num_shape_list, texture, VAO);
+				box->AddComponent<Gravity>();
+				box->GetComponent<Transform3D>()->position = glm::vec3(msx * 15.0f, create_height, -msy * 15.0f);
+				box->texture = texture[3];
+				Scene::scene->p_player->Item_bag.erase(p);
+			}
 			std::cout << " -- " << msx * 15.0f << ", " << -msy * 15.0f << std::endl;
 		}
 		else if (n_model == Star) {
